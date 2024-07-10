@@ -1,25 +1,26 @@
+
 #include "account.h"
 #include<fstream>
 #include<iostream>
 
-int Task::IdCounter = 0;
+             int Task::IdCounter = 0;
 
 Task::Task(std::string taskname, time_t st_time, time_t ed_time = -1, time_t rm_time = 30,
            std::string taskloc = "", taskPriority taskprio = LOW, int taskctg = 0,
            std::string tasknote = "")
 {
     taskId = ++ IdCounter;
-    
+
     taskName = taskname;
-    
+
     stTime = st_time;
     if (ed_time == -1) edTime = st_time + 30;
     rmTime = rm_time;
-    
+
     taskLoc = taskloc;
-    
+
     taskPrio = taskprio;
-    
+
     taskCtg = taskctg;
 
     taskNote = tasknote;
@@ -78,3 +79,4 @@ void Task::printInfo()
     printTimeSegment(stTime, edTime);
     std::cout << "Reminder Time: " + toTimeString_M(rmTime) + " before" << std::endl;
 }
+account::account() {}

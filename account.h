@@ -1,11 +1,14 @@
+
 #ifndef _ACCOUNT_H_
 #define _ACCOUNT_H_
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
 
 #include<string>
 #include<vector>
 #include<map>
 
-enum taskPriority { LOW = 0, MID, HIGH };
+    enum taskPriority { LOW = 0, MID, HIGH };
 
 std::map<int, std::string> mpCtg;
 
@@ -27,10 +30,10 @@ public:
          std::string tasknote);
     bool saveToFile();
     void printInfo();
-    
+
 };
 
-class Account
+    class account
 {
 
 public:
@@ -39,7 +42,9 @@ public:
     std::vector<Task *> taskList;
     bool showHelp;
     bool doneAndDel;
-    
+
+    account();
 };
 
 #endif //_ACCOUNT_H_
+#endif // ACCOUNT_H
