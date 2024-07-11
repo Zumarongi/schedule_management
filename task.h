@@ -27,6 +27,15 @@ public:
     bool saveToFile();
     void printInfo();
 
+    void mod_taskName(std::string new_taskName);
+    void mod_stTime(time_t new_stTime);
+    void mod_edTime(time_t new_edTime);
+    void mod_rmTime(time_t new_rmTime);
+    void mod_taskLoc(std::string new_taskLoc);
+    void mod_taskPrio(taskPriority new_taskPrio);
+    void mod_taskCtg(int new_taskCtg);
+    void mod_taskNote(std::string new_taskNote);
+
 };
 
 #endif // TASK_H

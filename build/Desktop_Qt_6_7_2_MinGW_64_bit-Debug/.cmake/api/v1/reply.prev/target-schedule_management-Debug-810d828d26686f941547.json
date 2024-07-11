@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "untitled.exe"
+			"path" : "schedule_management.exe"
 		},
 		{
-			"path" : "untitled.pdb"
+			"path" : "schedule_management.pdb"
 		}
 	],
 	"backtrace" : 4,
@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 64,
+				"line" : 66,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 47,
+				"line" : 49,
 				"parent" : 0
 			},
 			{
@@ -322,7 +322,7 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/include"
+					"path" : "D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include"
 				},
 				{
 					"backtrace" : 14,
@@ -366,21 +366,23 @@
 				1,
 				2,
 				6,
-				7
+				8,
+				10,
+				13
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 0,
-			"id" : "untitled_autogen::@6890427a1f51a3e7e1df"
+			"id" : "schedule_management_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "untitled_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"backtrace" : 0,
+			"id" : "schedule_management_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "untitled::@6890427a1f51a3e7e1df",
+	"id" : "schedule_management::@6890427a1f51a3e7e1df",
 	"install" : 
 	{
 		"destinations" : 
@@ -474,8 +476,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "untitled",
-	"nameOnDisk" : "untitled.exe",
+	"name" : "schedule_management",
+	"nameOnDisk" : "schedule_management.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -491,7 +493,9 @@
 				1,
 				2,
 				6,
-				7
+				8,
+				10,
+				13
 			]
 		},
 		{
@@ -500,8 +504,12 @@
 			[
 				3,
 				5,
-				8,
-				9
+				7,
+				9,
+				12,
+				15,
+				16,
+				17
 			]
 		},
 		{
@@ -509,14 +517,16 @@
 			"sourceIndexes" : 
 			[
 				4,
-				10
+				11,
+				14,
+				18
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				11
+				19
 			]
 		}
 	],
@@ -526,7 +536,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/mocs_compilation.cpp",
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -553,6 +563,17 @@
 		},
 		{
 			"backtrace" : 4,
+			"path" : "task.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "task.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
 			"path" : "account.h",
 			"sourceGroupIndex" : 1
 		},
@@ -564,31 +585,64 @@
 		},
 		{
 			"backtrace" : 4,
+			"path" : "sign_in_window.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
 			"compileGroupIndex" : 0,
-			"path" : "task.cpp",
+			"path" : "sign_in_window.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 4,
-			"path" : "task.h",
+			"path" : "sign_in_window.ui",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "sign_up_window.h",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/include/ui_mainwindow.h",
-			"sourceGroupIndex" : 1
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "sign_up_window.cpp",
+			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/timestamp",
+			"backtrace" : 4,
+			"path" : "sign_up_window.ui",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/untitled_autogen/timestamp.rule",
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include/ui_mainwindow.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include/ui_sign_in_window.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include/ui_sign_up_window.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp.rule",
 			"sourceGroupIndex" : 3
 		}
 	],

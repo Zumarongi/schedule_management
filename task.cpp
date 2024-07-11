@@ -45,3 +45,19 @@ bool Task::saveToFile()
     fout << taskNote << std::endl;
     return true;
 }
+
+void Task::mod_taskName(std::string new_taskName) { taskName = new_taskName; }
+
+void Task::mod_stTime(time_t new_stTime) { stTime = new_stTime; }
+
+void Task::mod_edTime(time_t new_edTime) { edTime = new_edTime; }
+
+void Task::mod_rmTime(time_t new_rmTime) { rmTime = new_rmTime; }
+
+void Task::mod_taskLoc(std::string new_taskLoc) { taskLoc = new_taskLoc; }
+
+void Task::mod_taskPrio(taskPriority new_taskPrio) { taskPrio = new_taskPrio; }
+
+void Task::mod_taskCtg(int new_taskCtg) { taskCtg = new_taskCtg; }
+
+void Task::mod_taskNote(std::string new_taskNote) { taskNote = new_taskNote; }

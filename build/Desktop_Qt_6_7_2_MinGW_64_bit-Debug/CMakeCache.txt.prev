@@ -194,7 +194,7 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 CMAKE_PROJECT_INCLUDE_BEFORE:FILEPATH=D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=schedule_manegement
+CMAKE_PROJECT_NAME:STATIC=schedule_management
 
 //Value Computed by CMake
 CMAKE_PROJECT_VERSION:STATIC=0.1
@@ -351,6 +351,15 @@ Vulkan_LIBRARY:FILEPATH=Vulkan_LIBRARY-NOTFOUND
 
 //Path to a program.
 WINDEPLOYQT_EXECUTABLE:FILEPATH=D:/Qt/6.7.2/mingw_64/bin/windeployqt.exe
+
+//Value Computed by CMake
+schedule_management_BINARY_DIR:STATIC=D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug
+
+//Value Computed by CMake
+schedule_management_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+schedule_management_SOURCE_DIR:STATIC=D:/Kobe/Projects/Qt Projects/schedule_management
 
 //Value Computed by CMake
 schedule_manegement_BINARY_DIR:STATIC=D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug

@@ -1075,7 +1075,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "schedule_manegement"
+			"value" : "schedule_management"
 		},
 		{
 			"name" : "CMAKE_PROJECT_VERSION",
@@ -6188,6 +6188,42 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "C:/Program Files (x86)/untitled"
+		},
+		{
+			"name" : "schedule_management_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug"
+		},
+		{
+			"name" : "schedule_management_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "schedule_management_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "D:/Kobe/Projects/Qt Projects/schedule_management"
 		},
 		{
 			"name" : "schedule_manegement_BINARY_DIR",

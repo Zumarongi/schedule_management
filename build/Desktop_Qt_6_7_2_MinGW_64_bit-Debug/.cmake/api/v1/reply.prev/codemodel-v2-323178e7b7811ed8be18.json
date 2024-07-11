@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-5523212b06c734e8e2ed.json",
+					"jsonFile" : "directory-.-Debug-bbf2734e68c31189b75b.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.16"
@@ -30,7 +30,7 @@
 					[
 						0
 					],
-					"name" : "schedule_manegement",
+					"name" : "schedule_management",
 					"targetIndexes" : 
 					[
 						0,
@@ -43,23 +43,23 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "untitled::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-untitled-Debug-6d95907ae039adcc402e.json",
-					"name" : "untitled",
+					"id" : "schedule_management::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-schedule_management-Debug-810d828d26686f941547.json",
+					"name" : "schedule_management",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "untitled_autogen::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-untitled_autogen-Debug-763f0bb5562b0740f188.json",
-					"name" : "untitled_autogen",
+					"id" : "schedule_management_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-schedule_management_autogen-Debug-fe567f703e51b0d4f1c7.json",
+					"name" : "schedule_management_autogen",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
-					"id" : "untitled_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-untitled_autogen_timestamp_deps-Debug-fbd66e2d8906a3029e4c.json",
-					"name" : "untitled_autogen_timestamp_deps",
+					"id" : "schedule_management_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-schedule_management_autogen_timestamp_deps-Debug-5967b590368b0d1521a5.json",
+					"name" : "schedule_management_autogen_timestamp_deps",
 					"projectIndex" : 0
 				}
 			]
