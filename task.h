@@ -27,6 +27,15 @@ public:
     bool saveToFile();
     void printInfo();
 
+    std::string get_taskName() const;
+    time_t get_stTime() const;
+    time_t get_edTime() const;
+    time_t get_rmTime() const;
+    std::string get_taskLoc() const;
+    taskPriority get_taskPrio() const;
+    int get_taskCtg() const;
+    std::string get_taskNote() const;
+
     void mod_taskName(std::string new_taskName);
     void mod_stTime(time_t new_stTime);
     void mod_edTime(time_t new_edTime);

@@ -46,6 +46,22 @@ bool Task::saveToFile()
     return true;
 }
 
+std::string Task::get_taskName() const { return taskName; }
+
+time_t Task::get_stTime() const { return stTime; }
+
+time_t Task::get_edTime() const { return edTime; }
+
+time_t Task::get_rmTime() const { return rmTime; }
+
+std::string Task::get_taskLoc() const { return taskLoc; }
+
+taskPriority Task::get_taskPrio() const { return taskPrio; }
+
+int Task::get_taskCtg() const { return taskCtg; }
+
+std::string Task::get_taskNote() const { return taskNote; }
+
 void Task::mod_taskName(std::string new_taskName) { taskName = new_taskName; }
 
 void Task::mod_stTime(time_t new_stTime) { stTime = new_stTime; }
