@@ -3,6 +3,7 @@
 
 #include<string>
 #include<map>
+#include <QMessageBox>
 
 enum taskPriority { LOW = 0, MID, HIGH };
 
@@ -13,17 +14,17 @@ class Task
     static int IdCounter;
     int taskId;
 
-    std::string taskName;
+    QString taskName;
     time_t stTime, edTime, rmTime;  // start, end, reminder
-    std::string taskLoc;            // location
+    QString taskLoc;            // location
     taskPriority taskPrio;
     int taskCtg;                    //catagory
-    std::string taskNote;
+    QString taskNote;
 
 public:
-    Task(std::string taskname, time_t st_time, time_t ed_time, time_t rm_time,
-         std::string taskloc, taskPriority taskprio, int taskctg,
-         std::string tasknote);
+    Task(QString taskname, time_t st_time, time_t ed_time, time_t rm_time,
+         QString taskloc, taskPriority taskprio, int taskctg,
+         QString tasknote);
     bool saveToFile();
     void printInfo();
 

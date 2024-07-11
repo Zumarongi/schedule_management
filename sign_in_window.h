@@ -2,6 +2,9 @@
 #define SIGN_IN_WINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include "mainwindow.h"
+#include "sign_up_window.h"
 
 namespace Ui {
 class sign_in_window;
