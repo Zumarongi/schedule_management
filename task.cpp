@@ -27,4 +27,3 @@ Task::Task(QString taskname, time_t st_time, time_t ed_time = -1, time_t rm_time
     taskNote = tasknote;
 }
 
-
