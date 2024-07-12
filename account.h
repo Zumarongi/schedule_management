@@ -14,11 +14,11 @@ private:
 
     QString userName;
     std::string encryptedPass;
-    std::vector<Task *> taskList;
     bool showHelp;
     bool doneAndDel;
 
 public:
+    std::vector<Task *> taskList;//暂时设为public测试使用
     Account(QString getname, QString getpassword);
     static void readAccountList();
     static void saveAccountList();

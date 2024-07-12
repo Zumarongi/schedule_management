@@ -13,7 +13,7 @@ std::string encrypt(QString Qplaintext)
     return ciphertext;
 }
 
-Account::Account(QString getname, QString getpassword) {
+Account::Account(QString getname, QString getpassword) {//还需增加taskList
     userName=getname;
     encryptedPass=encrypt(getpassword);
     showHelp=false;

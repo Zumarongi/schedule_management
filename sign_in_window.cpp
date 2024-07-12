@@ -35,7 +35,9 @@ sign_in_window::sign_in_window(QWidget *parent)
             fin.close();
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
-            MainWindow *mainPage=new MainWindow;
+            //Account
+            Account *testaccount=new Account("niu","zijian");//测试使用
+            MainWindow *mainPage=new MainWindow(testaccount);
             mainPage->show();
             this->close();
         }
