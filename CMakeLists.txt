@@ -27,6 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         account.h account.cpp
         sign_in_window.h sign_in_window.cpp sign_in_window.ui
         sign_up_window.h sign_up_window.cpp sign_up_window.ui
+        md5.h md5.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET schedule_management APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

@@ -1,13 +1,20 @@
 #include "sign_in_window.h"
 #include "ui_sign_in_window.h"
-#include"account.h"
+#include "account.h"
+#include <filesystem>
+#include <fstream>
+
+std::string encrypt(QString Qplaintext);
 
 sign_in_window::sign_in_window(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::sign_in_window)
 {
     ui->setupUi(this);
-    //从各文件夹的名字中读取用户名，存入accouLists
+
+    //从各文件夹的名字中读取用户名，存入accountLists
+    Account::readAccountList();
+
     ui->empty_password_warning->hide();
     ui->empty_username_warning->hide();
     ui->error_password_warning->hide();
@@ -15,12 +22,17 @@ sign_in_window::sign_in_window(QWidget *parent)
     connect(ui->sign_in_Button,&QPushButton::clicked,[=](){\
         QString userName = ui->lineEdit_username->text();
         QString passWord = ui->lineEdit_password->text();
-        bool existName=false,samePassword=false;
-        for(int i=0;i<Account::accountLists.size();++i){
-            if(userName==Account::accountLists[i]->Username){
-                existName=true;
-                if(Account::accountLists[i]->encryptedPass==passWord) samePassword=true;
-            }
+        bool existName=Account::isNameExist(userName);
+        bool samePassword=false;
+        if (existName)
+        {
+            std::filesystem::path acc_path = ROOTDIR + "/data/" + userName.toStdString() + "/.acc";
+            std::ifstream fin(acc_path);
+            std::string s, encryptedPass;
+            fin >> s >> encryptedPass;
+            if (encryptedPass == encrypt(passWord))
+                samePassword = true;
+            fin.close();
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
             MainWindow *mainPage=new MainWindow;

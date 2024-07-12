@@ -2,6 +2,7 @@
 #include "ui_sign_up_window.h"
 #include "sign_in_window.h"
 #include "account.h"
+#include <filesystem>
 
 sign_up_window::sign_up_window(QWidget *parent)
     : QMainWindow(parent)
@@ -15,17 +16,22 @@ sign_up_window::sign_up_window(QWidget *parent)
     ui->emptyID_warning->hide();
     ui->emptypw_warning->hide();
     connect(ui->sign_up_button,&QPushButton::clicked,[=](){
-        bool existName=false;
         QString userName=ui->lineEdit_username->text();
         QString passWord=ui->lineEdit_password->text();
         QString confPassword=ui->lineEdit_confirm_password->text();
-        for(int i=0;i<Account::accountLists.size();++i){
-            if(userName==Account::accountLists[i]->Username) existName=true;
-        }
+        bool existName=Account::isNameExist(userName);
         if(!existName&&(passWord==confPassword)&&!userName.isEmpty()&&!passWord.isEmpty()&&!confPassword.isEmpty()){
             Account *creAccount=new Account(userName,passWord);
-            Account::accountLists.push_back(creAccount);
-            //将用户名存为新的文件夹名字
+            Account::addToList(userName);
+            Account::saveAccountList();
+
+            std::filesystem::path dir = ROOTDIR + "/data/" + userName.toStdString();
+            if (std::filesystem::create_directories(dir))
+                qDebug() << "Successfully created.";
+            else
+                qDebug() << "Failed.";
+            creAccount->saveToFile();
+
             sign_in_page->show();
             this->close();
         }
