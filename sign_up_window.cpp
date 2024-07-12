@@ -15,7 +15,7 @@ sign_up_window::sign_up_window(QWidget *parent)
     ui->empty_confpw_warning->hide();
     ui->emptyID_warning->hide();
     ui->emptypw_warning->hide();
-    connect(ui->sign_up_button,&QPushButton::clicked,[=](){
+    connect(ui->sign_up_button,&QPushButton::clicked,[=](){\
         QString userName=ui->lineEdit_username->text();
         QString passWord=ui->lineEdit_password->text();
         QString confPassword=ui->lineEdit_confirm_password->text();

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_taskName">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -26,7 +26,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;任务名称&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="label_stTime">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -39,7 +39,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;开始时间&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="label_taskLoc">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -52,7 +52,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;地点&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="lineEdit_taskName">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -62,7 +62,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="editButton_taskName">
    <property name="geometry">
     <rect>
      <x>200</x>
@@ -75,7 +75,7 @@
     <string>Edit</string>
    </property>
   </widget>
-  <widget class="QDateTimeEdit" name="dateTimeEdit">
+  <widget class="QDateTimeEdit" name="dateTimeEdit_stTime">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -85,7 +85,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="lineEdit_taskLoc">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -98,7 +98,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="editButton_taskLoc">
    <property name="geometry">
     <rect>
      <x>200</x>
@@ -111,7 +111,7 @@
     <string>Edit</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="label_taskPrio">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -124,7 +124,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;优先级&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="label_edTime">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -137,7 +137,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;结束时间&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QDateTimeEdit" name="dateTimeEdit_2">
+  <widget class="QDateTimeEdit" name="dateTimeEdit_edTime">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -147,7 +147,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
+  <widget class="QLabel" name="label_taskCtg">
    <property name="geometry">
     <rect>
      <x>310</x>
@@ -160,7 +160,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;分类&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
+  <widget class="QLabel" name="label_rmTime">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -173,7 +173,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;提醒时间&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="lineEdit_rmTime_h">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -183,7 +183,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
+  <widget class="QLineEdit" name="lineEdit_rmTime_m">
    <property name="geometry">
     <rect>
      <x>140</x>
@@ -193,7 +193,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_8">
+  <widget class="QLabel" name="label_rmTime_h">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -206,7 +206,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;小时&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_9">
+  <widget class="QLabel" name="label_rmTime_m">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -219,7 +219,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;分钟 前&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="editButton_rmTime">
    <property name="geometry">
     <rect>
      <x>215</x>
@@ -232,7 +232,7 @@
     <string>Edit</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_10">
+  <widget class="QLabel" name="label_taskNote">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -245,7 +245,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;备注&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QTextEdit" name="textEdit_taskNote">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -255,7 +255,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="editButton_taskNote">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -268,7 +268,7 @@
     <string>Edit</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="comboBox_taskPrio">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -293,7 +293,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QComboBox" name="comboBox_2">
+  <widget class="QComboBox" name="comboBox_taskCtg">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -328,7 +328,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="pushButton_5">
+  <widget class="QPushButton" name="pushButton_saveChange">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -341,7 +341,7 @@
     <string>保存更改</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_6">
+  <widget class="QPushButton" name="pushButton_deleteTask">
    <property name="geometry">
     <rect>
      <x>265</x>
@@ -354,7 +354,7 @@
     <string>删除任务</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_7">
+  <widget class="QPushButton" name="pushButton_return">
    <property name="geometry">
     <rect>
      <x>450</x>

@@ -50,7 +50,6 @@ public:
     void mod_taskPrio(taskPriority new_taskPrio);
     void mod_taskCtg(int new_taskCtg);
     void mod_taskNote(QString new_taskNote);
-
 };
 
 #endif // TASK_H
