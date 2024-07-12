@@ -26,10 +26,7 @@ sign_up_window::sign_up_window(QWidget *parent)
             Account::saveAccountList();
 
             std::filesystem::path dir = ROOTDIR + "/data/" + userName.toStdString();
-            if (std::filesystem::create_directories(dir))
-                qDebug() << "Successfully created.";
-            else
-                qDebug() << "Failed.";
+            std::filesystem::create_directories(dir);
             creAccount->saveToFile();
 
             sign_in_page->show();

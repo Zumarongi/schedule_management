@@ -33,12 +33,10 @@ void Account::readAccountList()
     QString qs;
     std::getline(fin, s);
     Task::setIdCounter(std::stoi(s));
-    qDebug() << "IdCounter =" << Task::getIdCounter();
     accountList.clear();
     while (std::getline(fin, s))
     {
         qs = QString::fromStdString(s);
-        qDebug() << qs;
         accountList.push_back(qs);
     }
     fin.close();
