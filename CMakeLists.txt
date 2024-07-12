@@ -28,6 +28,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         sign_in_window.h sign_in_window.cpp sign_in_window.ui
         sign_up_window.h sign_up_window.cpp sign_up_window.ui
         md5.h md5.cpp
+        delete_confirm_dialog.h delete_confirm_dialog.cpp delete_confirm_dialog.ui
+        task_info_window.h task_info_window.cpp task_info_window.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET schedule_management APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

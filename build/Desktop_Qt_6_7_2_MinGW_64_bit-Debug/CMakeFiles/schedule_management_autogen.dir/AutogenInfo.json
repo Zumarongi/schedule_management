@@ -263,6 +263,12 @@
 			null
 		],
 		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/delete_confirm_dialog.h",
+			"MU",
+			"EWIEGA46WW/moc_delete_confirm_dialog.cpp",
+			null
+		],
+		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
@@ -290,6 +296,12 @@
 			"D:/Kobe/Projects/Qt Projects/schedule_management/task.h",
 			"MU",
 			"EWIEGA46WW/moc_task.cpp",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/task_info_window.h",
+			"MU",
+			"EWIEGA46WW/moc_task_info_window.cpp",
 			null
 		]
 	],
@@ -370,6 +382,11 @@
 			null
 		],
 		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/delete_confirm_dialog.cpp",
+			"MU",
+			null
+		],
+		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/main.cpp",
 			"MU",
 			null
@@ -396,6 +413,11 @@
 		],
 		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/task.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/task_info_window.cpp",
 			"MU",
 			null
 		]
