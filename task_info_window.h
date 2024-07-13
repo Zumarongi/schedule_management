@@ -1,6 +1,7 @@
 #ifndef TASK_INFO_WINDOW_H
 #define TASK_INFO_WINDOW_H
 
+#include "task.h"
 #include <QWidget>
 
 namespace Ui {
@@ -12,7 +13,7 @@ class task_info_window : public QWidget
     Q_OBJECT
 
 public:
-    explicit task_info_window(QWidget *parent = nullptr);
+    explicit task_info_window(Task *taskptr, QWidget *parent = nullptr);
     ~task_info_window();
 
 private:

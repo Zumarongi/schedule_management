@@ -8,9 +8,13 @@
 
 enum taskPriority { LOW = 0, MID, HIGH };
 
+taskPriority toTaskPriority(QString qTaskPrio);
+taskPriority toTaskPriority(std::string sTaskPrio);
+
 class Task
 {
-    static std::map<int, std::string> mapCtg;
+    static std::map<int, std::string> ctgIdxToStr;
+    static std::map<std::string, int> ctgStrToIdx;
 
     static int IdCounter;
     int taskId;
@@ -33,15 +37,19 @@ public:
     bool saveToFile(std::filesystem::path task_path) const;
     void printInfo() const;
 
+    static int toCtgIndex(std::string ctgStr);
+    static int toCtgIndex(QString ctgqStr);
+    static std::string toCtgString(int ctgIdx);
+
     static int getIdCounter();
     static void setIdCounter(int idcounter);
 
-    static bool taskId_ascending(const Task *, const Task *);
-    static bool taskId_descending(const Task *, const Task *);
-    static bool taskName_ascending(const Task *, const Task *);
-    static bool taskName_descending(const Task *, const Task *);
-    static bool stTime_ascending(const Task *, const Task *);
-    static bool stTime_descending(const Task *, const Task *);
+    static bool (*taskId_ascending)(const Task *, const Task *);
+    static bool (*taskId_descending)(const Task *, const Task *);
+    static bool (*taskName_ascending)(const Task *, const Task *);
+    static bool (*taskName_descending)(const Task *, const Task *);
+    static bool (*stTime_ascending)(const Task *, const Task *);
+    static bool (*stTime_descending)(const Task *, const Task *);
     // rmTime_ascending/descending
 
     int get_taskId() const;
@@ -54,14 +62,14 @@ public:
     int get_taskCtg() const;
     QString get_taskNote() const;
 
-    void mod_taskName(QString new_taskName);
-    void mod_stTime(time_t new_stTime);
-    void mod_edTime(time_t new_edTime);
-    void mod_rmTime(time_t new_rmTime);
-    void mod_taskLoc(QString new_taskLoc);
-    void mod_taskPrio(taskPriority new_taskPrio);
-    void mod_taskCtg(int new_taskCtg);
-    void mod_taskNote(QString new_taskNote);
+    void set_taskName(QString new_taskName);
+    void set_stTime(time_t new_stTime);
+    void set_edTime(time_t new_edTime);
+    void set_rmTime(time_t new_rmTime);
+    void set_taskLoc(QString new_taskLoc);
+    void set_taskPrio(taskPriority new_taskPrio);
+    void set_taskCtg(int new_taskCtg);
+    void set_taskNote(QString new_taskNote);
 
 };
 

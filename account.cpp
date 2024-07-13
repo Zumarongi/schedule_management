@@ -51,19 +51,7 @@ Task *Account::readTask(std::filesystem::path task_path)
     QString taskLoc = QString::fromStdString(s);
 
     getline(fin, s);
-    int tmp = std::stoi(s);
-    taskPriority taskPrio;
-    switch (tmp)
-    {
-    case 0:
-        taskPrio = LOW; break;
-    case 1:
-        taskPrio = MID; break;
-    case 2:
-        taskPrio = HIGH; break;
-    default:
-        taskPrio = LOW;
-    }
+    taskPriority taskPrio = toTaskPriority(s);
 
     getline(fin, s);
     int taskCtg = std::stoi(s);
@@ -88,6 +76,7 @@ Account::Account(QString username)
     std::getline(fin, s);
     std::getline(fin, s);
     encryptedPass = s;
+    taskList.clear();
     while (std::getline(fin, s))
     {
         Task *t = readTask(acc_dir.append("/" + s + "/.task"));
@@ -103,6 +92,11 @@ Account::Account(QString getUserName, QString getPassWord) {
     encryptedPass=encrypt(getPassWord);
     showHelp=false;
     doneAndDel=false;
+}
+
+Account::~Account()
+{
+    Task *p;
 }
 
 void Account::readAccountList()
@@ -152,7 +146,7 @@ void Account::addToList(QString userName)
     accountList.push_back(userName);
 }
 
-void Account::sortTask(bool (*cmp)(const Task *, const Task *))
+void Account::sortTask(bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending)
 {
     std::stable_sort(taskList.begin(), taskList.end(), cmp);
 }

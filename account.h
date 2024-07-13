@@ -23,6 +23,7 @@ private:
 public:
     Account(QString username); // Build by username, namely read from file
     Account(QString getUserName, QString getPassWord); // Build temporarily for newly-created accounts
+    ~Account();
 
     static void readAccountList();
     static void saveAccountList();

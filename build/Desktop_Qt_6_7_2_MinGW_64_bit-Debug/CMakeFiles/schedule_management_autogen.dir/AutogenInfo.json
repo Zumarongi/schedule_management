@@ -303,6 +303,12 @@
 			"MU",
 			"EWIEGA46WW/moc_task_info_window.cpp",
 			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/timeformat.h",
+			"MU",
+			"EWIEGA46WW/moc_timeformat.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -418,6 +424,11 @@
 		],
 		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/task_info_window.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/timeformat.cpp",
 			"MU",
 			null
 		]

@@ -129,6 +129,14 @@ build CMakeFiles/schedule_management.dir/task_info_window.cpp.obj: CXX_COMPILER_
   OBJECT_DIR = CMakeFiles\schedule_management.dir
   OBJECT_FILE_DIR = CMakeFiles\schedule_management.dir
 
+build CMakeFiles/schedule_management.dir/timeformat.cpp.obj: CXX_COMPILER__schedule_management_unscanned_Debug D$:/Kobe/Projects/Qt$ Projects/schedule_management/timeformat.cpp || cmake_object_order_depends_target_schedule_management
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\schedule_management.dir\timeformat.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include" -isystem D:/Qt/6.7.2/mingw_64/include/QtCore -isystem D:/Qt/6.7.2/mingw_64/include -isystem D:/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -isystem D:/Qt/6.7.2/mingw_64/include/QtWidgets -isystem D:/Qt/6.7.2/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\schedule_management.dir
+  OBJECT_FILE_DIR = CMakeFiles\schedule_management.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target schedule_management
@@ -137,7 +145,7 @@ build CMakeFiles/schedule_management.dir/task_info_window.cpp.obj: CXX_COMPILER_
 #############################################
 # Link the executable schedule_management.exe
 
-build schedule_management.exe: CXX_EXECUTABLE_LINKER__schedule_management_Debug CMakeFiles/schedule_management.dir/schedule_management_autogen/mocs_compilation.cpp.obj CMakeFiles/schedule_management.dir/main.cpp.obj CMakeFiles/schedule_management.dir/mainwindow.cpp.obj CMakeFiles/schedule_management.dir/task.cpp.obj CMakeFiles/schedule_management.dir/account.cpp.obj CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj CMakeFiles/schedule_management.dir/md5.cpp.obj CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj CMakeFiles/schedule_management.dir/task_info_window.cpp.obj | D$:/Qt/6.7.2/mingw_64/lib/libQt6Widgets.a D$:/Qt/6.7.2/mingw_64/lib/libQt6Gui.a D$:/Qt/6.7.2/mingw_64/lib/libQt6Core.a D$:/Qt/6.7.2/mingw_64/lib/libQt6EntryPoint.a || schedule_management_autogen schedule_management_autogen_timestamp_deps
+build schedule_management.exe: CXX_EXECUTABLE_LINKER__schedule_management_Debug CMakeFiles/schedule_management.dir/schedule_management_autogen/mocs_compilation.cpp.obj CMakeFiles/schedule_management.dir/main.cpp.obj CMakeFiles/schedule_management.dir/mainwindow.cpp.obj CMakeFiles/schedule_management.dir/task.cpp.obj CMakeFiles/schedule_management.dir/account.cpp.obj CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj CMakeFiles/schedule_management.dir/md5.cpp.obj CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj CMakeFiles/schedule_management.dir/task_info_window.cpp.obj CMakeFiles/schedule_management.dir/timeformat.cpp.obj | D$:/Qt/6.7.2/mingw_64/lib/libQt6Widgets.a D$:/Qt/6.7.2/mingw_64/lib/libQt6Gui.a D$:/Qt/6.7.2/mingw_64/lib/libQt6Core.a D$:/Qt/6.7.2/mingw_64/lib/libQt6EntryPoint.a || schedule_management_autogen schedule_management_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = D:/Qt/6.7.2/mingw_64/lib/libQt6Widgets.a  D:/Qt/6.7.2/mingw_64/lib/libQt6Gui.a  D:/Qt/6.7.2/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  D:/Qt/6.7.2/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
