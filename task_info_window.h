@@ -11,9 +11,10 @@ class task_info_window;
 class task_info_window : public QWidget
 {
     Q_OBJECT
+    Task *currentTask;
 
 public:
-    explicit task_info_window(Task *taskptr, QWidget *parent = nullptr);
+    explicit task_info_window(Task *task, QWidget *parent = nullptr);
     ~task_info_window();
 
 private:
