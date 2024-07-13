@@ -18,13 +18,19 @@ private:
     bool showHelp;
     bool doneAndDel;
 
+    static void initDataDir();
+    Task *readTask(std::filesystem::path task_path);
 public:
-    Account(QString getname, QString getpassword);
+    Account(QString username); // Build by username, namely read from file
+    Account(QString getUserName, QString getPassWord); // Build temporarily for newly-created accounts
+    ~Account();
+
     static void readAccountList();
     static void saveAccountList();
     static bool isNameExist(QString newName);
     static void addToList(QString userName);
-    void readTaskList();
+
+    void sortTask(bool (*cmp)(const Task *, const Task *));
     void saveToFile();
 };
 
