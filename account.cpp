@@ -83,8 +83,10 @@ Account::Account(QString username)
         if (t != nullptr)
             taskList.push_back(t);
     }
-    sortTask(Task::stTime_ascending);
+    sortTask(taskList,Task::stTime_ascending);
     fin.close();
+    showHelp=false;
+    doneAndDel=false;
 }
 
 Account::Account(QString getUserName, QString getPassWord) {
@@ -146,9 +148,9 @@ void Account::addToList(QString userName)
     accountList.push_back(userName);
 }
 
-void Account::sortTask(bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending)
+void Account::sortTask(std::vector <Task*> needSortList,bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending)
 {
-    std::stable_sort(taskList.begin(), taskList.end(), cmp);
+    std::stable_sort(needSortList.begin(), needSortList.end(), cmp);
 }
 
 void Account::saveToFile()
@@ -167,3 +169,4 @@ void Account::saveToFile()
         fout << taskList[i]->get_taskId() << std::endl;
     fout.close();
 }
+

@@ -31,6 +31,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         delete_confirm_dialog.h delete_confirm_dialog.cpp delete_confirm_dialog.ui
         task_info_window.h task_info_window.cpp task_info_window.ui
         timeformat.h timeformat.cpp
+        create_task_window.h create_task_window.cpp create_task_window.ui
+        get_time_range.h get_time_range.cpp get_time_range.ui
+        get_task_range.h get_task_range.cpp get_task_range.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET schedule_management APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

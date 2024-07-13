@@ -8,6 +8,11 @@
 #include <QVBoxLayout>
 #include <vector>
 #include <ctime>
+#include "create_task_window.h"
+#include "get_time_range.h"
+#include "get_task_range.h"
+
+extern Account *currentAccount;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,10 +23,9 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    Account *currentAccount;
 
 public:
-    MainWindow(Account *getAccount,QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void auto_complete();
     void showButton();
