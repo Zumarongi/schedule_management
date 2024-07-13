@@ -3,7 +3,7 @@
 #include <iostream>
 #include <QDebug>
 
-std::map<int, std::string> Task::mapCtg = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}};
+std::map<int, std::string> Task::mapCtg = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}, {5, "其他"}};
 
 int Task::IdCounter = 0;
 
@@ -26,6 +26,11 @@ Task::Task(QString taskname, time_t st_time, time_t ed_time = -1, time_t rm_time
     taskCtg = taskctg;
 
     taskNote = tasknote;
+
+    taskButton=new QPushButton;
+    taskButton->setFixedSize(700,40);
+    taskButton->setText(taskname);
+    //改变颜色
 }
 
 bool Task::saveToFile(std::filesystem::path acc_path)
@@ -66,6 +71,8 @@ int Task::get_taskCtg() const { return taskCtg; }
 
 QString Task::get_taskNote() const { return taskNote; }
 
+QPushButton * Task::get_taskButton() const {return taskButton;}
+
 void Task::mod_taskName(QString new_taskName) { taskName = new_taskName; }
 
 void Task::mod_stTime(time_t new_stTime) { stTime = new_stTime; }
@@ -81,3 +88,4 @@ void Task::mod_taskPrio(taskPriority new_taskPrio) { taskPrio = new_taskPrio; }
 void Task::mod_taskCtg(int new_taskCtg) { taskCtg = new_taskCtg; }
 
 void Task::mod_taskNote(QString new_taskNote) { taskNote = new_taskNote; }
+

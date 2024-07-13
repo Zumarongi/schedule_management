@@ -5,6 +5,7 @@
 #include <map>
 #include <QMessageBox>
 #include <filesystem>
+#include <QPushButton>
 
 enum taskPriority { LOW = 0, MID, HIGH };
 
@@ -21,6 +22,7 @@ class Task
     taskPriority taskPrio;
     int taskCtg;                    //catagory
     QString taskNote;
+    QPushButton *taskButton;
 
 public:
     Task(QString taskname, time_t st_time, time_t ed_time, time_t rm_time,
@@ -41,6 +43,7 @@ public:
     taskPriority get_taskPrio() const;
     int get_taskCtg() const;
     QString get_taskNote() const;
+    QPushButton *get_taskButton() const;
 
     void mod_taskName(QString new_taskName);
     void mod_stTime(time_t new_stTime);

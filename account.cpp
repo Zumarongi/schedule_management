@@ -80,3 +80,20 @@ void Account::saveToFile()
         fout << taskList[i]->get_taskId() << std::endl;
     fout.close();
 }
+
+bool Account::compareTime(Task *a,Task *b){
+
+}
+
+bool Account::compareName(Task *a,Task *b){
+    return !a->get_taskName().compare(b->get_taskName());
+}
+
+void Account::sttimeSort(){
+    sort(taskList.begin(),taskList.end(),compareTime);
+}
+
+void Account::nameSort(){}
+
+
+

@@ -14,11 +14,11 @@ private:
 
     QString userName;
     std::string encryptedPass;
-    bool showHelp;
-    bool doneAndDel;
 
 public:
     std::vector<Task *> taskList;//暂时设为public测试使用
+    bool showHelp;
+    bool doneAndDel;
     Account(QString getname, QString getpassword);
     static void readAccountList();
     static void saveAccountList();
@@ -26,6 +26,11 @@ public:
     static void addToList(QString userName);
     void readTaskList();
     void saveToFile();
+
+    void sttimeSort();
+    void nameSort();
+    bool compareTime(Task *a,Task *b);
+    bool compareName(Task *a,Task *b);
 };
 
 #endif // ACCOUNT_H
