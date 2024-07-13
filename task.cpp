@@ -3,8 +3,8 @@
 #include <iostream>
 #include <QDebug>
 
-std::map<int, std::string> Task::ctgIdxToStr = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}};
-std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 0}, {"娱乐", 1}, {"生活", 2}, {"工作", 3}, {"运动", 4}};
+std::map<int, std::string> Task::ctgIdxToStr = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}, {5, "其他"}};
+std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 0}, {"娱乐", 1}, {"生活", 2}, {"工作", 3}, {"运动", 4}, {"其他", 5}};
 
 int Task::IdCounter = 0;
 
@@ -38,6 +38,11 @@ Task::Task(int taskid,
     taskPrio = taskprio;
     taskCtg = taskctg;
     taskNote = tasknote;
+
+    taskButton=new QPushButton;
+    taskButton->setFixedSize(700,40);
+    taskButton->setText(taskname);
+    //改变颜色
 }
 
 bool Task::saveToFile(std::filesystem::path acc_path) const
@@ -95,6 +100,8 @@ taskPriority Task::get_taskPrio() const { return taskPrio; }
 int Task::get_taskCtg() const { return taskCtg; }
 
 QString Task::get_taskNote() const { return taskNote; }
+
+QPushButton * Task::get_taskButton() const {return taskButton;}
 
 void Task::set_taskName(QString new_taskName) { taskName = new_taskName; }
 
