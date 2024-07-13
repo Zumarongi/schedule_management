@@ -6,6 +6,9 @@
 
 std::string encrypt(QString Qplaintext);
 
+MainWindow *mainPage;
+Account *currentAccount;
+
 sign_in_window::sign_in_window(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::sign_in_window)
@@ -28,14 +31,20 @@ sign_in_window::sign_in_window(QWidget *parent)
         {
             std::filesystem::path acc_path = ROOTDIR + "/data/" + userName.toStdString() + "/.acc";
             std::ifstream fin(acc_path);
-            std::string s, encryptedPass;
-            fin >> s >> encryptedPass;
-            if (encryptedPass == encrypt(passWord))
-                samePassword = true;
-            fin.close();
+            if (!fin.is_open())
+                qDebug() << "Fail to open" << QString::fromStdString(acc_path.string());
+            else
+            {
+                std::string s, encryptedPass;
+                fin >> s >> encryptedPass;
+                if (encryptedPass == encrypt(passWord))
+                    samePassword = true;
+                fin.close();
+            }
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
-            MainWindow *mainPage=new MainWindow;
+
+            mainPage=new MainWindow;
             mainPage->show();
             this->close();
         }

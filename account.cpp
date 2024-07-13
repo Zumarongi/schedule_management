@@ -2,6 +2,7 @@
 #include "md5.h"
 #include <fstream>
 #include <filesystem>
+#include <algorithm>
 #include <QDebug>
 
 std::vector<QString> Account::accountList = {};
@@ -13,9 +14,93 @@ std::string encrypt(QString Qplaintext)
     return ciphertext;
 }
 
-Account::Account(QString getname, QString getpassword) {
-    userName=getname;
-    encryptedPass=encrypt(getpassword);
+void Account::initDataDir()
+{
+    std::filesystem::create_directories(ROOTDIR + "/data/");
+    std::ofstream fout(ROOTDIR + "/data/.acclist");
+    fout << 0;
+}
+
+Task *Account::readTask(std::filesystem::path task_path)
+{
+    qDebug() << this->userName << "calling readTask(task_path =" << QString::fromStdString(task_path.string()) << ")";
+    std::ifstream fin(task_path);
+    if (!fin.is_open())
+    {
+        qDebug() << "File" << QString::fromStdString(task_path.string()) << "not found";
+        return nullptr;
+    }
+    std::string s;
+
+    getline(fin, s);
+    int taskId = std::stoi(s);
+
+    getline(fin, s);
+    QString taskName = QString::fromStdString(s);
+
+    getline(fin, s);
+    time_t stTime = std::stol(s);
+
+    getline(fin, s);
+    time_t edTime = std::stol(s);
+
+    getline(fin, s);
+    time_t rmTime = std::stol(s);
+
+    getline(fin, s);
+    QString taskLoc = QString::fromStdString(s);
+
+    getline(fin, s);
+    int tmp = std::stoi(s);
+    taskPriority taskPrio;
+    switch (tmp)
+    {
+    case 0:
+        taskPrio = LOW; break;
+    case 1:
+        taskPrio = MID; break;
+    case 2:
+        taskPrio = HIGH; break;
+    default:
+        taskPrio = LOW;
+    }
+
+    getline(fin, s);
+    int taskCtg = std::stoi(s);
+
+    getline(fin, s);
+    QString taskNote = QString::fromStdString(s);
+
+    return new Task(taskId, taskName, stTime, edTime, rmTime, taskLoc, taskPrio, taskCtg, taskNote);
+}
+
+Account::Account(QString username)
+{
+    userName = username;
+    std::filesystem::path acc_dir = ROOTDIR + "/data/" + username.toStdString();
+    std::ifstream fin(acc_dir.append("/.acc"));
+    if (!fin.is_open())
+    {
+        qDebug() << "can't find account" << username;
+        return;
+    }
+    std::string s;
+    std::getline(fin, s);
+    std::getline(fin, s);
+    encryptedPass = s;
+    while (std::getline(fin, s))
+    {
+        Task *t = readTask(acc_dir.append("/" + s + "/.task"));
+        if (t != nullptr)
+            taskList.push_back(t);
+    }
+    sortTask(Task::stTime_ascending);
+    fin.close();
+}
+
+Account::Account(QString getUserName, QString getPassWord) {
+    userName=getUserName;
+    encryptedPass=encrypt(getPassWord);
     showHelp=false;
     doneAndDel=false;
 }
@@ -26,7 +111,9 @@ void Account::readAccountList()
     std::ifstream fin(acclist_path);
     if (!fin.is_open())
     {
-        qDebug() << "./data/.acclist not found";
+        qDebug() << "File ./data/.acclist not found.";
+        initDataDir();
+        qDebug() << "Path ./data/.acclist created.";
         return;
     }
     std::string s;
@@ -65,13 +152,19 @@ void Account::addToList(QString userName)
     accountList.push_back(userName);
 }
 
+void Account::sortTask(bool (*cmp)(const Task *, const Task *))
+{
+    std::stable_sort(taskList.begin(), taskList.end(), cmp);
+}
+
 void Account::saveToFile()
 {
+    qDebug() << this->userName << "calling saveToFile()";
     std::filesystem::path acc_path = ROOTDIR + "/data/" + userName.toStdString() + "/.acc";
     std::ofstream fout(acc_path);
     if (!fout.is_open())
     {
-        qDebug() << "fail to open .acc";
+        qDebug() << "Fail to open" << QString::fromStdString(acc_path.string());
         return;
     }
     fout << userName.toStdString() << std::endl;

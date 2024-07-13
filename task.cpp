@@ -12,23 +12,33 @@ Task::Task(QString taskname, time_t st_time, time_t ed_time = -1, time_t rm_time
            QString tasknote = "")
 {
     taskId = ++ IdCounter;
-
     taskName = taskname;
-
     stTime = st_time;
     if (ed_time == -1) edTime = st_time + 30;
     rmTime = rm_time;
-
     taskLoc = taskloc;
-
     taskPrio = taskprio;
-
     taskCtg = taskctg;
-
     taskNote = tasknote;
 }
 
-bool Task::saveToFile(std::filesystem::path acc_path)
+Task::Task(int taskid,
+           QString taskname, time_t st_time, time_t ed_time, time_t rm_time,
+           QString taskloc, taskPriority taskprio, int taskctg,
+           QString tasknote)
+{
+    taskId = taskid;
+    taskName = taskname;
+    stTime = st_time;
+    edTime = ed_time;
+    rmTime = rm_time;
+    taskLoc = taskloc;
+    taskPrio = taskprio;
+    taskCtg = taskctg;
+    taskNote = tasknote;
+}
+
+bool Task::saveToFile(std::filesystem::path acc_path) const
 {
     std::filesystem::path task_path = acc_path.append("/" + std::to_string(taskId) + ".task");
     std::ofstream fout(task_path);
@@ -47,6 +57,18 @@ bool Task::saveToFile(std::filesystem::path acc_path)
 int Task::getIdCounter() { return IdCounter; }
 
 void Task::setIdCounter(int idcounter) { IdCounter = idcounter; }
+
+bool Task::taskId_ascending(const Task *x, const Task *y) { return x->taskId < y->taskId; }
+
+bool Task::taskId_descending(const Task *x, const Task *y) { return x->taskId > y->taskId; }
+
+bool Task::taskName_ascending(const Task *x, const Task *y) { return x->taskName < y->taskName; }
+
+bool Task::taskName_descending(const Task *x, const Task *y) { return x->taskName > y->taskName; }
+
+bool Task::stTime_ascending(const Task *x, const Task *y) { return x->stTime < y->stTime; }
+
+bool Task::stTime_descending(const Task *x, const Task *y) { return x->stTime > y->stTime; }
 
 int Task::get_taskId() const { return taskId; }
 

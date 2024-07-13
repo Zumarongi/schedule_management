@@ -17,20 +17,32 @@ class Task
 
     QString taskName;
     time_t stTime, edTime, rmTime;  // start, end, reminder
-    QString taskLoc;            // location
+    QString taskLoc;                // location
     taskPriority taskPrio;
-    int taskCtg;                    //catagory
+    int taskCtg;                    // catagory
     QString taskNote;
 
 public:
     Task(QString taskname, time_t st_time, time_t ed_time, time_t rm_time,
          QString taskloc, taskPriority taskprio, int taskctg,
-         QString tasknote);
-    bool saveToFile(std::filesystem::path task_path);
-    void printInfo();
+         QString tasknote);         // new task
+    Task(int taskId,
+         QString taskname, time_t st_time, time_t ed_time, time_t rm_time,
+         QString taskloc, taskPriority taskprio, int taskctg,
+         QString tasknote);         // build from file
+    bool saveToFile(std::filesystem::path task_path) const;
+    void printInfo() const;
 
     static int getIdCounter();
     static void setIdCounter(int idcounter);
+
+    static bool taskId_ascending(const Task *, const Task *);
+    static bool taskId_descending(const Task *, const Task *);
+    static bool taskName_ascending(const Task *, const Task *);
+    static bool taskName_descending(const Task *, const Task *);
+    static bool stTime_ascending(const Task *, const Task *);
+    static bool stTime_descending(const Task *, const Task *);
+    // rmTime_ascending/descending
 
     int get_taskId() const;
     QString get_taskName() const;

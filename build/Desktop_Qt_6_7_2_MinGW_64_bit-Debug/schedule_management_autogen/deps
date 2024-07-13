@@ -7,6 +7,8 @@ schedule_management_autogen/timestamp: \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/3.29.3/CMakeRCCompiler.cmake \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/3.29.3/CMakeSystem.cmake \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/moc_predefs.h \
+	D:/Kobe/Projects/Qt\ Projects/schedule_management/delete_confirm_dialog.cpp \
+	D:/Kobe/Projects/Qt\ Projects/schedule_management/delete_confirm_dialog.h \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/main.cpp \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/mainwindow.cpp \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/mainwindow.h \
@@ -18,6 +20,8 @@ schedule_management_autogen/timestamp: \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/sign_up_window.h \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/task.cpp \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/task.h \
+	D:/Kobe/Projects/Qt\ Projects/schedule_management/task_info_window.cpp \
+	D:/Kobe/Projects/Qt\ Projects/schedule_management/task_info_window.h \
 	D:/Qt/6.7.2/mingw_64/include/QtCore/q20functional.h \
 	D:/Qt/6.7.2/mingw_64/include/QtCore/q20memory.h \
 	D:/Qt/6.7.2/mingw_64/include/QtCore/q20type_traits.h \
@@ -160,8 +164,10 @@ schedule_management_autogen/timestamp: \
 	D:/Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
 	D:/Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
 	D:/Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+	D:/Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 	D:/Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
 	D:/Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
+	D:/Qt/6.7.2/mingw_64/include/QtWidgets/QWidget \
 	D:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 	D:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 	D:/Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
@@ -538,7 +544,9 @@ schedule_management_autogen/timestamp: \
 	D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/time.h \
 	D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
 	D:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
+	D:/Kobe/Projects/Qt\ Projects/schedule_management/delete_confirm_dialog.ui \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/mainwindow.ui \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/sign_in_window.ui \
 	D:/Kobe/Projects/Qt\ Projects/schedule_management/sign_up_window.ui \
+	D:/Kobe/Projects/Qt\ Projects/schedule_management/task_info_window.ui \
 	D:/Qt/Tools/CMake_64/bin/cmake.exe
