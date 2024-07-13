@@ -15,22 +15,24 @@ private:
     QString userName;
     std::string encryptedPass;
 
+    static void initDataDir();
+    Task *readTask(std::filesystem::path task_path);
 public:
     std::vector<Task *> taskList;//暂时设为public测试使用
     bool showHelp;
     bool doneAndDel;
-    Account(QString getname, QString getpassword);
+
+    Account(QString username); // Build by username, namely read from file
+    Account(QString getUserName, QString getPassWord); // Build temporarily for newly-created accounts
+    ~Account();
+
     static void readAccountList();
     static void saveAccountList();
     static bool isNameExist(QString newName);
     static void addToList(QString userName);
-    void readTaskList();
-    void saveToFile();
 
-    void sttimeSort();
-    void nameSort();
-    bool compareTime(Task *a,Task *b);
-    bool compareName(Task *a,Task *b);
+    void sortTask(bool (*cmp)(const Task *, const Task *));
+    void saveToFile();
 };
 
 #endif // ACCOUNT_H

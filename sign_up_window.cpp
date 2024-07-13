@@ -21,12 +21,14 @@ sign_up_window::sign_up_window(QWidget *parent)
         QString confPassword=ui->lineEdit_confirm_password->text();
         bool existName=Account::isNameExist(userName);
         if(!existName&&(passWord==confPassword)&&!userName.isEmpty()&&!passWord.isEmpty()&&!confPassword.isEmpty()){
-            Account *creAccount=new Account(userName,passWord);
+            Account *newAccount=new Account(userName, passWord);
             Account::addToList(userName);
             Account::saveAccountList();
             std::filesystem::path dir = ROOTDIR + "/data/" + userName.toStdString();
             std::filesystem::create_directories(dir);
-            creAccount->saveToFile();
+            newAccount->saveToFile();
+
+            delete newAccount;
 
             sign_in_page->show();
             this->close();

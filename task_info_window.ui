@@ -250,7 +250,7 @@
     <rect>
      <x>80</x>
      <y>180</y>
-     <width>200</width>
+     <width>194</width>
      <height>60</height>
     </rect>
    </property>
@@ -258,7 +258,7 @@
   <widget class="QPushButton" name="editButton_taskNote">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>280</x>
      <y>220</y>
      <width>22</width>
      <height>20</height>
@@ -328,7 +328,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="pushButton_saveChange">
+  <widget class="QPushButton" name="pushButton_saveChanges">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -365,6 +365,58 @@
    </property>
    <property name="text">
     <string>返回</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="editButton_stTime">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>90</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="editButton_edTime">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>90</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="editButton_taskCtg">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>120</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="editButton_taskPrio">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>60</y>
+     <width>22</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit</string>
    </property>
   </widget>
  </widget>
