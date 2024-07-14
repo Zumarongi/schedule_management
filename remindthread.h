@@ -5,7 +5,7 @@
 #include <QThread>
 #include <QTimer>
 #include "account.h"
-#include "arrive_remind_time.h"
+#include "reminddialog.h"
 
 extern Account *currentAccount;
 

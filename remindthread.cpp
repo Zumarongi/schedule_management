@@ -11,7 +11,7 @@ void remindThread::run(){
         currentTime=time(NULL);
         for(int i=0;i<currentAccount->taskList.size();++i){
             if((currentAccount->taskList[i]->get_stTime()-currentTime)<currentAccount->taskList[i]->get_rmTime()){
-                arrive_remind_time *remindPage=new arrive_remind_time(currentAccount->taskList[i]);;
+                remindDialog *remindPage=new remindDialog(currentAccount->taskList[i]);;
 
             }
         }
