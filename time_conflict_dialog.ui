@@ -35,10 +35,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>40</y>
-     <width>60</width>
-     <height>12</height>
+     <x>40</x>
+     <y>30</y>
+     <width>120</width>
+     <height>36</height>
     </rect>
    </property>
    <property name="font">
@@ -47,7 +47,7 @@
     </font>
    </property>
    <property name="text">
-    <string>确认删除任务？</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;该任务与其他任务时间冲突，&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;是否保存？&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

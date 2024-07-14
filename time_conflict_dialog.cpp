@@ -6,6 +6,7 @@ time_conflict_dialog::time_conflict_dialog(QWidget *parent)
     , ui(new Ui::time_conflict_dialog)
 {
     ui->setupUi(this);
+
 }
 
 time_conflict_dialog::~time_conflict_dialog()
