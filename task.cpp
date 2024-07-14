@@ -72,6 +72,8 @@ int Task::toCtgIndex(QString ctgqStr) { return ctgStrToIdx[ctgqStr.toStdString()
 
 std::string Task::toCtgString(int ctgIdx) { return ctgIdxToStr[ctgIdx]; }
 
+QString Task::toCtgQString(int ctgIdx) { return QString::fromStdString(ctgIdxToStr[ctgIdx]); }
+
 int Task::getIdCounter() { return IdCounter; }
 
 void Task::setIdCounter(int idcounter) { IdCounter = idcounter; }
@@ -138,4 +140,20 @@ TaskPriority toTaskPriority(std::string sTaskPrio)
     if (sTaskPrio == "MID") return MID;
     if (sTaskPrio == "HIGH") return HIGH;
     return LOW;
+}
+
+QString toQString(TaskPriority taskPrio)
+{
+    if (taskPrio == LOW) return "LOW";
+    if (taskPrio == MID) return "MID";
+    if (taskPrio == HIGH) return "HIGH";
+    return "LOW";
+}
+
+std::string toString(TaskPriority taskPrio)
+{
+    if (taskPrio == LOW) return "LOW";
+    if (taskPrio == MID) return "MID";
+    if (taskPrio == HIGH) return "HIGH";
+    return "LOW";
 }

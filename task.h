@@ -12,6 +12,8 @@ enum TaskPriority { LOW = 0, MID, HIGH };
 
 TaskPriority toTaskPriority(QString qTaskPrio);
 TaskPriority toTaskPriority(std::string sTaskPrio);
+QString toQString(TaskPriority taskPrio);
+std::string toString(TaskPriority taskPrio);
 
 class Task
 {
@@ -45,6 +47,7 @@ public:
     static int toCtgIndex(std::string ctgStr);
     static int toCtgIndex(QString ctgqStr);
     static std::string toCtgString(int ctgIdx);
+    static QString toCtgQString(int ctgIdx);
 
     static int getIdCounter();
     static void setIdCounter(int idcounter);

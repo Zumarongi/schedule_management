@@ -14,6 +14,25 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
     currentTask = task;
 
+    ui->dateTimeEdit_stTime->setMinimumDateTime(QDateTime::currentDateTime());
+    ui->lineEdit_rmTime_h->setValidator(new QIntValidator(0, 23, this));
+    ui->lineEdit_rmTime_m->setValidator(new QIntValidator(0, 59, this));
+
+    ui->lineEdit_taskName->setText(task->get_taskName());
+    ui->dateTimeEdit_stTime->setDateTime(task->get_stTime());
+    ui->dateTimeEdit_edTime->setDateTime(task->get_edTime());
+    ui->lineEdit_rmTime_h->setText(QString::fromStdString(std::to_string(task->get_rmTime().hour())));
+    ui->lineEdit_rmTime_m->setText(QString::fromStdString(std::to_string(task->get_rmTime().minute())));
+    ui->lineEdit_taskLoc->setText(task->get_taskLoc());
+    ui->comboBox_taskPrio->setCurrentText(toQString(task->get_taskPrio()));
+    ui->comboBox_taskCtg->setCurrentText(Task::toCtgQString(task->get_taskCtg()));
+    ui->textEdit_taskNote->setText(task->get_taskNote());
+
+    ui->warning_taskNameEmpty->hide();
+    ui->warning_stTimeTooEarly->hide();
+    ui->warning_edTimeTooEarly->hide();
+    ui->warning_rmTimeTooEarly->hide();
+
     ui->lineEdit_taskName->setReadOnly(true);
     connect(ui->editButton_taskName, &QPushButton::clicked, [=](){
         ui->lineEdit_taskName->setReadOnly(false);
@@ -71,22 +90,39 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
         bool edTimeTooEarly = new_edTime < new_stTime;
         bool rmTimeTooEarly = new_stTime - QDateTime::currentDateTime() < (std::chrono::milliseconds)(new_rmTime.msec());
 
-        // warnings
+        if (taskNameEmpty)
+            ui->warning_taskNameEmpty->show();
+        else ui->warning_taskNameEmpty->hide();
 
-        task->set_taskName(new_taskName);
-        task->set_stTime(new_stTime);
-        task->set_edTime(new_edTime);
-        task->set_rmTime(new_rmTime);
-        task->set_taskLoc(new_taskLoc);
-        task->set_taskPrio(new_taskPrio);
-        task->set_taskCtg(new_taskCtg);
-        task->set_taskNote(new_taskNote);
+        if (stTimeTooEarly)
+            ui->warning_stTimeTooEarly->show();
+        else ui->warning_stTimeTooEarly->hide();
 
-        std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(task->get_taskId()) + ".task";
-        task->saveToFile(task_path);
+        if (edTimeTooEarly)
+            ui->warning_edTimeTooEarly->show();
+        else ui->warning_edTimeTooEarly->hide();
 
-        mainPage->show();
-        this->close();
+        if (rmTimeTooEarly)
+            ui->warning_rmTimeTooEarly->show();
+        else ui->warning_rmTimeTooEarly->hide();
+
+        if (!taskNameEmpty && !stTimeTooEarly && !edTimeTooEarly && !rmTimeTooEarly)
+        {
+            task->set_taskName(new_taskName);
+            task->set_stTime(new_stTime);
+            task->set_edTime(new_edTime);
+            task->set_rmTime(new_rmTime);
+            task->set_taskLoc(new_taskLoc);
+            task->set_taskPrio(new_taskPrio);
+            task->set_taskCtg(new_taskCtg);
+            task->set_taskNote(new_taskNote);
+
+            std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(task->get_taskId()) + ".task";
+            task->saveToFile(task_path);
+
+            mainPage->show();
+            this->close();
+        }
     });
 
     connect(ui->pushButton_deleteTask, &QPushButton::clicked, [=](){
