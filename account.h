@@ -31,8 +31,11 @@ public:
     static bool isNameExist(QString newName);
     static void addToList(QString userName);
 
+    QString get_userName() const;
+
     void sortTask(bool (*cmp)(const Task *, const Task *));
-    void saveToFile();
+    void saveToFile() const;
+    void delTask(Task *taskToDel);
 };
 
 #endif // ACCOUNT_H

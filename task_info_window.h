@@ -17,6 +17,8 @@ public:
     explicit task_info_window(Task *task, QWidget *parent = nullptr);
     ~task_info_window();
 
+    Task *get_currentTask() const;
+
 private:
     Ui::task_info_window *ui;
 };

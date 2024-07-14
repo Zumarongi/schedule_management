@@ -93,7 +93,7 @@ MainWindow::MainWindow(Account *getAccount,QWidget *parent)
     connect(ui->time_order_button,&QRadioButton::clicked,[=](){
         if(ui->time_order_button->isChecked()){
             removeButton();
-            currentAccount->sttimeSort();
+            currentAccount->sortTask(Task::stTime_ascending);
             taskOrder.clear();
             for(int i=0;i<currentAccount->taskList.size();++i){
                 taskOrder[i]=currentAccount->taskList[i];
@@ -104,7 +104,7 @@ MainWindow::MainWindow(Account *getAccount,QWidget *parent)
     connect(ui->name_order_button,&QRadioButton::clicked,[=](){
         if(ui->name_order_button->isChecked()){
             removeButton();
-            currentAccount->nameSort();
+            currentAccount->sortTask(Task::taskName_ascending);
             taskOrder.clear();
             for(int i=0;i<currentAccount->taskList.size();++i){
                 taskOrder[i]=currentAccount->taskList[i];
@@ -140,7 +140,7 @@ void MainWindow::on_search_button_clicked(){
         }
     }
     if(findTask){
-        task_info_window *task_info_page=new task_info_window(currentAccount->taskList[location]);
+        task_info_window *task_info_page=new task_info_window(currentAccount->taskList[location], this);
         task_info_page->show();
         ui->not_find_warning->hide();
     }

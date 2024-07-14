@@ -24,6 +24,7 @@ sign_up_window::sign_up_window(QWidget *parent)
             Account *newAccount=new Account(userName, passWord);
             Account::addToList(userName);
             Account::saveAccountList();
+
             std::filesystem::path dir = ROOTDIR + "/data/" + userName.toStdString();
             std::filesystem::create_directories(dir);
             newAccount->saveToFile();
