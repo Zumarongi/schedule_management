@@ -19,6 +19,9 @@ public:
     explicit get_time_range(QWidget *parent = nullptr);
     ~get_time_range();
 
+signals:
+    void done_change();
+
 private:
     Ui::get_time_range *ui;
 };

@@ -8,6 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setFixedSize(800,600);
+
+    remindThread * arrving_remind=new remindThread;
+    arrving_remind->start();
+
     ui->auto_delete->setFixedSize(100,20);
     ui->auto_delete->move(30,30);
     ui->name_order_button->setFixedSize(80,20);
@@ -50,19 +54,21 @@ MainWindow::MainWindow(QWidget *parent)
 
     QMenu *main_menu =new QMenu();
     main_menu->addAction("时间段",[=](){
-        get_task_range *getTimePage=new get_task_range;
+        get_time_range *getTimePage=new get_time_range;
         getTimePage->show();
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_stTime()>=currentAccount->minTime&&currentAccount->taskList[i]->get_edTime()<=currentAccount->maxTime){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
+        connect(getTimePage,&get_time_range::done_change,[=](){
+            removeButton();
+            taskOrder.clear();
+            int i=0,j=0;
+            while(i<currentAccount->taskList.size()){
+                if(currentAccount->taskList[i]->get_stTime()>=currentAccount->minTime&&currentAccount->taskList[i]->get_edTime()<=currentAccount->maxTime){
+                    taskOrder[j]=currentAccount->taskList[i];
+                    ++j;
+                }
+                ++i;
             }
-            ++i;
-        }
-        showButton();
+            showButton();
+        });
     });
 
     //QMenu *sub_time_menu=new QMenu("时间段");

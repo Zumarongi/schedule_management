@@ -33,7 +33,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         timeformat.h timeformat.cpp
         create_task_window.h create_task_window.cpp create_task_window.ui
         get_time_range.h get_time_range.cpp get_time_range.ui
-        get_task_range.h get_task_range.cpp get_task_range.ui
+        remindthread.h remindthread.cpp
+        arrive_remind_time.h arrive_remind_time.cpp arrive_remind_time.ui
+
+
 
     )
 # Define target properties for Android with Qt 6 as:

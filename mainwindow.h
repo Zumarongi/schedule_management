@@ -9,8 +9,9 @@
 #include <vector>
 #include <ctime>
 #include "create_task_window.h"
+#include <QDebug>
 #include "get_time_range.h"
-#include "get_task_range.h"
+#include "remindthread.h"
 
 extern Account *currentAccount;
 

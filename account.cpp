@@ -87,6 +87,8 @@ Account::Account(QString username)
     fin.close();
     showHelp=false;
     doneAndDel=false;
+    maxTime=time(NULL);
+    minTime=0;
 }
 
 Account::Account(QString getUserName, QString getPassWord) {
