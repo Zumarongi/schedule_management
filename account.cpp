@@ -2,7 +2,6 @@
 #include "md5.h"
 #include <fstream>
 #include <filesystem>
-#include <algorithm>
 #include <QDebug>
 
 std::vector<QString> Account::accountList = {};
@@ -83,12 +82,10 @@ Account::Account(QString username)
         if (t != nullptr)
             taskList.push_back(t);
     }
-    sortTask(taskList,Task::stTime_ascending);
+    Task::sortTasks(taskList.begin(), taskList.end(), Task::stTime_ascending);
     fin.close();
     showHelp=false;
     doneAndDel=false;
-    maxTime=time(NULL);
-    minTime=0;
 }
 
 Account::Account(QString getUserName, QString getPassWord) {
@@ -101,6 +98,8 @@ Account::Account(QString getUserName, QString getPassWord) {
 Account::~Account()
 {
     Task *p;
+    for (auto task: taskList)
+        delete task;
 }
 
 void Account::readAccountList()
@@ -140,8 +139,8 @@ void Account::saveAccountList()
 bool Account::isNameExist(QString newName)
 {
     qDebug() << "isNameExist";
-    for (int i = 0; i < accountList.size(); i ++)
-        if (accountList[i] == newName) return true;
+    for (auto userName: accountList)
+        if (userName == newName) return true;
     return false;
 }
 
@@ -152,10 +151,15 @@ void Account::addToList(QString userName)
 
 QString Account::get_userName() const { return userName; }
 
-void Account::sortTask(bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending)
-{
-    std::stable_sort(taskList.begin(), taskList.end(), cmp);
-}
+std::vector<Task *> Account::get_taskList() const { return taskList; }
+
+bool Account::get_showHelp() const { return showHelp; }
+
+bool Account::get_doneAndDel() const { return doneAndDel; }
+
+void Account::set_showHelp(bool new_showHelp) { showHelp = new_showHelp; }
+
+void Account::set_doneAndDel(bool new_doneAndDel) { doneAndDel = new_doneAndDel; }
 
 void Account::saveToFile() const
 {

@@ -12,7 +12,6 @@ extern Account *currentAccount;
 class remindThread : public QThread
 {
     Q_OBJECT
-    time_t currentTime;
 
 public:
     explicit remindThread(QObject *parent = nullptr);

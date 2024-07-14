@@ -14,19 +14,16 @@ private:
 
     QString userName;
     std::string encryptedPass;
+    std::vector<Task *> taskList;
+    bool showHelp;
+    bool doneAndDel;
 
     static void initDataDir();
     Task *readTask(std::filesystem::path task_path);
 
 public:
-    std::vector<Task *> taskList;//暂时设为public测试使用
-    bool showHelp;
-    bool doneAndDel;
-
-    time_t maxTime,minTime;
-
-    Account(QString username); // Build by username, namely read from file
-    Account(QString getUserName, QString getPassWord); // Build temporarily for newly-created accounts
+    Account(QString username);                          // Build by username, namely read from file
+    Account(QString getUserName, QString getPassWord);  // Build temporarily for newly-created accounts
     ~Account();
 
     static void readAccountList();
@@ -34,11 +31,17 @@ public:
     static bool isNameExist(QString newName);
     static void addToList(QString userName);
 
-    QString get_userName() const;
-
-    void sortTask(bool (*cmp)(const Task *, const Task *));
     void saveToFile() const;
+    void addTask(Task *taskToAdd);
     void delTask(Task *taskToDel);
+
+    QString get_userName() const;
+    std::vector<Task *> get_taskList() const;
+    bool get_showHelp() const;
+    bool get_doneAndDel() const;
+
+    void set_showHelp(bool new_showHelp);
+    void set_doneAndDel(bool new_doneAndDel);
 };
 
 #endif // ACCOUNT_H

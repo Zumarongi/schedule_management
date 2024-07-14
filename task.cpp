@@ -1,6 +1,7 @@
 #include "task.h"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 #include <QDebug>
 
 std::map<int, std::string> Task::ctgIdxToStr = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}, {5, "其他"}};
@@ -79,6 +80,11 @@ QString Task::toCtgQString(int ctgIdx) { return QString::fromStdString(ctgIdxToS
 int Task::getIdCounter() { return IdCounter; }
 
 void Task::setIdCounter(int idcounter) { IdCounter = idcounter; }
+
+void Task::sortTasks(std::vector<Task *>::iterator begin, std::vector<Task *>::iterator end, bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending)
+{
+    std::stable_sort(begin, end, cmp);
+}
 
 bool (*Task::taskId_ascending)(const Task *, const Task *) = [](const Task *x, const Task *y) -> bool { return x->taskId < y->taskId; };
 

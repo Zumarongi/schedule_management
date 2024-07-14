@@ -27,7 +27,7 @@ class Task
     QDateTime stTime, edTime;
     QTime rmTime;
     QString taskLoc;                // location
-    TaskPriority taskPrio;
+    TaskPriority taskPrio;          // priority
     int taskCtg;                    // catagory
     QString taskNote;
     QPushButton *taskButton;
@@ -52,6 +52,7 @@ public:
     static int getIdCounter();
     static void setIdCounter(int idcounter);
 
+    static void sortTasks(std::vector<Task *>::iterator begin, std::vector<Task *>::iterator end, bool (*cmp)(const Task *, const Task *));
     static bool (*taskId_ascending)(const Task *, const Task *);
     static bool (*taskId_descending)(const Task *, const Task *);
     static bool (*taskName_ascending)(const Task *, const Task *);

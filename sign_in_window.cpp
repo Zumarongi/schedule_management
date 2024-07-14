@@ -43,7 +43,7 @@ sign_in_window::sign_in_window(QWidget *parent)
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
             currentAccount = new Account(userName);
-            mainPage = new MainWindow(currentAccount);
+            mainPage = new MainWindow;
             mainPage->show();
             this->close();
         }

@@ -7,7 +7,6 @@
 #include "task_info_window.h"
 #include <QVBoxLayout>
 #include <vector>
-#include <ctime>
 #include "create_task_window.h"
 #include <QDebug>
 #include "get_time_range.h"
@@ -42,5 +41,6 @@ private:
     QWidget *contentWidget;
     QVBoxLayout *layout;
     std::vector<Task *> taskOrder;
+    QDateTime maxTime,minTime;
 };
 #endif // MAINWINDOW_H

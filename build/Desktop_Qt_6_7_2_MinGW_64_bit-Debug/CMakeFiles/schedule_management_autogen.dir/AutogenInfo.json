@@ -263,9 +263,21 @@
 			null
 		],
 		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/create_task_window.h",
+			"MU",
+			"EWIEGA46WW/moc_create_task_window.cpp",
+			null
+		],
+		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/delete_confirm_dialog.h",
 			"MU",
 			"EWIEGA46WW/moc_delete_confirm_dialog.cpp",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/get_time_range.h",
+			"MU",
+			"EWIEGA46WW/moc_get_time_range.cpp",
 			null
 		],
 		[
@@ -278,6 +290,18 @@
 			"D:/Kobe/Projects/Qt Projects/schedule_management/md5.h",
 			"MU",
 			"EWIEGA46WW/moc_md5.cpp",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/reminddialog.h",
+			"MU",
+			"EWIEGA46WW/moc_reminddialog.cpp",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/remindthread.h",
+			"MU",
+			"EWIEGA46WW/moc_remindthread.cpp",
 			null
 		],
 		[
@@ -388,7 +412,17 @@
 			null
 		],
 		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/create_task_window.cpp",
+			"MU",
+			null
+		],
+		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/delete_confirm_dialog.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/get_time_range.cpp",
 			"MU",
 			null
 		],
@@ -404,6 +438,16 @@
 		],
 		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/md5.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/reminddialog.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/remindthread.cpp",
 			"MU",
 			null
 		],

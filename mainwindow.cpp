@@ -39,9 +39,9 @@ MainWindow::MainWindow(QWidget *parent)
     layout = new QVBoxLayout(contentWidget);                //记得调整间距
     ui->scrollArea->setWidget(contentWidget);
     layout->setContentsMargins(35,5,35,5);
-    for(int i=0;i<currentAccount->taskList.size();++i){
-        taskOrder[i]=currentAccount->taskList[i];
-    }
+
+    taskOrder = currentAccount->get_taskList();
+
     /*QPushButton *button=new QPushButton;
     button->setFixedSize(700,40);
     layout->addWidget(button);
@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     button1->setFixedSize(700,40);
     layout->addWidget(button1);
     */
-    if(currentAccount->doneAndDel) del_done_task();
+    if(currentAccount->get_doneAndDel()) del_done_task();
     showButton();
 
     QMenu *main_menu =new QMenu();
@@ -59,14 +59,17 @@ MainWindow::MainWindow(QWidget *parent)
         connect(getTimePage,&get_time_range::done_change,[=](){
             removeButton();
             taskOrder.clear();
-            int i=0,j=0;
-            while(i<currentAccount->taskList.size()){
-                if(currentAccount->taskList[i]->get_stTime()>=currentAccount->minTime&&currentAccount->taskList[i]->get_edTime()<=currentAccount->maxTime){
-                    taskOrder[j]=currentAccount->taskList[i];
-                    ++j;
-                }
-                ++i;
-            }
+            for (auto task: currentAccount->get_taskList())
+                if (task->get_stTime() >= minTime && task->get_stTime() <= maxTime)
+                    taskOrder.push_back(task);
+            // int i=0,j=0;
+            // while(i<currentAccount->taskList.size()){
+            //     if(currentAccount->taskList[i]->get_stTime()>=currentAccount->minTime&&currentAccount->taskList[i]->get_edTime()<=currentAccount->maxTime){
+            //         taskOrder[j]=currentAccount->taskList[i];
+            //         ++j;
+            //     }
+            //     ++i;
+            // }
             showButton();
         });
     });
@@ -81,34 +84,43 @@ MainWindow::MainWindow(QWidget *parent)
     sub_prio_menu->addAction("高",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskPrio()==2){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskPrio() == HIGH)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskPrio()==2){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
     sub_prio_menu->addAction("中",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskPrio()==1){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskPrio() == MID)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskPrio()==1){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
     sub_prio_menu->addAction("低",[=](){
         removeButton();
         taskOrder.clear();
+        // for (auto task: currentAccount->get_taskList())
+        //     if (task->get_taskPrio() == LOW)
+        //         taskOrder.push_back(task);
         int i=0,j=0;
         while(i<currentAccount->taskList.size()){
             if(currentAccount->taskList[i]->get_taskPrio()==0){
@@ -123,84 +135,102 @@ MainWindow::MainWindow(QWidget *parent)
     sub_ctg_menu->addAction("学习",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==0){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskCtg() == 0)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskCtg()==0){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
     sub_ctg_menu->addAction("娱乐",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==1){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskCtg() == 1)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskCtg()==1){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
     sub_ctg_menu->addAction("生活",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==2){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskCtg() == 2)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskCtg()==2){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
     sub_ctg_menu->addAction("工作",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==3){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskCtg() == 3)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskCtg()==3){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
     sub_ctg_menu->addAction("运动",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==4){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskCtg() == 4)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskCtg()==4){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
     sub_ctg_menu->addAction("其他",[=](){
         removeButton();
         taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==5){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskCtg() == 5)
+                taskOrder.push_back(task);
+        // int i=0,j=0;
+        // while(i<currentAccount->taskList.size()){
+        //     if(currentAccount->taskList[i]->get_taskCtg()==5){
+        //         taskOrder[j]=currentAccount->taskList[i];
+        //         ++j;
+        //     }
+        //     ++i;
+        // }
         showButton();
     });
 
@@ -213,20 +243,18 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->auto_delete,&QCheckBox::stateChanged,[=](){
         if(ui->auto_delete->isChecked()){
-            currentAccount->doneAndDel=true;
+            currentAccount->set_doneAndDel(true);
             del_done_task();
         }
         else{
-            currentAccount->doneAndDel=false;
+            currentAccount->set_doneAndDel(false);
         }
     });
 
     connect(ui->time_order_button,&QRadioButton::clicked,[=](){
         if(ui->time_order_button->isChecked()){
             removeButton();
-            currentAccount->sortTask(Task::stTime_ascending);
-            taskOrder.clear();
-            currentAccount->sortTask(taskOrder,Task::stTime_ascending);
+            Task::sortTasks(taskOrder.begin(), taskOrder.end(), Task::stTime_ascending);
             showButton();
         }
     });
@@ -234,10 +262,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->name_order_button,&QRadioButton::clicked,[=](){
         if(ui->name_order_button->isChecked()){
             removeButton();
-            currentAccount->sortTask(Task::taskName_ascending);
-            taskOrder.clear();
-            currentAccount->sortTask(currentAccount->taskList,Task::taskName_ascending);
-            currentAccount->sortTask(taskOrder,Task::stTime_ascending);
+            Task::sortTasks(taskOrder.begin(), taskOrder.end(), Task::taskName_ascending);
             showButton();
         }
     });
@@ -250,9 +275,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::auto_complete(){
     QStringList searched_tasks;
-    for(int i=0;i<currentAccount->taskList.size();++i){
-        searched_tasks<<currentAccount->taskList[i]->get_taskName();
-    }
+    for (auto task: currentAccount->get_taskList())
+        searched_tasks<<task->get_taskName();
+    // for(int i=0;i<currentAccount->taskList.size();++i){
+    //     searched_tasks<<currentAccount->taskList[i]->get_taskName();
+    // }
     QCompleter *searchList=new QCompleter(searched_tasks,this);
     searchList->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit_search->setCompleter(searchList);
