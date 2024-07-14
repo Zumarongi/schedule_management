@@ -303,6 +303,12 @@
 			"MU",
 			"EWIEGA46WW/moc_task_info_window.cpp",
 			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/time_conflict_dialog.h",
+			"MU",
+			"EWIEGA46WW/moc_time_conflict_dialog.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -418,6 +424,11 @@
 		],
 		[
 			"D:/Kobe/Projects/Qt Projects/schedule_management/task_info_window.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/Kobe/Projects/Qt Projects/schedule_management/time_conflict_dialog.cpp",
 			"MU",
 			null
 		]

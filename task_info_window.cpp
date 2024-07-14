@@ -17,6 +17,8 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
     ui->dateTimeEdit_stTime->setMinimumDateTime(QDateTime::currentDateTime());
     ui->lineEdit_rmTime_h->setValidator(new QIntValidator(0, 23, this));
     ui->lineEdit_rmTime_m->setValidator(new QIntValidator(0, 59, this));
+    ui->comboBox_taskPrio->setEditable(false);
+    ui->comboBox_taskCtg->setEditable(false);
 
     ui->lineEdit_taskName->setText(task->get_taskName());
     ui->dateTimeEdit_stTime->setDateTime(task->get_stTime());
@@ -60,14 +62,14 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
         ui->lineEdit_taskLoc->setReadOnly(false);
     });
 
-    ui->comboBox_taskPrio->setEditable(false);
+    ui->comboBox_taskPrio->setEnabled(false);
     connect(ui->editButton_taskPrio, &QPushButton::clicked, [=](){
-        ui->comboBox_taskPrio->setEditable(true);
+        ui->comboBox_taskPrio->setEnabled(true);
     });
 
-    ui->comboBox_taskCtg->setEditable(false);
+    ui->comboBox_taskCtg->setEnabled(false);
     connect(ui->editButton_taskCtg, &QPushButton::clicked, [=](){
-        ui->comboBox_taskCtg->setEditable(true);
+        ui->comboBox_taskCtg->setEnabled(true);
     });
 
     ui->textEdit_taskNote->setReadOnly(true);
@@ -86,17 +88,12 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
         QString new_taskNote = ui->textEdit_taskNote->toPlainText();
 
         bool taskNameEmpty = new_taskName.isEmpty();
-        bool stTimeTooEarly = new_stTime < QDateTime::currentDateTime();
         bool edTimeTooEarly = new_edTime < new_stTime;
         bool rmTimeTooEarly = new_stTime - QDateTime::currentDateTime() < (std::chrono::milliseconds)(new_rmTime.msec());
 
         if (taskNameEmpty)
             ui->warning_taskNameEmpty->show();
         else ui->warning_taskNameEmpty->hide();
-
-        if (stTimeTooEarly)
-            ui->warning_stTimeTooEarly->show();
-        else ui->warning_stTimeTooEarly->hide();
 
         if (edTimeTooEarly)
             ui->warning_edTimeTooEarly->show();
@@ -106,7 +103,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
             ui->warning_rmTimeTooEarly->show();
         else ui->warning_rmTimeTooEarly->hide();
 
-        if (!taskNameEmpty && !stTimeTooEarly && !edTimeTooEarly && !rmTimeTooEarly)
+        if (!taskNameEmpty && !edTimeTooEarly && !rmTimeTooEarly)
         {
             task->set_taskName(new_taskName);
             task->set_stTime(new_stTime);

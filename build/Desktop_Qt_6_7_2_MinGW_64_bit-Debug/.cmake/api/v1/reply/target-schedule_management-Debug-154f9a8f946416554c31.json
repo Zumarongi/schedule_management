@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 69,
+				"line" : 70,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 52,
+				"line" : 53,
 				"parent" : 0
 			},
 			{
@@ -371,7 +371,8 @@
 				13,
 				16,
 				18,
-				21
+				21,
+				24
 			]
 		}
 	],
@@ -501,7 +502,8 @@
 				13,
 				16,
 				18,
-				21
+				21,
+				24
 			]
 		},
 		{
@@ -517,10 +519,12 @@
 				17,
 				20,
 				23,
-				24,
-				25,
 				26,
-				27
+				27,
+				28,
+				29,
+				30,
+				31
 			]
 		},
 		{
@@ -532,14 +536,15 @@
 				14,
 				19,
 				22,
-				28
+				25,
+				32
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				29
+				33
 			]
 		}
 	],
@@ -672,6 +677,22 @@
 			"sourceGroupIndex" : 2
 		},
 		{
+			"backtrace" : 4,
+			"path" : "time_conflict_dialog.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "time_conflict_dialog.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "time_conflict_dialog.ui",
+			"sourceGroupIndex" : 2
+		},
+		{
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include/ui_mainwindow.h",
@@ -699,6 +720,12 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include/ui_task_info_window.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/include/ui_time_conflict_dialog.h",
 			"sourceGroupIndex" : 1
 		},
 		{
