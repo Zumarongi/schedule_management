@@ -15,7 +15,6 @@ sign_in_window::sign_in_window(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //从各文件夹的名字中读取用户名，存入accountLists
     Account::readAccountList();
 
     ui->empty_password_warning->hide();
@@ -43,9 +42,8 @@ sign_in_window::sign_in_window(QWidget *parent)
             }
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
-            //Account
-            Account *testaccount=new Account("niu","zijian");//测试使用
-            MainWindow *mainPage=new MainWindow(testaccount);
+            currentAccount = new Account(userName);
+            mainPage = new MainWindow(currentAccount);
             mainPage->show();
             this->close();
         }
