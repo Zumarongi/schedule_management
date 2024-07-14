@@ -12,6 +12,8 @@ enum TaskPriority { LOW = 0, MID, HIGH };
 
 TaskPriority toTaskPriority(QString qTaskPrio);
 TaskPriority toTaskPriority(std::string sTaskPrio);
+QString toQString(TaskPriority taskPrio);
+std::string toString(TaskPriority taskPrio);
 
 class Task
 {
@@ -25,7 +27,7 @@ class Task
     QDateTime stTime, edTime;
     QTime rmTime;
     QString taskLoc;                // location
-    TaskPriority taskPrio;
+    TaskPriority taskPrio;          // priority
     int taskCtg;                    // catagory
     QString taskNote;
     QPushButton *taskButton;
@@ -45,10 +47,12 @@ public:
     static int toCtgIndex(std::string ctgStr);
     static int toCtgIndex(QString ctgqStr);
     static std::string toCtgString(int ctgIdx);
+    static QString toCtgQString(int ctgIdx);
 
     static int getIdCounter();
     static void setIdCounter(int idcounter);
 
+    static void sortTasks(std::vector<Task *>::iterator begin, std::vector<Task *>::iterator end, bool (*cmp)(const Task *, const Task *));
     static bool (*taskId_ascending)(const Task *, const Task *);
     static bool (*taskId_descending)(const Task *, const Task *);
     static bool (*taskName_ascending)(const Task *, const Task *);

@@ -55,9 +55,9 @@ public:
     QPushButton *editButton_taskCtg;
     QPushButton *editButton_taskPrio;
     QLabel *warning_taskNameEmpty;
-    QLabel *warning_stTime;
-    QLabel *warning_edTime;
-    QLabel *warning_rmTime;
+    QLabel *warning_stTimeTooEarly;
+    QLabel *warning_edTimeTooEarly;
+    QLabel *warning_rmTimeTooEarly;
 
     void setupUi(QWidget *task_info_window)
     {
@@ -167,20 +167,20 @@ public:
         warning_taskNameEmpty->setGeometry(QRect(80, 50, 113, 14));
         warning_taskNameEmpty->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 0, 0);"));
-        warning_stTime = new QLabel(task_info_window);
-        warning_stTime->setObjectName("warning_stTime");
-        warning_stTime->setGeometry(QRect(80, 88, 194, 14));
-        warning_stTime->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+        warning_stTimeTooEarly = new QLabel(task_info_window);
+        warning_stTimeTooEarly->setObjectName("warning_stTimeTooEarly");
+        warning_stTimeTooEarly->setGeometry(QRect(80, 88, 194, 14));
+        warning_stTimeTooEarly->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 0, 0);"));
-        warning_edTime = new QLabel(task_info_window);
-        warning_edTime->setObjectName("warning_edTime");
-        warning_edTime->setGeometry(QRect(360, 88, 194, 14));
-        warning_edTime->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+        warning_edTimeTooEarly = new QLabel(task_info_window);
+        warning_edTimeTooEarly->setObjectName("warning_edTimeTooEarly");
+        warning_edTimeTooEarly->setGeometry(QRect(360, 88, 194, 14));
+        warning_edTimeTooEarly->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 0, 0);"));
-        warning_rmTime = new QLabel(task_info_window);
-        warning_rmTime->setObjectName("warning_rmTime");
-        warning_rmTime->setGeometry(QRect(80, 170, 130, 14));
-        warning_rmTime->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+        warning_rmTimeTooEarly = new QLabel(task_info_window);
+        warning_rmTimeTooEarly->setObjectName("warning_rmTimeTooEarly");
+        warning_rmTimeTooEarly->setGeometry(QRect(80, 170, 130, 14));
+        warning_rmTimeTooEarly->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 0, 0);"));
 
         retranslateUi(task_info_window);
@@ -224,9 +224,9 @@ public:
         editButton_taskCtg->setText(QCoreApplication::translate("task_info_window", "Edit", nullptr));
         editButton_taskPrio->setText(QCoreApplication::translate("task_info_window", "Edit", nullptr));
         warning_taskNameEmpty->setText(QCoreApplication::translate("task_info_window", " \344\273\273\345\212\241\345\220\215\347\247\260\344\270\215\350\203\275\344\270\272\347\251\272\357\274\201", nullptr));
-        warning_stTime->setText(QCoreApplication::translate("task_info_window", " \345\274\200\345\247\213\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\347\216\260\345\234\250\357\274\201", nullptr));
-        warning_edTime->setText(QCoreApplication::translate("task_info_window", " \347\273\223\346\235\237\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\345\274\200\345\247\213\346\227\266\351\227\264\357\274\201", nullptr));
-        warning_rmTime->setText(QCoreApplication::translate("task_info_window", " \346\217\220\351\206\222\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\347\216\260\345\234\250\357\274\201", nullptr));
+        warning_stTimeTooEarly->setText(QCoreApplication::translate("task_info_window", " \345\274\200\345\247\213\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\347\216\260\345\234\250\357\274\201", nullptr));
+        warning_edTimeTooEarly->setText(QCoreApplication::translate("task_info_window", " \347\273\223\346\235\237\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\345\274\200\345\247\213\346\227\266\351\227\264\357\274\201", nullptr));
+        warning_rmTimeTooEarly->setText(QCoreApplication::translate("task_info_window", " \346\217\220\351\206\222\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\347\216\260\345\234\250\357\274\201", nullptr));
     } // retranslateUi
 
 };

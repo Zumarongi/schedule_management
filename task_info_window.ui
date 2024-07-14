@@ -436,7 +436,7 @@ background-color: rgb(255, 0, 0);</string>
     <string> 任务名称不能为空！</string>
    </property>
   </widget>
-  <widget class="QLabel" name="warning_stTime">
+  <widget class="QLabel" name="warning_stTimeTooEarly">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -453,7 +453,7 @@ background-color: rgb(255, 0, 0);</string>
     <string> 开始时间不能早于现在！</string>
    </property>
   </widget>
-  <widget class="QLabel" name="warning_edTime">
+  <widget class="QLabel" name="warning_edTimeTooEarly">
    <property name="geometry">
     <rect>
      <x>360</x>
@@ -470,7 +470,7 @@ background-color: rgb(255, 0, 0);</string>
     <string> 结束时间不能早于开始时间！</string>
    </property>
   </widget>
-  <widget class="QLabel" name="warning_rmTime">
+  <widget class="QLabel" name="warning_rmTimeTooEarly">
    <property name="geometry">
     <rect>
      <x>80</x>

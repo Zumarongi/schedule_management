@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include "account.h"
-#include "timeformat.h"
 
 extern Account *currentAccount;
 

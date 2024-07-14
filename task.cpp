@@ -1,6 +1,7 @@
 #include "task.h"
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 #include <QDebug>
 
 std::map<int, std::string> Task::ctgIdxToStr = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}, {5, "其他"}};
@@ -74,9 +75,16 @@ int Task::toCtgIndex(QString ctgqStr) { return ctgStrToIdx[ctgqStr.toStdString()
 
 std::string Task::toCtgString(int ctgIdx) { return ctgIdxToStr[ctgIdx]; }
 
+QString Task::toCtgQString(int ctgIdx) { return QString::fromStdString(ctgIdxToStr[ctgIdx]); }
+
 int Task::getIdCounter() { return IdCounter; }
 
 void Task::setIdCounter(int idcounter) { IdCounter = idcounter; }
+
+void Task::sortTasks(std::vector<Task *>::iterator begin, std::vector<Task *>::iterator end, bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending)
+{
+    std::stable_sort(begin, end, cmp);
+}
 
 bool (*Task::taskId_ascending)(const Task *, const Task *) = [](const Task *x, const Task *y) -> bool { return x->taskId < y->taskId; };
 
@@ -140,4 +148,20 @@ TaskPriority toTaskPriority(std::string sTaskPrio)
     if (sTaskPrio == "MID") return MID;
     if (sTaskPrio == "HIGH") return HIGH;
     return LOW;
+}
+
+QString toQString(TaskPriority taskPrio)
+{
+    if (taskPrio == LOW) return "LOW";
+    if (taskPrio == MID) return "MID";
+    if (taskPrio == HIGH) return "HIGH";
+    return "LOW";
+}
+
+std::string toString(TaskPriority taskPrio)
+{
+    if (taskPrio == LOW) return "LOW";
+    if (taskPrio == MID) return "MID";
+    if (taskPrio == HIGH) return "HIGH";
+    return "LOW";
 }

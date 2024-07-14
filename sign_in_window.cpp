@@ -42,9 +42,8 @@ sign_in_window::sign_in_window(QWidget *parent)
             }
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
-            currentAccount=new Account(userName);
-            //Account *testaccount=new Account("niu","zijian");测试使用
-            MainWindow *mainPage=new MainWindow;
+            currentAccount = new Account(userName);
+            mainPage = new MainWindow;
             mainPage->show();
             this->close();
         }

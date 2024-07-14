@@ -1,13 +1,13 @@
 #ifndef CREATE_TASK_WINDOW_H
 #define CREATE_TASK_WINDOW_H
 
-#include <QMainWindow>
+#include <QWidget>
 
 namespace Ui {
 class create_task_window;
 }
 
-class create_task_window : public QMainWindow
+class create_task_window : public QWidget
 {
     Q_OBJECT
 
