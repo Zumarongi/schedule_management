@@ -35,8 +35,11 @@ public:
     static void addToList(QString userName);
 
     void sortTask(std::vector <Task*> needSortList,bool (*cmp)(const Task *, const Task *));
-    void saveToFile();
 
+    QString get_userName() const;
+
+    void saveToFile() const;
+    void delTask(Task *taskToDel);
 };
 
 #endif // ACCOUNT_H

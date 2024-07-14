@@ -268,7 +268,7 @@ void MainWindow::on_search_button_clicked(){
         }
     }
     if(findTask){
-        task_info_window *task_info_page=new task_info_window(currentAccount->taskList[location]);
+        task_info_window *task_info_page=new task_info_window(currentAccount->taskList[location], this);
         task_info_page->show();
         ui->not_find_warning->hide();
     }

@@ -8,15 +8,14 @@ std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 0}, {"娱乐", 1}, {"
 
 int Task::IdCounter = 0;
 
-Task::Task(QString taskname, time_t st_time, time_t ed_time = -1, time_t rm_time = 30,
-           QString taskloc = "", taskPriority taskprio = LOW, int taskctg = 0,
-           QString tasknote = "")
+Task::Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
+           QString taskloc, TaskPriority taskprio, int taskctg,
+           QString tasknote)
 {
     taskId = ++ IdCounter;
     taskName = taskname;
     stTime = st_time;
-    if (ed_time == -1)
-        edTime = st_time + 30;
+    edTime = ed_time;
     rmTime = rm_time;
     taskLoc = taskloc;
     taskPrio = taskprio;
@@ -25,8 +24,8 @@ Task::Task(QString taskname, time_t st_time, time_t ed_time = -1, time_t rm_time
 }
 
 Task::Task(int taskid,
-           QString taskname, time_t st_time, time_t ed_time, time_t rm_time,
-           QString taskloc, taskPriority taskprio, int taskctg,
+           QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
+           QString taskloc, TaskPriority taskprio, int taskctg,
            QString tasknote)
 {
     taskId = taskid;
@@ -47,14 +46,20 @@ Task::Task(int taskid,
     //改变颜色
 }
 
+Task::~Task()
+{
+    delete taskButton;
+}
+
 bool Task::saveToFile(std::filesystem::path acc_path) const
 {
     std::filesystem::path task_path = acc_path.append("/" + std::to_string(taskId) + ".task");
     std::ofstream fout(task_path);
     fout << taskId << std::endl;
     fout << taskName.toStdString() << std::endl;
-    fout << stTime << std::endl;
-    fout << edTime << std::endl;
+    fout << stTime.toString().toStdString() << std::endl;
+    fout << edTime.toString().toStdString() << std::endl;
+    fout << rmTime.toString().toStdString() << std::endl;
     fout << taskLoc.toStdString() << std::endl;
     fout << taskPrio << std::endl;
     fout << taskCtg << std::endl;
@@ -89,15 +94,15 @@ int Task::get_taskId() const { return taskId; }
 
 QString Task::get_taskName() const { return taskName; }
 
-time_t Task::get_stTime() const { return stTime; }
+QDateTime Task::get_stTime() const { return stTime; }
 
-time_t Task::get_edTime() const { return edTime; }
+QDateTime Task::get_edTime() const { return edTime; }
 
-time_t Task::get_rmTime() const { return rmTime; }
+QTime Task::get_rmTime() const { return rmTime; }
 
 QString Task::get_taskLoc() const { return taskLoc; }
 
-taskPriority Task::get_taskPrio() const { return taskPrio; }
+TaskPriority Task::get_taskPrio() const { return taskPrio; }
 
 int Task::get_taskCtg() const { return taskCtg; }
 
@@ -107,21 +112,21 @@ QPushButton * Task::get_taskButton() const {return taskButton;}
 
 void Task::set_taskName(QString new_taskName) { taskName = new_taskName; }
 
-void Task::set_stTime(time_t new_stTime) { stTime = new_stTime; }
+void Task::set_stTime(QDateTime new_stTime) { stTime = new_stTime; }
 
-void Task::set_edTime(time_t new_edTime) { edTime = new_edTime; }
+void Task::set_edTime(QDateTime new_edTime) { edTime = new_edTime; }
 
-void Task::set_rmTime(time_t new_rmTime) { rmTime = new_rmTime; }
+void Task::set_rmTime(QTime new_rmTime) { rmTime = new_rmTime; }
 
 void Task::set_taskLoc(QString new_taskLoc) { taskLoc = new_taskLoc; }
 
-void Task::set_taskPrio(taskPriority new_taskPrio) { taskPrio = new_taskPrio; }
+void Task::set_taskPrio(TaskPriority new_taskPrio) { taskPrio = new_taskPrio; }
 
 void Task::set_taskCtg(int new_taskCtg) { taskCtg = new_taskCtg; }
 
 void Task::set_taskNote(QString new_taskNote) { taskNote = new_taskNote; }
 
-taskPriority toTaskPriority(QString qTaskPrio)
+TaskPriority toTaskPriority(QString qTaskPrio)
 {
     if (qTaskPrio == "LOW") return LOW;
     if (qTaskPrio == "MID") return MID;
@@ -129,7 +134,7 @@ taskPriority toTaskPriority(QString qTaskPrio)
     return LOW;
 }
 
-taskPriority toTaskPriority(std::string sTaskPrio)
+TaskPriority toTaskPriority(std::string sTaskPrio)
 {
     if (sTaskPrio == "LOW") return LOW;
     if (sTaskPrio == "MID") return MID;

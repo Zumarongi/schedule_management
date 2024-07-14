@@ -39,19 +39,19 @@ Task *Account::readTask(std::filesystem::path task_path)
     QString taskName = QString::fromStdString(s);
 
     getline(fin, s);
-    time_t stTime = std::stol(s);
+    QDateTime stTime = QDateTime::fromString(QString::fromStdString(s));
 
     getline(fin, s);
-    time_t edTime = std::stol(s);
+    QDateTime edTime = QDateTime::fromString(QString::fromStdString(s));
 
     getline(fin, s);
-    time_t rmTime = std::stol(s);
+    QTime rmTime = QTime::fromString(QString::fromStdString(s));
 
     getline(fin, s);
     QString taskLoc = QString::fromStdString(s);
 
     getline(fin, s);
-    taskPriority taskPrio = toTaskPriority(s);
+    TaskPriority taskPrio = toTaskPriority(s);
 
     getline(fin, s);
     int taskCtg = std::stoi(s);
@@ -151,11 +151,12 @@ void Account::addToList(QString userName)
 }
 
 void Account::sortTask(std::vector <Task*> needSortList,bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending)
+
 {
     std::stable_sort(needSortList.begin(), needSortList.end(), cmp);
 }
 
-void Account::saveToFile()
+void Account::saveToFile() const
 {
     qDebug() << this->userName << "calling saveToFile()";
     std::filesystem::path acc_path = ROOTDIR + "/data/" + userName.toStdString() + "/.acc";
@@ -172,3 +173,18 @@ void Account::saveToFile()
     fout.close();
 }
 
+void Account::delTask(Task *taskToDel)
+{
+    for (auto p = taskList.begin(); p != taskList.end(); p ++)
+        if (taskToDel == *p)
+        {
+            taskList.erase(p);
+
+            std::filesystem::path task_path = ROOTDIR + "/data/" + this->userName.toStdString() + "/" + std::to_string( taskToDel->get_taskId()) + ".task";
+            std::filesystem::remove(task_path);
+
+            taskToDel->~Task();
+            break;
+        }
+    saveToFile();
+}
