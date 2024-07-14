@@ -83,8 +83,12 @@ Account::Account(QString username)
         if (t != nullptr)
             taskList.push_back(t);
     }
-    sortTask(Task::stTime_ascending);
+    sortTask(taskList,Task::stTime_ascending);
     fin.close();
+    showHelp=false;
+    doneAndDel=false;
+    maxTime=time(NULL);
+    minTime=0;
 }
 
 Account::Account(QString getUserName, QString getPassWord) {

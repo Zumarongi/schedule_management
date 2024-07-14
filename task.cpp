@@ -41,6 +41,8 @@ Task::Task(int taskid,
     taskButton=new QPushButton;
     taskButton->setFixedSize(700,40);
     taskButton->setText(taskname);
+    taskButton->setStyleSheet("QPushButton{border-radius:15px;}");
+    taskButton->setText(taskname);
     //改变颜色
 }
 

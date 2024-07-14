@@ -17,10 +17,13 @@ private:
 
     static void initDataDir();
     Task *readTask(std::filesystem::path task_path);
+
 public:
     std::vector<Task *> taskList;//暂时设为public测试使用
     bool showHelp;
     bool doneAndDel;
+
+    time_t maxTime,minTime;
 
     Account(QString username); // Build by username, namely read from file
     Account(QString getUserName, QString getPassWord); // Build temporarily for newly-created accounts
