@@ -54,7 +54,9 @@ MainWindow::MainWindow(QWidget *parent)
     minTime=QDateTime();
     showButton();
 
-    //对时间范围的限定
+    ui->min_dateTimeEdit->setMinimumDateTime(QDateTime::currentDateTime());
+    ui->min_dateTimeEdit->setMaximumDateTime(ui->max_dateTimeEdit->dateTime());
+    ui->max_dateTimeEdit->setMinimumDateTime(ui->min_dateTimeEdit->dateTime());
     connect(ui->min_dateTimeEdit,&QDateTimeEdit::dateTimeChanged,[=](){
         removeButton();
         this->minTime=ui->min_dateTimeEdit->dateTime();
@@ -104,165 +106,7 @@ MainWindow::MainWindow(QWidget *parent)
         this->choosePrio=ui->choose_priority->currentIndex();
         showButton();
     });
-    /*QMenu *main_menu =new QMenu();
-    main_menu->addAction("时间段",[=](){
-        get_time_range *getTimePage=new get_time_range;
-        getTimePage->show();
-        connect(getTimePage,&get_time_range::done_change,[=](){
-            removeButton();
-            taskOrder.clear();
-            int i=0,j=0;
-            while(i<currentAccount->taskList.size()){
-                if(currentAccount->taskList[i]->get_stTime()>=currentAccount->minTime&&currentAccount->taskList[i]->get_edTime()<=currentAccount->maxTime){
-                    taskOrder[j]=currentAccount->taskList[i];
-                    ++j;
-                }
-                ++i;
-            }
-            showButton();
-        });
-    });
 
-    //QMenu *sub_time_menu=new QMenu("时间段");
-    QMenu *sub_prio_menu=new QMenu("优先级");
-    QMenu *sub_ctg_menu=new QMenu("分类");
-    //main_menu->addMenu(sub_time_menu);
-    main_menu->addMenu(sub_prio_menu);
-    main_menu->addMenu(sub_ctg_menu);                    //排序方式
-
-    sub_prio_menu->addAction("高",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskPrio()==2){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_prio_menu->addAction("中",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskPrio()==1){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_prio_menu->addAction("低",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskPrio()==0){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_ctg_menu->addAction("学习",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==0){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_ctg_menu->addAction("娱乐",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==1){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_ctg_menu->addAction("生活",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==2){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_ctg_menu->addAction("工作",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==3){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_ctg_menu->addAction("运动",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==4){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    sub_ctg_menu->addAction("其他",[=](){
-        removeButton();
-        taskOrder.clear();
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskCtg()==5){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
-        showButton();
-    });
-
-    ui->change_order_button->setFixedSize(60,25);
-    ui->change_order_button->move(50,55);
-    connect(ui->change_order_button,&QPushButton::clicked,[=](){
-        QPoint pos = ui->change_order_button->mapToGlobal(QPoint(0, ui->change_order_button->height()));
-        main_menu->exec(pos);
-    });
-    */
     connect(ui->auto_delete,&QCheckBox::stateChanged,[=](){
         if(ui->auto_delete->isChecked()){
             currentAccount->set_doneAndDel(true);
@@ -273,26 +117,6 @@ MainWindow::MainWindow(QWidget *parent)
         }
     });
 
-    /*connect(ui->time_order_button,&QRadioButton::clicked,[=](){
-        if(ui->time_order_button->isChecked()){
-            removeButton();
-            currentAccount->sortTask(currentAccount->taskList,Task::stTime_ascending);
-            taskOrder.clear();
-            currentAccount->sortTask(taskOrder,Task::stTime_ascending);
-            showButton();
-        }
-    });
-
-    connect(ui->name_order_button,&QRadioButton::clicked,[=](){
-        if(ui->name_order_button->isChecked()){
-            removeButton();
-            taskOrder.clear();
-            currentAccount->sortTask(currentAccount->taskList,Task::taskName_ascending);
-            currentAccount->sortTask(taskOrder,Task::stTime_ascending);
-            showButton();
-        }
-    });
-    */
 }
 
 MainWindow::~MainWindow()
@@ -363,4 +187,12 @@ void MainWindow::del_done_task(){
             currentAccount->delTask(task);
         }
     }
+}
+
+void MainWindow::set_maxTime(QDateTime get_maxTime){
+    maxTime=get_maxTime;
+}
+
+void MainWindow::set_minTime(QDateTime get_minTime){
+    minTime=get_minTime;
 }
