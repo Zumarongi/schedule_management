@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include "qmenu.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -36,9 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
     layout = new QVBoxLayout(contentWidget);                //记得调整间距
     ui->scrollArea->setWidget(contentWidget);
     layout->setContentsMargins(35,5,35,5);
-    for(int i=0;i<currentAccount->get_taskList().size();++i){
-        taskOrder[i]=currentAccount->get_taskList()[i];
-    }
     /*QPushButton *button=new QPushButton;
     button->setFixedSize(700,40);
     layout->addWidget(button);
@@ -142,6 +138,7 @@ void MainWindow::on_search_button_clicked(){
         }
     if(findTask){
         task_info_window *task_info_page=new task_info_window(taskSearched, this);
+        this->close();
         task_info_page->show();
         ui->not_find_warning->hide();
     }
@@ -175,6 +172,7 @@ void MainWindow::removeButton(){
 void MainWindow::on_add_task_button_clicked(){
     create_task_window *createPage=new create_task_window;
     createPage->show();
+    this->close();
 }
 
 void MainWindow::del_done_task(){
@@ -184,3 +182,11 @@ void MainWindow::del_done_task(){
         }
     }
 }
+
+QDateTime MainWindow::get_minTime() const { return minTime; }
+
+QDateTime MainWindow::get_maxTime() const { return maxTime; }
+
+void MainWindow::set_minTime(QDateTime new_minTime) { minTime = new_minTime; }
+
+void MainWindow::set_maxTime(QDateTime new_maxTime) { maxTime = new_maxTime; }

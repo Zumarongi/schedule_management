@@ -1,50 +1,81 @@
 # ninja log v6
-21	312	7427197249739068	schedule_management_autogen/timestamp	e3a748672f7aedcc
-329	2323	7427197252789799	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
-21	312	7427197249739068	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
-21	312	7427197249739068	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
-251	2476	7427188041342777	CMakeFiles/schedule_management.dir/remindthread.cpp.obj	a9ec2ae9694a080c
-21	312	7427197249739068	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
-318	2719	7427197252703279	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
-365	2927	7427197253155098	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
-1415	2384	7427186492143263	CMakeFiles/schedule_management.dir/md5.cpp.obj	54318dae2bb63cd2
-346	2366	7427197252954762	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
-586	2864	7427191335131310	CMakeFiles/schedule_management.dir/main.cpp.obj	71ad06fc558d95f0
-360	2400	7427197253115035	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
-322	2612	7427197252748676	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
-1390	4267	7427186491899874	CMakeFiles/schedule_management.dir/account.cpp.obj	1cfb25c094a6d934
-579	3196	7427191335061314	CMakeFiles/schedule_management.dir/schedule_management_autogen/mocs_compilation.cpp.obj	be3f193e7ab0453d
-1380	4447	7427186491815893	CMakeFiles/schedule_management.dir/task.cpp.obj	498b8ac3e6fb98a9
-339	3027	7427197252914503	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
-313	2954	7427197252652168	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
-353	2743	7427197253034748	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
-3027	3642	7427197279798807	schedule_management.exe	bdfc6ec8fb55415d
-28	204	7427198783758139	schedule_management_autogen/timestamp	e3a748672f7aedcc
-28	204	7427198783758139	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
-28	204	7427198783758139	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
-28	204	7427198783758139	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
-220	2215	7427198785691751	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
-233	2275	7427198785791329	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
-246	2367	7427198785957205	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
-240	2609	7427198785871326	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
-215	2689	7427198785640182	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
-210	2709	7427198785600304	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
-205	2881	7427198785542139	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
-252	2882	7427198785997199	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
-226	2885	7427198785751019	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
-2886	3499	7427198812352370	schedule_management.exe	bdfc6ec8fb55415d
-33	242	7427200637988957	schedule_management_autogen/timestamp	e3a748672f7aedcc
-33	242	7427200637988957	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
-33	242	7427200637988957	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
-33	242	7427200637988957	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
-271	3044	7427200640344489	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
-249	3201	7427200640158230	CMakeFiles/schedule_management.dir/account.cpp.obj	1cfb25c094a6d934
-300	3205	7427200640671966	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
-284	3247	7427200640504979	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
-292	3469	7427200640551970	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
-264	3469	7427200640298974	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
-257	3506	7427200640218970	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
-242	3670	7427200640086523	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
-276	3680	7427200640424967	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
-308	3753	7427200640718674	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
-3753	4421	7427200675195553	schedule_management.exe	bdfc6ec8fb55415d
+31	267	7427337616821691	schedule_management_autogen/timestamp	e3a748672f7aedcc
+31	267	7427337616821691	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+31	267	7427337616821691	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+295	3508	7427337619456113	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
+31	267	7427337616821691	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
+1093	4822	7427336755780590	CMakeFiles/schedule_management.dir/remindthread.cpp.obj	a9ec2ae9694a080c
+1592	2446	7427282858676221	CMakeFiles/schedule_management.dir/md5.cpp.obj	54318dae2bb63cd2
+323	3525	7427337619736100	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
+406	3773	7427337620576070	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
+277	3765	7427337619295064	CMakeFiles/schedule_management.dir/account.cpp.obj	1cfb25c094a6d934
+289	4198	7427337619416026	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
+431	4970	7427326798554914	CMakeFiles/schedule_management.dir/task.cpp.obj	498b8ac3e6fb98a9
+939	4578	7427336754143652	CMakeFiles/schedule_management.dir/main.cpp.obj	71ad06fc558d95f0
+931	5086	7427336754082157	CMakeFiles/schedule_management.dir/schedule_management_autogen/mocs_compilation.cpp.obj	be3f193e7ab0453d
+283	4202	7427337619336093	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
+417	4435	7427337620696147	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
+268	4433	7427337619213515	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
+306	4566	7427337619576175	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
+356	4040	7427337620056105	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
+4566	5671	7427337662187596	schedule_management.exe	bdfc6ec8fb55415d
+114	479	7427340447344257	schedule_management_autogen/timestamp	e3a748672f7aedcc
+114	479	7427340447344257	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+114	479	7427340447344257	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
+114	479	7427340447344257	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+512	4172	7427340451343372	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
+533	4375	7427340451539417	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
+550	4516	7427340451733183	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
+496	4884	7427340451183352	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
+540	4897	7427340451619421	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
+504	4925	7427340451263345	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
+480	5111	7427340451041321	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
+564	5172	7427340451863366	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
+525	5410	7427340451494210	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
+31	271	7427340632709729	schedule_management_autogen/timestamp	e3a748672f7aedcc
+31	271	7427340632709729	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+31	271	7427340632709729	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
+31	271	7427340632709729	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+299	3545	7427340635418416	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
+318	3550	7427340635604918	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
+336	3781	7427340635771341	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
+325	3952	7427340635680909	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
+278	4001	7427340635206307	CMakeFiles/schedule_management.dir/task.cpp.obj	498b8ac3e6fb98a9
+286	4161	7427340635277683	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
+292	4188	7427340635353791	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
+272	4311	7427340635146321	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
+306	4441	7427340635487851	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
+343	4453	7427340635852279	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
+4454	5457	7427340676963940	schedule_management.exe	bdfc6ec8fb55415d
+32	844	7427346081934963	schedule_management_autogen/timestamp	e3a748672f7aedcc
+32	844	7427346081934963	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+32	844	7427346081934963	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
+32	844	7427346081934963	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+907	4194	7427346083743784	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
+931	4336	7427346084002230	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
+854	4403	7427346083208640	CMakeFiles/schedule_management.dir/main.cpp.obj	71ad06fc558d95f0
+958	4425	7427346084258084	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
+845	4736	7427346083145953	CMakeFiles/schedule_management.dir/schedule_management_autogen/mocs_compilation.cpp.obj	be3f193e7ab0453d
+943	4759	7427346084107061	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
+898	4885	7427346083662059	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
+881	4915	7427346083493595	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
+964	5158	7427346084319864	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
+861	5159	7427346083292874	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
+913	5190	7427346083819119	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
+5190	6227	7427346126601231	schedule_management.exe	bdfc6ec8fb55415d
+33	777	7427347308894620	schedule_management_autogen/timestamp	e3a748672f7aedcc
+33	777	7427347308894620	schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+33	777	7427347308894620	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/timestamp	e3a748672f7aedcc
+33	777	7427347308894620	D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/mocs_compilation.cpp	e3a748672f7aedcc
+825	4083	7427347310651354	CMakeFiles/schedule_management.dir/delete_confirm_dialog.cpp.obj	9f8dab3513c51564
+786	4220	7427347310259459	CMakeFiles/schedule_management.dir/main.cpp.obj	71ad06fc558d95f0
+849	4241	7427347310891464	CMakeFiles/schedule_management.dir/time_conflict_dialog.cpp.obj	f49a25fb6dc62a21
+897	4423	7427347311336542	CMakeFiles/schedule_management.dir/reminddialog.cpp.obj	e336a154a0f90dd5
+871	4596	7427347311092603	CMakeFiles/schedule_management.dir/get_time_range.cpp.obj	945553e305088c97
+778	4607	7427347310189586	CMakeFiles/schedule_management.dir/schedule_management_autogen/mocs_compilation.cpp.obj	be3f193e7ab0453d
+817	4742	7427347310565854	CMakeFiles/schedule_management.dir/sign_up_window.cpp.obj	d83c9de8625c10fa
+807	4768	7427347310457915	CMakeFiles/schedule_management.dir/sign_in_window.cpp.obj	f38f2f06d10464c9
+796	4855	7427347310361160	CMakeFiles/schedule_management.dir/mainwindow.cpp.obj	690a2bfd2a54c12d
+914	5001	7427347311537471	CMakeFiles/schedule_management.dir/create_task_window.cpp.obj	69ae4afaf8a5f717
+832	5147	7427347310691436	CMakeFiles/schedule_management.dir/task_info_window.cpp.obj	946af4e32efc0d82
+5147	6126	7427347353880433	schedule_management.exe	bdfc6ec8fb55415d

@@ -132,8 +132,10 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
                 task->set_taskCtg(new_taskCtg);
                 task->set_taskNote(new_taskNote);
 
-                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(task->get_taskId()) + ".task";
+                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(currentTask->get_taskId()) + ".task";
+                qDebug() << "In task_info_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
                 task->saveToFile(task_path);
+                currentAccount->saveToFile();
 
                 mainPage->show();
                 this->close();

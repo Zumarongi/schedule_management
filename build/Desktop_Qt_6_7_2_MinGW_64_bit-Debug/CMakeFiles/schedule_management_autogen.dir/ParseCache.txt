@@ -761,6 +761,7 @@ D:/Kobe/Projects/Qt Projects/schedule_management/mainwindow.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QDateTime
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QDebug
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QObject
+ mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QString
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QThread
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QTimer
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/q20functional.h
@@ -1179,7 +1180,9 @@ D:/Kobe/Projects/Qt Projects/schedule_management/reminddialog.h
  mdp:D:/Kobe/Projects/Qt Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/moc_predefs.h
  mdp:D:/Kobe/Projects/Qt Projects/schedule_management/reminddialog.h
  mdp:D:/Kobe/Projects/Qt Projects/schedule_management/task.h
+ mdp:D:/Kobe/Projects/Qt Projects/schedule_management/task_info_window.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QDateTime
+ mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QString
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/q20functional.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/q20memory.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/q20type_traits.h
@@ -1328,6 +1331,7 @@ D:/Kobe/Projects/Qt Projects/schedule_management/reminddialog.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QDialog
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton
+ mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QWidget
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h
@@ -2364,8 +2368,10 @@ D:/Kobe/Projects/Qt Projects/schedule_management/remindthread.h
  mdp:D:/Kobe/Projects/Qt Projects/schedule_management/reminddialog.h
  mdp:D:/Kobe/Projects/Qt Projects/schedule_management/remindthread.h
  mdp:D:/Kobe/Projects/Qt Projects/schedule_management/task.h
+ mdp:D:/Kobe/Projects/Qt Projects/schedule_management/task_info_window.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QDateTime
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QObject
+ mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QString
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QThread
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QTimer
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/q20functional.h
@@ -2521,6 +2527,7 @@ D:/Kobe/Projects/Qt Projects/schedule_management/remindthread.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QDialog
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QPushButton
+ mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/QWidget
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h
@@ -2784,6 +2791,7 @@ D:/Kobe/Projects/Qt Projects/schedule_management/sign_in_window.h
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QDateTime
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QDebug
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QObject
+ mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QString
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QThread
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/QTimer
  mdp:D:/Qt/6.7.2/mingw_64/include/QtCore/q20functional.h

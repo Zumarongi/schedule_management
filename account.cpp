@@ -29,6 +29,7 @@ Task *Account::readTask(std::filesystem::path task_path)
         qDebug() << "File" << QString::fromStdString(task_path.string()) << "not found";
         return nullptr;
     }
+    qDebug() << "[File" << task_path.string() << "opened to read.]";
     std::string s;
 
     getline(fin, s);
@@ -58,32 +59,40 @@ Task *Account::readTask(std::filesystem::path task_path)
     getline(fin, s);
     QString taskNote = QString::fromStdString(s);
 
+    fin.close();
+    qDebug() << "[File" << task_path.string() << "opened.]";
+
     return new Task(taskId, taskName, stTime, edTime, rmTime, taskLoc, taskPrio, taskCtg, taskNote);
 }
 
 Account::Account(QString username)
 {
-    userName = username;
     std::filesystem::path acc_dir = ROOTDIR + "/data/" + username.toStdString();
-    std::ifstream fin(acc_dir.append("/.acc"));
+    std::filesystem::path accfile_path = ROOTDIR + "/data/" + username.toStdString() + "/.acc";
+    std::ifstream fin(accfile_path);
     if (!fin.is_open())
     {
         qDebug() << "can't find account" << username;
         return;
     }
+    qDebug() << "[File" << accfile_path.string() << "opened to read.]";
     std::string s;
     std::getline(fin, s);
+    userName = username;
     std::getline(fin, s);
     encryptedPass = s;
+    qDebug() << "Read encryptedPass =" << encryptedPass;
     taskList.clear();
     while (std::getline(fin, s))
     {
-        Task *t = readTask(acc_dir.append("/" + s + "/.task"));
+        std::filesystem::path task_path = ROOTDIR + "/data/" + username.toStdString() + "/" + s + ".task";
+        Task *t = readTask(task_path);
         if (t != nullptr)
             taskList.push_back(t);
     }
     Task::sortTasks(taskList.begin(), taskList.end(), Task::stTime_ascending);
     fin.close();
+    qDebug() << "[File" << accfile_path.string() << "closed.]";
     showHelp=false;
     doneAndDel=false;
 }
@@ -91,6 +100,8 @@ Account::Account(QString username)
 Account::Account(QString getUserName, QString getPassWord) {
     userName=getUserName;
     encryptedPass=encrypt(getPassWord);
+    qDebug() << "sign-up password :" << getPassWord;
+    qDebug() << "sign-up password encrypted :" << encryptedPass;
     showHelp=false;
     doneAndDel=false;
 }
@@ -113,6 +124,7 @@ void Account::readAccountList()
         qDebug() << "Path ./data/.acclist created.";
         return;
     }
+    qDebug() << "[File" << acclist_path.string() << "opened to read.]";
     std::string s;
     QString qs;
     std::getline(fin, s);
@@ -124,22 +136,25 @@ void Account::readAccountList()
         accountList.push_back(qs);
     }
     fin.close();
+    qDebug() << "[File" << acclist_path.string() << "closed.]";
 }
 
 void Account::saveAccountList()
 {
     std::filesystem::path acclist_path = ROOTDIR + "/data/.acclist";
     std::ofstream fout(acclist_path);
+    qDebug() << "[File" << acclist_path.string() << "opened to write.]";
     fout << Task::getIdCounter() << std::endl;
     for (int i = 0; i < accountList.size(); i ++)
         fout << accountList[i].toStdString() << std::endl;
     fout.close();
+    qDebug() << "[File" << acclist_path.string() << "closed.]";
 }
 
 bool Account::isNameExist(QString newName)
 {
     qDebug() << "isNameExist";
-    for (auto userName: accountList)
+    for (auto &userName: accountList)
         if (userName == newName) return true;
     return false;
 }
@@ -171,11 +186,13 @@ void Account::saveToFile() const
         qDebug() << "Fail to open" << QString::fromStdString(acc_path.string());
         return;
     }
+    qDebug() << "[File" << acc_path.string() << "opened to write.]";
     fout << userName.toStdString() << std::endl;
     fout << encryptedPass << std::endl;
     for (int i = 0; i < taskList.size(); i ++)
         fout << taskList[i]->get_taskId() << std::endl;
     fout.close();
+    qDebug() << "[File" << acc_path.string() << "closed.]";
 }
 
 void Account::addTask(Task *taskToAdd)
