@@ -121,7 +121,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
                 timeConfDialog->show();
                 connect(timeConfDialog, &time_conflict_dialog::forcedSave, [&](){forceToSave = true;});
             }
-            if (forceToSave)
+            if (!timeConflicted || forceToSave)
             {
                 task->set_taskName(new_taskName);
                 task->set_stTime(new_stTime);

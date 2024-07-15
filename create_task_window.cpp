@@ -85,9 +85,11 @@ create_task_window::create_task_window(QWidget *parent)
                 time_conflict_dialog *timeConfDialog = new time_conflict_dialog(this);
                 timeConfDialog->show();
                 connect(timeConfDialog, &time_conflict_dialog::forcedSave, [&](){forceToSave = true;});
+                // forceToSave 待解决
             }
             if (!timeConflicted || forceToSave)
             {
+                qDebug() << "ready to create task";
                 Task *new_task = new Task(new_taskName, new_stTime, new_edTime, new_rmTime, new_taskLoc, new_taskPrio, new_taskCtg, new_taskNote);
                 currentAccount->addTask(new_task);
 

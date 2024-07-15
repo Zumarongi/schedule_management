@@ -54,6 +54,7 @@ Task::~Task()
 
 bool Task::saveToFile(std::filesystem::path acc_path) const
 {
+    qDebug() << "Task" << this->get_taskId() << "calling Task::saveTofile()";
     std::filesystem::path task_path = acc_path.append("/" + std::to_string(taskId) + ".task");
     std::ofstream fout(task_path);
     fout << taskId << std::endl;
