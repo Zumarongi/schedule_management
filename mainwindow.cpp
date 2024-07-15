@@ -54,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     minTime=QDateTime();
     showButton();
 
+    //对时间范围的限定
     connect(ui->min_dateTimeEdit,&QDateTimeEdit::dateTimeChanged,[=](){
         removeButton();
         this->minTime=ui->min_dateTimeEdit->dateTime();

@@ -11,7 +11,7 @@ void remindThread::run(){
         for (auto task: currentAccount->get_taskList())
         {
             if ((task->get_stTime()-QDateTime::currentDateTime())<
-                (std::chrono::milliseconds)task->get_rmTime().msec()){
+                (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay()){
                 remindDialog *remindPage=new remindDialog(task);
             }
         }

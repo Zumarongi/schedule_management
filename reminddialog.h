@@ -5,6 +5,7 @@
 #include "task.h"
 #include <QDateTime>
 #include "task_info_window.h"
+#include <QString>
 
 namespace Ui {
 class remindDialog;
