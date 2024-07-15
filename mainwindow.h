@@ -41,7 +41,6 @@ private:
     Ui::MainWindow *ui;
     QWidget *contentWidget;
     QVBoxLayout *layout;
-    std::vector<Task *> taskOrder;
     QDateTime maxTime,minTime;
     int choosePrio;
     int chooseCtg;

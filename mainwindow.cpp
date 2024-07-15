@@ -36,9 +36,6 @@ MainWindow::MainWindow(QWidget *parent)
     layout = new QVBoxLayout(contentWidget);                //记得调整间距
     ui->scrollArea->setWidget(contentWidget);
     layout->setContentsMargins(35,5,35,5);
-    for(int i=0;i<currentAccount->get_taskList().size();++i){
-        taskOrder[i]=currentAccount->get_taskList()[i];
-    }
     /*QPushButton *button=new QPushButton;
     button->setFixedSize(700,40);
     layout->addWidget(button);
