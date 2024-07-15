@@ -1,6 +1,9 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+create_task_window *createTaskPage;
+task_info_window *taskInfoPage;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -27,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->not_find_warning->setFixedSize(450,20);
     ui->not_find_warning->move(165,55);
     ui->not_find_warning->setStyleSheet("QLabel{background-color:#FFFFFF;}");
-    //ui->scrollArea->setFixedSize(790,520);
+    ui->scrollArea->setFixedSize(790,400);
     //ui->scrollArea->move(10,80);
     ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->scrollArea->setWidgetResizable(true);
@@ -35,70 +38,77 @@ MainWindow::MainWindow(QWidget *parent)
     layout = new QVBoxLayout(contentWidget);                //记得调整间距
     ui->scrollArea->setWidget(contentWidget);
     layout->setContentsMargins(35,5,35,5);
-    /*QPushButton *button=new QPushButton;
-    button->setFixedSize(700,40);
-    layout->addWidget(button);
-    QPushButton *button1=new QPushButton;
-    button1->setFixedSize(700,40);
-    layout->addWidget(button1);
-    */
+    // QPushButton *button=new QPushButton;
+    // button->setFixedSize(700,200);
+    // layout->addWidget(button);
+    // QPushButton *button1=new QPushButton;
+    // button1->setFixedSize(700,200);
+    // layout->addWidget(button1);
+
+    taskOrder = currentAccount->get_taskList();
+
     if(currentAccount->get_doneAndDel()) del_done_task();
 
-    choosePrio=6;
-    chooseCtg=3;
+    choosePrio=0;
+    chooseCtg=0;
     maxTime=QDateTime::currentDateTime();
     minTime=QDateTime();
     showButton();
 
-    //对时间范围的限定
-    connect(ui->min_dateTimeEdit,&QDateTimeEdit::dateTimeChanged,[=](){
-        removeButton();
-        this->minTime=ui->min_dateTimeEdit->dateTime();
-        showButton();
-    });
-    connect(ui->max_dateTimeEdit,&QDateTimeEdit::dateTimeChanged,[=](){
-        removeButton();
-        this->maxTime=ui->max_dateTimeEdit->dateTime();
-        showButton();
-    });
+    ui->min_dateTimeEdit->setMinimumDateTime(QDateTime::currentDateTime());
+    ui->min_dateTimeEdit->setMaximumDateTime(ui->max_dateTimeEdit->dateTime());
+    ui->max_dateTimeEdit->setMinimumDateTime(ui->min_dateTimeEdit->dateTime());
+    connect(ui->min_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){emit reorder();});
+    connect(ui->max_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){emit reorder();});
 
     ui->choose_order->addItem("开始时间顺序");
     ui->choose_order->addItem("名字顺序");
     ui->choose_order->setCurrentIndex(0);
-    connect(ui->choose_order,&QComboBox::currentIndexChanged,[=](){
-        removeButton();
-        if(ui->choose_order->currentIndex()==0){
-            Task::sortTasks(currentAccount->get_taskList().begin(),currentAccount->get_taskList().end(),Task::stTime_ascending);
-            showButton();
-        }
-        else{
-            Task::sortTasks(currentAccount->get_taskList().begin(),currentAccount->get_taskList().end(),Task::taskName_ascending);
-            showButton();
-        }
-    });
+    connect(ui->choose_order, &QComboBox::currentIndexChanged, [=](){emit reorder();});
 
-    ui->choose_category->setCurrentIndex(6);
+    ui->choose_category->setCurrentIndex(0);
+    ui->choose_category->addItem("所有分类");
     ui->choose_category->addItem("学习");
     ui->choose_category->addItem("娱乐");
     ui->choose_category->addItem("生活");
     ui->choose_category->addItem("工作");
     ui->choose_category->addItem("运动");
     ui->choose_category->addItem("其他");
-    ui->choose_category->addItem("所有分类");
-    connect(ui->choose_category,&QComboBox::currentIndexChanged,[=](){
-        removeButton();
-        this->chooseCtg=ui->choose_category->currentIndex();
-        showButton();
-    });
+    connect(ui->choose_category, &QComboBox::currentIndexChanged, [=](){emit reorder();});
 
-    ui->choose_priority->setCurrentIndex(3);
+    ui->choose_priority->setCurrentIndex(0);
+    ui->choose_priority->addItem("所有优先级");
     ui->choose_priority->addItem("低");
     ui->choose_priority->addItem("中");
     ui->choose_priority->addItem("高");
-    connect(ui->choose_priority,&QComboBox::currentIndexChanged,[=](){
+    connect(ui->choose_priority, &QComboBox::currentIndexChanged, [=](){emit reorder();});
+
+    // connect(createTaskPage, &create_task_window::done_creation, [=](){emit reorder();});
+    // connect(taskInfoPage, &task_info_window::done_modification, [=](){emit reorder();});
+
+    connect(this, &MainWindow::reorder, [=](){
+        currentAccount->printTask();
         removeButton();
-        this->choosePrio=ui->choose_priority->currentIndex();
+        // removeHLayout();
+        taskOrder.clear();
+        for (auto task: currentAccount->get_taskList())
+            if ((task->get_stTime() >= minTime && task->get_edTime() <= maxTime)
+             && (task->get_taskCtg()==chooseCtg || chooseCtg == 0)
+             && (task->get_taskPrio()==choosePrio || choosePrio == 0))
+                taskOrder.push_back(task);
+        bool (*cmp)(const Task *, const Task *);
+        switch (ui->choose_order->currentIndex())
+        {
+        case 0:
+            cmp = Task::stTime_ascending; break;
+        case 1:
+            cmp = Task::taskName_ascending; break;
+        default:
+            cmp = Task::stTime_ascending;
+        }
+        Task::sortTasks(taskOrder.begin(), taskOrder.end(), cmp);
         showButton();
+        // showHLayout();
     });
 
     connect(ui->auto_delete,&QCheckBox::stateChanged,[=](){
@@ -114,6 +124,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    Account::saveAccountList();
+    delete currentAccount;
+    delete createTaskPage;
+    delete taskInfoPage;
     delete ui;
 }
 
@@ -137,9 +151,10 @@ void MainWindow::on_search_button_clicked(){
             taskSearched=task;
         }
     if(findTask){
-        task_info_window *task_info_page=new task_info_window(taskSearched, this);
+        delete taskInfoPage;
+        taskInfoPage = new task_info_window(taskSearched);
         this->close();
-        task_info_page->show();
+        taskInfoPage->show();
         ui->not_find_warning->hide();
     }
     else{
@@ -149,18 +164,8 @@ void MainWindow::on_search_button_clicked(){
 }
 
 void MainWindow::showButton(){
-    if(chooseCtg==6||choosePrio==3){
-        for(Task *task:currentAccount->get_taskList()){
-            layout->addWidget(task->get_taskButton());
-        }
-    }
-    else{
-        for(Task *task:currentAccount->get_taskList()){
-            if(task->get_stTime()>=minTime&&task->get_edTime()<=maxTime&&task->get_taskCtg()==chooseCtg&&task->get_taskPrio()==choosePrio){
-                layout->addWidget(task->get_taskButton());
-            }
-        }
-    }
+    for(Task *task: taskOrder)
+        layout->addWidget(task->get_taskButton());
 }
 
 void MainWindow::removeButton(){
@@ -169,9 +174,19 @@ void MainWindow::removeButton(){
     }
 }
 
+void MainWindow::removeHLayout()
+{
+}
+
+void MainWindow::showHLayout()
+{
+
+}
+
 void MainWindow::on_add_task_button_clicked(){
-    create_task_window *createPage=new create_task_window;
-    createPage->show();
+    delete createTaskPage;
+    createTaskPage = new create_task_window;
+    createTaskPage->show();
     this->close();
 }
 
@@ -190,3 +205,8 @@ QDateTime MainWindow::get_maxTime() const { return maxTime; }
 void MainWindow::set_minTime(QDateTime new_minTime) { minTime = new_minTime; }
 
 void MainWindow::set_maxTime(QDateTime new_maxTime) { maxTime = new_maxTime; }
+
+void MainWindow::showEvent(QShowEvent *event)
+{
+    emit reorder();
+}

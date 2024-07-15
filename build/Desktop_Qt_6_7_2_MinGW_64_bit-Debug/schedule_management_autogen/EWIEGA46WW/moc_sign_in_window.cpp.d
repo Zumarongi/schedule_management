@@ -2,7 +2,6 @@ D:/Kobe/Projects/Qt\ Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_6
   D:/Kobe/Projects/Qt\ Projects/schedule_management/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/schedule_management_autogen/moc_predefs.h \
   D:/Kobe/Projects/Qt\ Projects/schedule_management/account.h \
   D:/Kobe/Projects/Qt\ Projects/schedule_management/create_task_window.h \
-  D:/Kobe/Projects/Qt\ Projects/schedule_management/get_time_range.h \
   D:/Kobe/Projects/Qt\ Projects/schedule_management/mainwindow.h \
   D:/Kobe/Projects/Qt\ Projects/schedule_management/reminddialog.h \
   D:/Kobe/Projects/Qt\ Projects/schedule_management/remindthread.h \
