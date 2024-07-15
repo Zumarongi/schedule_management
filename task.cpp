@@ -42,7 +42,7 @@ Task::Task(int taskid,
     taskButton=new QPushButton;
     taskButton->setFixedSize(700,40);
     taskButton->setText(taskname);
-    taskButton->setStyleSheet("QPushButton{border-radius:15px;}");
+    taskButton->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;}");
     taskButton->setText(taskname);
     //改变颜色
 }
@@ -52,10 +52,16 @@ Task::~Task()
     delete taskButton;
 }
 
-bool Task::saveToFile(std::filesystem::path acc_path) const
+bool Task::saveToFile(std::filesystem::path task_path) const
 {
-    std::filesystem::path task_path = acc_path.append("/" + std::to_string(taskId) + ".task");
+    qDebug() << "Task" << this->get_taskId() << "calling Task::saveTofile(), saving to" << task_path.string();
     std::ofstream fout(task_path);
+    if (!fout.is_open())
+    {
+        qDebug() << "Can't open file" << task_path.string();
+        return false;
+    }
+    qDebug() << "[File" << task_path.string() << "opened to write.]";
     fout << taskId << std::endl;
     fout << taskName.toStdString() << std::endl;
     fout << stTime.toString().toStdString() << std::endl;
@@ -66,6 +72,7 @@ bool Task::saveToFile(std::filesystem::path acc_path) const
     fout << taskCtg << std::endl;
     fout << taskNote.toStdString() << std::endl;
     fout.close();
+    qDebug() << "[File" << task_path.string() << "closed.]";
     return true;
 }
 

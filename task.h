@@ -59,7 +59,6 @@ public:
     static bool (*taskName_descending)(const Task *, const Task *);
     static bool (*stTime_ascending)(const Task *, const Task *);
     static bool (*stTime_descending)(const Task *, const Task *);
-    // rmTime_ascending/descending
 
     int get_taskId() const;
     QString get_taskName() const;

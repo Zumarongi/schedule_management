@@ -19,6 +19,9 @@ public:
     explicit time_conflict_dialog(task_info_window *parent = nullptr);
     ~time_conflict_dialog();
 
+signals:
+    void forcedSave();
+
 private:
     Ui::time_conflict_dialog *ui;
 };

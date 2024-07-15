@@ -9,11 +9,7 @@ void remindThread::run(){
     timer->setInterval(1000);
     connect(timer,&QTimer::timeout,[=](){
         for (auto task: currentAccount->get_taskList())
-        {
-            if ((task->get_stTime()-QDateTime::currentDateTime())<
-                (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay()){
-                remindDialog *remindPage=new remindDialog(task);
-            }
-        }
+            if (task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
+                remindDialog *remindPage = new remindDialog(task);
     });
 }
