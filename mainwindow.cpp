@@ -36,9 +36,6 @@ MainWindow::MainWindow(QWidget *parent)
     layout = new QVBoxLayout(contentWidget);                //记得调整间距
     ui->scrollArea->setWidget(contentWidget);
     layout->setContentsMargins(35,5,35,5);
-    for(int i=0;i<currentAccount->get_taskList().size();++i){
-        taskOrder[i]=currentAccount->get_taskList()[i];
-    }
     /*QPushButton *button=new QPushButton;
     button->setFixedSize(700,40);
     layout->addWidget(button);
@@ -54,7 +51,9 @@ MainWindow::MainWindow(QWidget *parent)
     minTime=QDateTime();
     showButton();
 
-    //对时间范围的限定
+    ui->min_dateTimeEdit->setMinimumDateTime(QDateTime::currentDateTime());
+    ui->min_dateTimeEdit->setMaximumDateTime(ui->max_dateTimeEdit->dateTime());
+    ui->max_dateTimeEdit->setMinimumDateTime(ui->min_dateTimeEdit->dateTime());
     connect(ui->min_dateTimeEdit,&QDateTimeEdit::dateTimeChanged,[=](){
         removeButton();
         this->minTime=ui->min_dateTimeEdit->dateTime();
@@ -183,4 +182,12 @@ void MainWindow::del_done_task(){
             currentAccount->delTask(task);
         }
     }
+}
+
+void MainWindow::set_maxTime(QDateTime get_maxTime){
+    maxTime=get_maxTime;
+}
+
+void MainWindow::set_minTime(QDateTime get_minTime){
+    minTime=get_minTime;
 }

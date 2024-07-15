@@ -31,7 +31,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         delete_confirm_dialog.h delete_confirm_dialog.cpp delete_confirm_dialog.ui
         task_info_window.h task_info_window.cpp task_info_window.ui
         time_conflict_dialog.h time_conflict_dialog.cpp time_conflict_dialog.ui
-        get_time_range.h get_time_range.cpp get_time_range.ui
+
         remindthread.h remindthread.cpp
         reminddialog.h reminddialog.cpp reminddialog.ui
         create_task_window.h create_task_window.cpp create_task_window.ui
