@@ -56,7 +56,7 @@
       <x>130</x>
       <y>40</y>
       <width>181</width>
-      <height>21</height>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -67,9 +67,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
+      <y>110</y>
       <width>431</width>
-      <height>351</height>
+      <height>301</height>
      </rect>
     </property>
     <property name="widgetResizable">
@@ -81,29 +81,16 @@
        <x>0</x>
        <y>0</y>
        <width>429</width>
-       <height>349</height>
+       <height>299</height>
       </rect>
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="change_order_button">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>40</y>
-      <width>80</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>改变顺序</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="auto_delete">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
+      <x>10</x>
+      <y>410</y>
       <width>68</width>
       <height>19</height>
      </rect>
@@ -112,30 +99,80 @@
      <string>自动删除任务</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="time_order_button">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
-      <width>81</width>
-      <height>19</height>
+      <y>60</y>
+      <width>16</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>开始时间顺序</string>
+     <string>从</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="name_order_button">
+   <widget class="QDateTimeEdit" name="min_dateTimeEdit">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>0</y>
-      <width>81</width>
-      <height>19</height>
+      <x>30</x>
+      <y>60</y>
+      <width>194</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>60</y>
+      <width>16</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>名字顺序</string>
+     <string>到</string>
+    </property>
+   </widget>
+   <widget class="QDateTimeEdit" name="max_dateTimeEdit">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>60</y>
+      <width>194</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="choose_order">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>90</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="choose_priority">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>90</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="choose_category">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>90</y>
+      <width>62</width>
+      <height>22</height>
+     </rect>
     </property>
    </widget>
   </widget>
