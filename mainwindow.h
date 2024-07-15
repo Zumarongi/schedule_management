@@ -42,14 +42,6 @@ signals:
 protected:
     void showEvent(QShowEvent *event);
 
-<<<<<<< Updated upstream
-=======
-    QDateTime get_minTime() const;
-    QDateTime get_maxTime() const;
-    std::vector <Task *> taskOrder;
-
-
->>>>>>> Stashed changes
 private slots:
     void on_search_button_clicked();
     void on_add_task_button_clicked();

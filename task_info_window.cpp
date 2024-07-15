@@ -146,10 +146,12 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
     });
 
     connect(ui->pushButton_deleteTask, &QPushButton::clicked, [=](){
-        delete_confirm_dialog *delConfDialog = new delete_confirm_dialog(this);
+        delete_confirm_dialog *delConfDialog = new delete_confirm_dialog(currentTask);
         delConfDialog->show();
-        mainPage->show();
         this->close();
+        connect(delConfDialog,&delete_confirm_dialog::doneDel,[=](){
+            mainPage->show();
+        });
     });
 
     connect(ui->pushButton_return, &QPushButton::clicked, [=](){
