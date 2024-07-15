@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <QDebug>
 
-std::map<int, std::string> Task::ctgIdxToStr = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}, {5, "其他"}};
-std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 0}, {"娱乐", 1}, {"生活", 2}, {"工作", 3}, {"运动", 4}, {"其他", 5}};
+std::map<int, std::string> Task::ctgIdxToStr = {{1, "学习"}, {2, "娱乐"}, {3, "生活"}, {4, "工作"}, {5, "运动"}, {6, "其他"}};
+std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 1}, {"娱乐", 2}, {"生活", 3}, {"工作", 4}, {"运动", 5}, {"其他", 6}};
 
 int Task::IdCounter = 0;
 
