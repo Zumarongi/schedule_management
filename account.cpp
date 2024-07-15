@@ -218,3 +218,10 @@ void Account::delTask(Task *taskToDel)
         }
     saveToFile();
 }
+
+void Account::printTask() const
+{
+    qDebug() << "printTask(): printing taskIds";
+    for (auto task: taskList)
+        qDebug() << "\t" << task->get_taskId();
+}

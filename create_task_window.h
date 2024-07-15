@@ -15,6 +15,9 @@ public:
     explicit create_task_window(QWidget *parent = nullptr);
     ~create_task_window();
 
+signals:
+    void done_creation();
+
 private:
     Ui::create_task_window *ui;
 };

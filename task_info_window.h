@@ -19,6 +19,9 @@ public:
 
     Task *get_currentTask() const;
 
+signals:
+    void done_modification();
+
 private:
     Ui::task_info_window *ui;
 };

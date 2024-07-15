@@ -97,7 +97,7 @@ create_task_window::create_task_window(QWidget *parent)
                 qDebug() << "In create_task_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
                 new_task->saveToFile(task_path);
 
-                // emit
+                emit done_creation();
 
                 mainPage->show();
                 this->close();

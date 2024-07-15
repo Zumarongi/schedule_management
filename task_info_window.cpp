@@ -137,6 +137,8 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
                 task->saveToFile(task_path);
                 currentAccount->saveToFile();
 
+                emit done_modification();
+
                 mainPage->show();
                 this->close();
             }

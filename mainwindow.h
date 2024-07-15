@@ -30,14 +30,18 @@ public:
     void showButton();
     void removeButton();
     void del_done_task();
-    void set_maxTime(QDateTime get_maxTime);
-    void set_minTime(QDateTime get_minTime);
 
     QDateTime get_minTime() const;
     QDateTime get_maxTime() const;
 
     void set_minTime(QDateTime new_minTime);
     void set_maxTime(QDateTime new_maxTime);
+
+signals:
+    void reorder();
+
+protected:
+    void showEvent(QShowEvent *event);
 
 private slots:
     void on_search_button_clicked();
@@ -47,9 +51,13 @@ private:
     Ui::MainWindow *ui;
     QWidget *contentWidget;
     QVBoxLayout *layout;
+    std::vector<Task *> taskOrder;
     QDateTime maxTime,minTime;
     int choosePrio;
     int chooseCtg;
+
+    void removeHLayout();
+    void showHLayout();
 };
 
 #endif // MAINWINDOW_H

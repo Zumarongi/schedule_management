@@ -34,6 +34,7 @@ public:
     void saveToFile() const;
     void addTask(Task *taskToAdd);
     void delTask(Task *taskToDel);
+    void printTask() const;
 
     QString get_userName() const;
     std::vector<Task *> get_taskList() const;
