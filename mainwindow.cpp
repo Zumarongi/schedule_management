@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->auto_delete->setFixedSize(100,20);
     ui->auto_delete->move(30,30);
 
+    taskOrder=currentAccount->get_taskList();
+
     ui->lineEdit_search->setFixedSize(500,30);
     ui->lineEdit_search->move(150,25);
     ui->lineEdit_search->setStyleSheet("QLineEdit{border-radius:15px;}");
@@ -45,6 +47,13 @@ MainWindow::MainWindow(QWidget *parent)
     */
     if(currentAccount->get_doneAndDel()) del_done_task();
 
+    QStringList searched_tasks;
+    for (Task * task: currentAccount->get_taskList())
+        searched_tasks.append(task->get_taskName());
+    QCompleter *searchList=new QCompleter(searched_tasks,this);
+    searchList->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEdit_search->setCompleter(searchList);
+
     choosePrio=6;
     chooseCtg=3;
     maxTime=QDateTime::currentDateTime();
@@ -71,34 +80,36 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->choose_order,&QComboBox::currentIndexChanged,[=](){
         removeButton();
         if(ui->choose_order->currentIndex()==0){
-            Task::sortTasks(currentAccount->get_taskList().begin(),currentAccount->get_taskList().end(),Task::stTime_ascending);
+            Task::sortTasks(taskOrder.begin(),taskOrder.end(),Task::stTime_ascending);
             showButton();
         }
         else{
-            Task::sortTasks(currentAccount->get_taskList().begin(),currentAccount->get_taskList().end(),Task::taskName_ascending);
+            Task::sortTasks(taskOrder.begin(),taskOrder.end(),Task::taskName_ascending);
             showButton();
         }
     });
 
-    ui->choose_category->setCurrentIndex(6);
+    ui->choose_category->setCurrentIndex(0);
+    ui->choose_category->addItem("所有分类");
     ui->choose_category->addItem("学习");
     ui->choose_category->addItem("娱乐");
     ui->choose_category->addItem("生活");
     ui->choose_category->addItem("工作");
     ui->choose_category->addItem("运动");
     ui->choose_category->addItem("其他");
-    ui->choose_category->addItem("所有分类");
+
     connect(ui->choose_category,&QComboBox::currentIndexChanged,[=](){
         removeButton();
         this->chooseCtg=ui->choose_category->currentIndex();
         showButton();
     });
 
-    ui->choose_priority->setCurrentIndex(3);
+    ui->choose_priority->setCurrentIndex(0);
+    ui->choose_priority->addItem("所有优先级");
     ui->choose_priority->addItem("低");
     ui->choose_priority->addItem("中");
     ui->choose_priority->addItem("高");
-    ui->choose_priority->addItem("所有优先级");
+
     connect(ui->choose_priority,&QComboBox::currentIndexChanged,[=](){
         removeButton();
         this->choosePrio=ui->choose_priority->currentIndex();
@@ -122,6 +133,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+<<<<<<< Updated upstream
 void MainWindow::auto_complete(){
     QStringList searched_tasks;
     for(int i=0;i<currentAccount->get_taskList().size();++i){
@@ -132,6 +144,8 @@ void MainWindow::auto_complete(){
     ui->lineEdit_search->setCompleter(searchList);
 }
 
+=======
+>>>>>>> Stashed changes
 void MainWindow::on_search_button_clicked(){
     QString getSearched=ui->lineEdit_search->text();
     bool findTask=false;
@@ -143,7 +157,12 @@ void MainWindow::on_search_button_clicked(){
         }
     }
     if(findTask){
+<<<<<<< Updated upstream
         task_info_window *task_info_page=new task_info_window(currentAccount->get_taskList()[location], this);
+=======
+        task_info_window *task_info_page=new task_info_window(taskSearched);
+        this->close();
+>>>>>>> Stashed changes
         task_info_page->show();
         ui->not_find_warning->hide();
     }
@@ -154,15 +173,18 @@ void MainWindow::on_search_button_clicked(){
 }
 
 void MainWindow::showButton(){
-    if(chooseCtg==6||choosePrio==3){
-        for(Task *task:currentAccount->get_taskList()){
+    if(chooseCtg==0&&choosePrio==0){
+        for(Task *task:taskOrder){
             layout->addWidget(task->get_taskButton());
+            task->get_taskButton()->show();
         }
     }
     else{
-        for(Task *task:currentAccount->get_taskList()){
-            if(task->get_stTime()>=minTime&&task->get_edTime()<=maxTime&&task->get_taskCtg()==chooseCtg&&task->get_taskPrio()==choosePrio){
+        for(Task *task:taskOrder){
+            if(task->get_stTime()>=minTime&&task->get_edTime()<=maxTime
+                &&(task->get_taskCtg()==chooseCtg||task->get_taskCtg()==0)&&(task->get_taskPrio()==choosePrio||task->get_taskPrio()==0)){
                 layout->addWidget(task->get_taskButton());
+                task->get_taskButton()->show();
             }
         }
     }
