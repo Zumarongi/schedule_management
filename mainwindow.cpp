@@ -98,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->choose_priority->addItem("低");
     ui->choose_priority->addItem("中");
     ui->choose_priority->addItem("高");
+    ui->choose_priority->addItem("所有优先级");
     connect(ui->choose_priority,&QComboBox::currentIndexChanged,[=](){
         removeButton();
         this->choosePrio=ui->choose_priority->currentIndex();
