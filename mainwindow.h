@@ -42,5 +42,7 @@ private:
     QVBoxLayout *layout;
     std::vector<Task *> taskOrder;
     QDateTime maxTime,minTime;
+    int choosePrio;
+    int chooseCtg;
 };
 #endif // MAINWINDOW_H

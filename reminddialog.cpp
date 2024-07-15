@@ -15,3 +15,7 @@ remindDialog::~remindDialog()
 {
     delete ui;
 }
+
+void remindDialog::on_task_info_button_clicked(){
+    task_info_window *infoPage=new task_info_window(currenTask);
+}
