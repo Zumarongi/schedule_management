@@ -9,7 +9,6 @@
 #include <vector>
 #include "create_task_window.h"
 #include <QDebug>
-#include "get_time_range.h"
 #include "remindthread.h"
 
 extern Account *currentAccount;
@@ -31,6 +30,8 @@ public:
     void showButton();
     void removeButton();
     void del_done_task();
+    void set_maxTime(QDateTime get_maxTime);
+    void set_minTime(QDateTime get_minTime);
 
     QDateTime get_minTime() const;
     QDateTime get_maxTime() const;

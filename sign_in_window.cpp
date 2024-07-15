@@ -21,6 +21,7 @@ sign_in_window::sign_in_window(QWidget *parent)
     ui->empty_username_warning->hide();
     ui->error_password_warning->hide();
     ui->notfind_username_warning->hide();
+    ui->lineEdit_password->setEchoMode(QLineEdit::Password);
     connect(ui->sign_in_Button,&QPushButton::clicked,[=](){\
         QString userName = ui->lineEdit_username->text();
         QString passWord = ui->lineEdit_password->text();

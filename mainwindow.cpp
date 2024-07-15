@@ -50,7 +50,9 @@ MainWindow::MainWindow(QWidget *parent)
     minTime=QDateTime();
     showButton();
 
-    //对时间范围的限定
+    ui->min_dateTimeEdit->setMinimumDateTime(QDateTime::currentDateTime());
+    ui->min_dateTimeEdit->setMaximumDateTime(ui->max_dateTimeEdit->dateTime());
+    ui->max_dateTimeEdit->setMinimumDateTime(ui->min_dateTimeEdit->dateTime());
     connect(ui->min_dateTimeEdit,&QDateTimeEdit::dateTimeChanged,[=](){
         removeButton();
         this->minTime=ui->min_dateTimeEdit->dateTime();
@@ -95,6 +97,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->choose_priority->addItem("低");
     ui->choose_priority->addItem("中");
     ui->choose_priority->addItem("高");
+    ui->choose_priority->addItem("所有优先级");
     connect(ui->choose_priority,&QComboBox::currentIndexChanged,[=](){
         removeButton();
         this->choosePrio=ui->choose_priority->currentIndex();
