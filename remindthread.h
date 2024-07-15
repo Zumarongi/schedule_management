@@ -1,6 +1,7 @@
 #ifndef REMINDTHREAD_H
 #define REMINDTHREAD_H
 
+#include <QMutex>
 #include <QObject>
 #include <QThread>
 #include <QTimer>
@@ -12,6 +13,8 @@ extern Account *currentAccount;
 class remindThread : public QThread
 {
     Q_OBJECT
+
+    static QMutex mutex;
 
 public:
     explicit remindThread(QObject *parent = nullptr);

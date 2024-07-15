@@ -83,8 +83,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->scrollArea->move(10,125);
     ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->scrollArea->setWidgetResizable(true);
-    scrollLayout = new QVBoxLayout;
-    ui->scrollArea->setLayout(scrollLayout);
     layout->addWidget(ui->scrollArea);
 
     this->setLayout(layout);
@@ -98,13 +96,6 @@ MainWindow::MainWindow(QWidget *parent)
     //ui->scrollArea->setLayout(layout);
     // ui->scrollArea->setWidget(contentWidget);
     // layout->setContentsMargins(35,5,35,5);
-
-    // QPushButton *button=new QPushButton;
-    // button->setFixedSize(700,200);
-    // layout->addWidget(button);
-    // QPushButton *button1=new QPushButton;
-    // button1->setFixedSize(700,200);
-    // layout->addWidget(button1);
 
     taskOrder = currentAccount->get_taskList();
     showLayout();
@@ -121,10 +112,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     choosePrio=0;
     chooseCtg=0;
-    maxTime=QDateTime::currentDateTime();
-    minTime = QDateTime(QDate(1970, 0, 0), QTime(0, 0)); // 设置为指定日期和时间
-
-    showButton();
+    // maxTime=QDateTime::currentDateTime();
+    maxTime = QDateTime(QDate(2100, 1, 1), QTime(0, 0));
+    minTime = QDateTime(QDate(1970, 1, 1), QTime(0, 0)); // 设置为指定日期和时间
+    ui->max_dateTimeEdit->setDateTime(maxTime);
+    ui->min_dateTimeEdit->setDateTime(minTime);
 
     connect(ui->min_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){
         this->minTime=ui->min_dateTimeEdit->dateTime();
@@ -163,19 +155,26 @@ MainWindow::MainWindow(QWidget *parent)
         emit reorder();
     });
 
-    // connect(createTaskPage, &create_task_window::done_creation, [=](){emit reorder();});
-    // connect(taskInfoPage, &task_info_window::done_modification, [=](){emit reorder();});
+    connect(createTaskPage, &create_task_window::done_creation, [=](){emit reorder();});
+    connect(taskInfoPage, &task_info_window::done_modification, [=](){emit reorder();});
 
     connect(this, &MainWindow::reorder, [=](){
         currentAccount->printTask();
         // removeButton();
         removeLayout();
         taskOrder.clear();
+        qDebug() << minTime;
+        qDebug() << maxTime;
+        qDebug() << choosePrio;
+        qDebug() << chooseCtg;
         for (auto task: currentAccount->get_taskList())
+        {
+            qDebug() << task->get_taskId() << "\t" << task->get_taskName() << "\t" << task->get_stTime() << "\t" << task->get_edTime() << "\t" << task->get_taskPrio() << "\t" << task->get_taskCtg();
             if ((task->get_stTime() >= minTime && task->get_stTime() <= maxTime)
              && (task->get_taskCtg() == chooseCtg || chooseCtg == 0)
              && (task->get_taskPrio() == choosePrio || choosePrio == 0))
                 taskOrder.push_back(task);
+        }
         bool (*cmp)(const Task *, const Task *);
         switch (ui->choose_order->currentIndex())
         {
@@ -242,15 +241,12 @@ void MainWindow::on_search_button_clicked(){
 
 void MainWindow::removeLayout()
 {
-    for (auto task: taskOrder)
-    {
-        scrollLayout->removeWidget(task->taskButton);
-        delete task->taskButton;
-    }
+    delete scrollLayout;
 }
 
 void MainWindow::showLayout()
 {
+    scrollLayout = new QVBoxLayout;
     qDebug() << "showLayout(): printing taskOrder";
     for (auto task: taskOrder)
     {
@@ -259,23 +255,24 @@ void MainWindow::showLayout()
         task->taskButton->setFixedSize(700, 40);
         task->taskButton->setStyleSheet("QPushButton{border-radius:5px;background-color:#148AFF;}");
         connect(task->taskButton, &QPushButton::clicked, [=](){
-            delete taskInfoPage;
             taskInfoPage = new task_info_window(task);
             taskInfoPage->show();
             this->close();
         });
         scrollLayout->addWidget(task->taskButton);
     }
+    scrollLayout->setContentsMargins(35, 5, 35, 5);
+    ui->scrollArea->setLayout(scrollLayout);
 }
 
 void MainWindow::showButton(){
     for(Task *task: taskOrder)
-        layout->addWidget(task->get_taskButton());
+        layout->addWidget(task->taskButton);
 }
 
 void MainWindow::removeButton(){
     for(Task *task:taskOrder){
-        layout->removeWidget(task->get_taskButton());
+        layout->removeWidget(task->taskButton);
     }
 }
 

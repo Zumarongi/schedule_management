@@ -134,17 +134,17 @@ void Task::set_taskNote(QString new_taskNote) { taskNote = new_taskNote; }
 
 TaskPriority toTaskPriority(QString qTaskPrio)
 {
-    if (qTaskPrio == "LOW") return LOW;
-    if (qTaskPrio == "MID") return MID;
-    if (qTaskPrio == "HIGH") return HIGH;
+    if (qTaskPrio == "低" || qTaskPrio == "LOW") return LOW;
+    if (qTaskPrio == "中" || qTaskPrio == "MID") return MID;
+    if (qTaskPrio == "高" || qTaskPrio == "HIGH") return HIGH;
     return LOW;
 }
 
 TaskPriority toTaskPriority(std::string sTaskPrio)
 {
-    if (sTaskPrio == "LOW") return LOW;
-    if (sTaskPrio == "MID") return MID;
-    if (sTaskPrio == "HIGH") return HIGH;
+    if (sTaskPrio == "低" || sTaskPrio == "LOW") return LOW;
+    if (sTaskPrio == "中" || sTaskPrio == "MID") return MID;
+    if (sTaskPrio == "高" || sTaskPrio == "HIGH") return HIGH;
     return LOW;
 }
 
