@@ -62,14 +62,6 @@ MainWindow::MainWindow(QWidget *parent)
             for (auto task: currentAccount->get_taskList())
                 if (task->get_stTime() >= minTime && task->get_stTime() <= maxTime)
                     taskOrder.push_back(task);
-            // int i=0,j=0;
-            // while(i<currentAccount->taskList.size()){
-            //     if(currentAccount->taskList[i]->get_stTime()>=currentAccount->minTime&&currentAccount->taskList[i]->get_edTime()<=currentAccount->maxTime){
-            //         taskOrder[j]=currentAccount->taskList[i];
-            //         ++j;
-            //     }
-            //     ++i;
-            // }
             showButton();
         });
     });
@@ -87,14 +79,6 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskPrio() == HIGH)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskPrio()==2){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
@@ -104,31 +88,15 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskPrio() == MID)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskPrio()==1){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
     sub_prio_menu->addAction("低",[=](){
         removeButton();
         taskOrder.clear();
-        // for (auto task: currentAccount->get_taskList())
-        //     if (task->get_taskPrio() == LOW)
-        //         taskOrder.push_back(task);
-        int i=0,j=0;
-        while(i<currentAccount->taskList.size()){
-            if(currentAccount->taskList[i]->get_taskPrio()==0){
-                taskOrder[j]=currentAccount->taskList[i];
-                ++j;
-            }
-            ++i;
-        }
+        for (auto task: currentAccount->get_taskList())
+            if (task->get_taskPrio() == LOW)
+                taskOrder.push_back(task);
         showButton();
     });
 
@@ -138,14 +106,6 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskCtg() == 0)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskCtg()==0){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
@@ -155,14 +115,6 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskCtg() == 1)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskCtg()==1){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
@@ -172,14 +124,6 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskCtg() == 2)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskCtg()==2){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
@@ -189,14 +133,6 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskCtg() == 3)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskCtg()==3){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
@@ -206,14 +142,6 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskCtg() == 4)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskCtg()==4){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
@@ -223,14 +151,6 @@ MainWindow::MainWindow(QWidget *parent)
         for (auto task: currentAccount->get_taskList())
             if (task->get_taskCtg() == 5)
                 taskOrder.push_back(task);
-        // int i=0,j=0;
-        // while(i<currentAccount->taskList.size()){
-        //     if(currentAccount->taskList[i]->get_taskCtg()==5){
-        //         taskOrder[j]=currentAccount->taskList[i];
-        //         ++j;
-        //     }
-        //     ++i;
-        // }
         showButton();
     });
 
@@ -277,9 +197,6 @@ void MainWindow::auto_complete(){
     QStringList searched_tasks;
     for (auto task: currentAccount->get_taskList())
         searched_tasks<<task->get_taskName();
-    // for(int i=0;i<currentAccount->taskList.size();++i){
-    //     searched_tasks<<currentAccount->taskList[i]->get_taskName();
-    // }
     QCompleter *searchList=new QCompleter(searched_tasks,this);
     searchList->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit_search->setCompleter(searchList);
@@ -288,15 +205,15 @@ void MainWindow::auto_complete(){
 void MainWindow::on_search_button_clicked(){
     QString getSearched=ui->lineEdit_search->text();
     bool findTask=false;
-    int location=-1;
-    for(int i=0;i<currentAccount->taskList.size();++i){
-        if(getSearched==currentAccount->taskList[i]->get_taskName()){
+    Task *taskSearched;
+    for (auto task: currentAccount->get_taskList())
+        if(getSearched==task->get_taskName())
+        {
             findTask=true;
-            location=i;
+            taskSearched=task;
         }
-    }
     if(findTask){
-        task_info_window *task_info_page=new task_info_window(currentAccount->taskList[location], this);
+        task_info_window *task_info_page=new task_info_window(taskSearched, this);
         task_info_page->show();
         ui->not_find_warning->hide();
     }
@@ -324,7 +241,7 @@ void MainWindow::on_add_task_button_clicked(){
 }
 
 void MainWindow::del_done_task(){
-    for (int i = 0; i < currentAccount->taskList.size(); ++i) {
+    for (auto task: currentAccount->get_taskList()){
         //if任务过时，删除
     }
 }

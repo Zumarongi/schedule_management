@@ -9,6 +9,15 @@ time_conflict_dialog::time_conflict_dialog(create_task_window *parent)
 
     ui->label->setText("该任务与其他任务时间冲突，\n确认创建？");
     ui->buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, [=](){
+        emit forcedSave();
+        this->close();
+    });
+
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, [=](){
+        this->close();
+    });
 }
 
 time_conflict_dialog::time_conflict_dialog(task_info_window *parent)
@@ -19,6 +28,15 @@ time_conflict_dialog::time_conflict_dialog(task_info_window *parent)
 
     ui->label->setText("该任务与其他任务时间冲突，\n是否保存？");
     ui->buttonBox->setStandardButtons(QDialogButtonBox::Save | QDialogButtonBox::Cancel);
+
+    connect(ui->buttonBox, &QDialogButtonBox::accepted, [=](){
+        emit forcedSave();
+        this->close();
+    });
+
+    connect(ui->buttonBox, &QDialogButtonBox::rejected, [=](){
+        this->close();
+    });
 }
 
 time_conflict_dialog::~time_conflict_dialog()

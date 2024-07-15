@@ -178,6 +178,14 @@ void Account::saveToFile() const
     fout.close();
 }
 
+void Account::addTask(Task *taskToAdd)
+{
+    taskList.push_back(taskToAdd);
+    std::filesystem::path task_path = ROOTDIR + "/data/" + this->userName.toStdString() + "/" + std::to_string(taskToAdd->get_taskId()) + ".task";
+    taskToAdd->saveToFile(task_path);
+    saveToFile();
+}
+
 void Account::delTask(Task *taskToDel)
 {
     for (auto p = taskList.begin(); p != taskList.end(); p ++)
@@ -185,7 +193,7 @@ void Account::delTask(Task *taskToDel)
         {
             taskList.erase(p);
 
-            std::filesystem::path task_path = ROOTDIR + "/data/" + this->userName.toStdString() + "/" + std::to_string( taskToDel->get_taskId()) + ".task";
+            std::filesystem::path task_path = ROOTDIR + "/data/" + this->userName.toStdString() + "/" + std::to_string(taskToDel->get_taskId()) + ".task";
             std::filesystem::remove(task_path);
 
             taskToDel->~Task();

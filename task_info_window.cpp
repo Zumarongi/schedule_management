@@ -2,6 +2,7 @@
 #include "ui_task_info_window.h"
 #include "mainwindow.h"
 #include "delete_confirm_dialog.h"
+#include "time_conflict_dialog.h"
 
 extern MainWindow *mainPage;
 extern Account *currentAccount;
@@ -14,7 +15,8 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
     currentTask = task;
 
-    ui->dateTimeEdit_stTime->setMinimumDateTime(QDateTime::currentDateTime());
+    // ui->dateTimeEdit_stTime->setMinimumDateTime(QDateTime::currentDateTime());
+    // ui->dateTimeEdit_edTime->setMinimumDateTime(QDateTime::currentDateTime());
     ui->lineEdit_rmTime_h->setValidator(new QIntValidator(0, 23, this));
     ui->lineEdit_rmTime_m->setValidator(new QIntValidator(0, 59, this));
     ui->comboBox_taskPrio->setEditable(false);
@@ -31,7 +33,6 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
     ui->textEdit_taskNote->setText(task->get_taskNote());
 
     ui->warning_taskNameEmpty->hide();
-    ui->warning_stTimeTooEarly->hide();
     ui->warning_edTimeTooEarly->hide();
     ui->warning_rmTimeTooEarly->hide();
 
@@ -89,7 +90,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
         bool taskNameEmpty = new_taskName.isEmpty();
         bool edTimeTooEarly = new_edTime < new_stTime;
-        bool rmTimeTooEarly = new_stTime - QDateTime::currentDateTime() < (std::chrono::milliseconds)(new_rmTime.msec());
+        bool rmTimeTooEarly = new_stTime - QDateTime::currentDateTime() < (std::chrono::milliseconds)(new_rmTime.msecsSinceStartOfDay());
 
         if (taskNameEmpty)
             ui->warning_taskNameEmpty->show();
@@ -105,26 +106,46 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
         if (!taskNameEmpty && !edTimeTooEarly && !rmTimeTooEarly)
         {
-            task->set_taskName(new_taskName);
-            task->set_stTime(new_stTime);
-            task->set_edTime(new_edTime);
-            task->set_rmTime(new_rmTime);
-            task->set_taskLoc(new_taskLoc);
-            task->set_taskPrio(new_taskPrio);
-            task->set_taskCtg(new_taskCtg);
-            task->set_taskNote(new_taskNote);
+            bool timeConflicted = false;
+            for (auto task: currentAccount->get_taskList())
+                if (task != currentTask)
+                    if ((new_stTime <= task->get_stTime() && task->get_stTime() <= new_edTime) || (new_stTime <= task->get_edTime() && task->get_edTime() <= new_edTime))
+                    {
+                        timeConflicted = true;
+                        break;
+                    }
+            bool forceToSave = false;
+            if (timeConflicted)
+            {
+                time_conflict_dialog *timeConfDialog = new time_conflict_dialog(this);
+                timeConfDialog->show();
+                connect(timeConfDialog, &time_conflict_dialog::forcedSave, [&](){forceToSave = true;});
+            }
+            if (forceToSave)
+            {
+                task->set_taskName(new_taskName);
+                task->set_stTime(new_stTime);
+                task->set_edTime(new_edTime);
+                task->set_rmTime(new_rmTime);
+                task->set_taskLoc(new_taskLoc);
+                task->set_taskPrio(new_taskPrio);
+                task->set_taskCtg(new_taskCtg);
+                task->set_taskNote(new_taskNote);
 
-            std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(task->get_taskId()) + ".task";
-            task->saveToFile(task_path);
+                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(task->get_taskId()) + ".task";
+                task->saveToFile(task_path);
 
-            mainPage->show();
-            this->close();
+                mainPage->show();
+                this->close();
+            }
         }
     });
 
     connect(ui->pushButton_deleteTask, &QPushButton::clicked, [=](){
         delete_confirm_dialog *delConfDialog = new delete_confirm_dialog(this);
         delConfDialog->show();
+        mainPage->show();
+        this->close();
     });
 
     connect(ui->pushButton_return, &QPushButton::clicked, [=](){

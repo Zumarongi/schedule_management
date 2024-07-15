@@ -55,7 +55,6 @@ public:
     QPushButton *editButton_taskCtg;
     QPushButton *editButton_taskPrio;
     QLabel *warning_taskNameEmpty;
-    QLabel *warning_stTimeTooEarly;
     QLabel *warning_edTimeTooEarly;
     QLabel *warning_rmTimeTooEarly;
 
@@ -139,6 +138,7 @@ public:
         comboBox_taskCtg->addItem(QString());
         comboBox_taskCtg->addItem(QString());
         comboBox_taskCtg->addItem(QString());
+        comboBox_taskCtg->addItem(QString());
         comboBox_taskCtg->setObjectName("comboBox_taskCtg");
         comboBox_taskCtg->setGeometry(QRect(360, 110, 62, 22));
         pushButton_saveChanges = new QPushButton(task_info_window);
@@ -166,11 +166,6 @@ public:
         warning_taskNameEmpty->setObjectName("warning_taskNameEmpty");
         warning_taskNameEmpty->setGeometry(QRect(80, 50, 113, 14));
         warning_taskNameEmpty->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"background-color: rgb(255, 0, 0);"));
-        warning_stTimeTooEarly = new QLabel(task_info_window);
-        warning_stTimeTooEarly->setObjectName("warning_stTimeTooEarly");
-        warning_stTimeTooEarly->setGeometry(QRect(80, 88, 194, 14));
-        warning_stTimeTooEarly->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(255, 0, 0);"));
         warning_edTimeTooEarly = new QLabel(task_info_window);
         warning_edTimeTooEarly->setObjectName("warning_edTimeTooEarly");
@@ -215,6 +210,7 @@ public:
         comboBox_taskCtg->setItemText(2, QCoreApplication::translate("task_info_window", "\347\224\237\346\264\273", nullptr));
         comboBox_taskCtg->setItemText(3, QCoreApplication::translate("task_info_window", "\345\267\245\344\275\234", nullptr));
         comboBox_taskCtg->setItemText(4, QCoreApplication::translate("task_info_window", "\350\277\220\345\212\250", nullptr));
+        comboBox_taskCtg->setItemText(5, QCoreApplication::translate("task_info_window", "\345\205\266\344\273\226", nullptr));
 
         pushButton_saveChanges->setText(QCoreApplication::translate("task_info_window", "\344\277\235\345\255\230\346\233\264\346\224\271", nullptr));
         pushButton_deleteTask->setText(QCoreApplication::translate("task_info_window", "\345\210\240\351\231\244\344\273\273\345\212\241", nullptr));
@@ -224,7 +220,6 @@ public:
         editButton_taskCtg->setText(QCoreApplication::translate("task_info_window", "Edit", nullptr));
         editButton_taskPrio->setText(QCoreApplication::translate("task_info_window", "Edit", nullptr));
         warning_taskNameEmpty->setText(QCoreApplication::translate("task_info_window", " \344\273\273\345\212\241\345\220\215\347\247\260\344\270\215\350\203\275\344\270\272\347\251\272\357\274\201", nullptr));
-        warning_stTimeTooEarly->setText(QCoreApplication::translate("task_info_window", " \345\274\200\345\247\213\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\347\216\260\345\234\250\357\274\201", nullptr));
         warning_edTimeTooEarly->setText(QCoreApplication::translate("task_info_window", " \347\273\223\346\235\237\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\345\274\200\345\247\213\346\227\266\351\227\264\357\274\201", nullptr));
         warning_rmTimeTooEarly->setText(QCoreApplication::translate("task_info_window", " \346\217\220\351\206\222\346\227\266\351\227\264\344\270\215\350\203\275\346\227\251\344\272\216\347\216\260\345\234\250\357\274\201", nullptr));
     } // retranslateUi

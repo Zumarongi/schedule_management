@@ -327,6 +327,11 @@
      <string>运动</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>其他</string>
+    </property>
+   </item>
   </widget>
   <widget class="QPushButton" name="pushButton_saveChanges">
    <property name="geometry">
@@ -434,23 +439,6 @@ background-color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
     <string> 任务名称不能为空！</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="warning_stTimeTooEarly">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>88</y>
-     <width>194</width>
-     <height>14</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string> 开始时间不能早于现在！</string>
    </property>
   </widget>
   <widget class="QLabel" name="warning_edTimeTooEarly">

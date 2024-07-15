@@ -25,6 +25,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    QDateTime maxTime,minTime;
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void auto_complete();
@@ -41,6 +43,5 @@ private:
     QWidget *contentWidget;
     QVBoxLayout *layout;
     std::vector<Task *> taskOrder;
-    QDateTime maxTime,minTime;
 };
 #endif // MAINWINDOW_H
