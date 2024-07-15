@@ -43,7 +43,8 @@ protected:
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void auto_complete();
+    void showButton();
+    void removeButton();
     void del_done_task();
 
     QDateTime get_minTime() const;

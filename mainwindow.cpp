@@ -112,20 +112,26 @@ MainWindow::MainWindow(QWidget *parent)
     {
     if(currentAccount->get_doneAndDel()) del_done_task();
 
+    QStringList searched_tasks;
+    for (Task * task: currentAccount->get_taskList())
+        searched_tasks.append(task->get_taskName());
+    QCompleter *searchList=new QCompleter(searched_tasks,this);
+    searchList->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEdit_search->setCompleter(searchList);
+
     choosePrio=0;
     chooseCtg=0;
     maxTime=QDateTime::currentDateTime();
-    minTime=QDateTime();
+    minTime = QDateTime(QDate(1970, 0, 0), QTime(0, 0)); // 设置为指定日期和时间
 
-    ui->min_dateTimeEdit->setMinimumDateTime(QDateTime::currentDateTime());
-    ui->min_dateTimeEdit->setDateTime(QDateTime::currentDateTime());
-    ui->max_dateTimeEdit->setDateTime(QDateTime::currentDateTime().addDays(1));
+    showButton();
+
     connect(ui->min_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){
-        minTime = ui->min_dateTimeEdit->dateTime();
+        this->minTime=ui->min_dateTimeEdit->dateTime();
         emit reorder();
     });
     connect(ui->max_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){
-        maxTime = ui->max_dateTimeEdit->dateTime();
+        this->maxTime=ui->max_dateTimeEdit->dateTime();
         emit reorder();
     });
 
@@ -143,7 +149,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->choose_category->addItem("其他");
     ui->choose_category->setCurrentIndex(0);
     connect(ui->choose_category, &QComboBox::currentIndexChanged, [=](){
-        chooseCtg = ui->choose_category->currentIndex();
+        this->chooseCtg=ui->choose_category->currentIndex();
         emit reorder();
     });
 
@@ -153,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->choose_priority->addItem("高");
     ui->choose_priority->setCurrentIndex(0);
     connect(ui->choose_priority, &QComboBox::currentIndexChanged, [=](){
-        choosePrio = ui->choose_priority->currentIndex();
+        this->choosePrio=ui->choose_priority->currentIndex();
         emit reorder();
     });
 
@@ -203,16 +209,12 @@ MainWindow::~MainWindow()
     delete currentAccount;
     delete createTaskPage;
     delete taskInfoPage;
+    for(Task *task:taskOrder){
+        delete task;
+    }
+    delete contentWidget;
+    delete layout;
     delete ui;
-}
-
-void MainWindow::auto_complete(){
-    QStringList searched_tasks;
-    for (auto task: currentAccount->get_taskList())
-        searched_tasks<<task->get_taskName();
-    QCompleter *searchList=new QCompleter(searched_tasks,this);
-    searchList->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->lineEdit_search->setCompleter(searchList);
 }
 
 void MainWindow::on_search_button_clicked(){
@@ -263,6 +265,17 @@ void MainWindow::showLayout()
             this->close();
         });
         scrollLayout->addWidget(task->taskButton);
+    }
+}
+
+void MainWindow::showButton(){
+    for(Task *task: taskOrder)
+        layout->addWidget(task->get_taskButton());
+}
+
+void MainWindow::removeButton(){
+    for(Task *task:taskOrder){
+        layout->removeWidget(task->get_taskButton());
     }
 }
 
