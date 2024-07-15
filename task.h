@@ -30,9 +30,10 @@ class Task
     TaskPriority taskPrio;          // priority
     int taskCtg;                    // catagory
     QString taskNote;
-    QPushButton *taskButton;
 
 public:
+    QPushButton *taskButton;
+
     Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
          QString taskloc, TaskPriority taskprio, int taskctg,
          QString tasknote);         // new task
@@ -69,7 +70,6 @@ public:
     TaskPriority get_taskPrio() const;
     int get_taskCtg() const;
     QString get_taskNote() const;
-    QPushButton *get_taskButton() const;
 
     void set_taskName(QString new_taskName);
     void set_stTime(QDateTime new_stTime);

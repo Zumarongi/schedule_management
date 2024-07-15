@@ -198,8 +198,10 @@ void Account::saveToFile() const
 void Account::addTask(Task *taskToAdd)
 {
     taskList.push_back(taskToAdd);
+
     std::filesystem::path task_path = ROOTDIR + "/data/" + this->userName.toStdString() + "/" + std::to_string(taskToAdd->get_taskId()) + ".task";
     taskToAdd->saveToFile(task_path);
+
     saveToFile();
 }
 
@@ -213,7 +215,7 @@ void Account::delTask(Task *taskToDel)
             std::filesystem::path task_path = ROOTDIR + "/data/" + this->userName.toStdString() + "/" + std::to_string(taskToDel->get_taskId()) + ".task";
             std::filesystem::remove(task_path);
 
-            taskToDel->~Task();
+            delete taskToDel;
             break;
         }
     saveToFile();
@@ -223,5 +225,5 @@ void Account::printTask() const
 {
     qDebug() << "printTask(): printing taskIds";
     for (auto task: taskList)
-        qDebug() << "\t" << task->get_taskId();
+        qDebug() << task->get_taskId() << "\t" << task->get_taskName();
 }

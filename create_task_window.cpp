@@ -93,10 +93,6 @@ create_task_window::create_task_window(QWidget *parent)
                 Task *new_task = new Task(new_taskName, new_stTime, new_edTime, new_rmTime, new_taskLoc, new_taskPrio, new_taskCtg, new_taskNote);
                 currentAccount->addTask(new_task);
 
-                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(new_task->get_taskId()) + ".task";
-                qDebug() << "In create_task_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
-                new_task->saveToFile(task_path);
-
                 emit done_creation();
 
                 mainPage->show();

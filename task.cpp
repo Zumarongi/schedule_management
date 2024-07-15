@@ -38,13 +38,6 @@ Task::Task(int taskid,
     taskPrio = taskprio;
     taskCtg = taskctg;
     taskNote = tasknote;
-
-    taskButton=new QPushButton;
-    taskButton->setFixedSize(700,40);
-    taskButton->setText(taskname);
-    taskButton->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;}");
-    taskButton->setText(taskname);
-    //改变颜色
 }
 
 Task::~Task()
@@ -122,8 +115,6 @@ TaskPriority Task::get_taskPrio() const { return taskPrio; }
 int Task::get_taskCtg() const { return taskCtg; }
 
 QString Task::get_taskNote() const { return taskNote; }
-
-QPushButton * Task::get_taskButton() const {return taskButton;}
 
 void Task::set_taskName(QString new_taskName) { taskName = new_taskName; }
 

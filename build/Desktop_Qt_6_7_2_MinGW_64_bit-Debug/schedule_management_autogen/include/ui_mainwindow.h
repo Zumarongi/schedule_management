@@ -36,9 +36,9 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QCheckBox *auto_delete;
-    QLabel *label;
+    QLabel *label_from;
     QDateTimeEdit *min_dateTimeEdit;
-    QLabel *label_2;
+    QLabel *label_to;
     QDateTimeEdit *max_dateTimeEdit;
     QComboBox *choose_order;
     QComboBox *choose_priority;
@@ -76,15 +76,15 @@ public:
         auto_delete = new QCheckBox(centralwidget);
         auto_delete->setObjectName("auto_delete");
         auto_delete->setGeometry(QRect(10, 410, 68, 19));
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-        label->setGeometry(QRect(10, 60, 16, 16));
+        label_from = new QLabel(centralwidget);
+        label_from->setObjectName("label_from");
+        label_from->setGeometry(QRect(10, 60, 16, 16));
         min_dateTimeEdit = new QDateTimeEdit(centralwidget);
         min_dateTimeEdit->setObjectName("min_dateTimeEdit");
         min_dateTimeEdit->setGeometry(QRect(30, 60, 194, 22));
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(230, 60, 16, 16));
+        label_to = new QLabel(centralwidget);
+        label_to->setObjectName("label_to");
+        label_to->setGeometry(QRect(230, 60, 16, 16));
         max_dateTimeEdit = new QDateTimeEdit(centralwidget);
         max_dateTimeEdit->setObjectName("max_dateTimeEdit");
         max_dateTimeEdit->setGeometry(QRect(250, 60, 194, 22));
@@ -103,7 +103,7 @@ public:
         MainWindow->setStatusBar(statusbar);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 18));
+        menubar->setGeometry(QRect(0, 0, 800, 17));
         MainWindow->setMenuBar(menubar);
 
         retranslateUi(MainWindow);
@@ -114,12 +114,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        search_button->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-        add_task_button->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+        search_button->setText(QCoreApplication::translate("MainWindow", "\346\237\245\350\257\242", nullptr));
+        add_task_button->setText(QCoreApplication::translate("MainWindow", "\345\210\233\345\273\272\344\273\273\345\212\241", nullptr));
         not_find_warning->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         auto_delete->setText(QCoreApplication::translate("MainWindow", "\350\207\252\345\212\250\345\210\240\351\231\244\344\273\273\345\212\241", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "\344\273\216", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "\345\210\260", nullptr));
+        label_from->setText(QCoreApplication::translate("MainWindow", "\344\273\216", nullptr));
+        label_to->setText(QCoreApplication::translate("MainWindow", "\345\210\260", nullptr));
     } // retranslateUi
 
 };
