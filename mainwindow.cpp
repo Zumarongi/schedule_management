@@ -61,19 +61,26 @@ MainWindow::MainWindow(QWidget *parent)
     choosePrio=0;
     chooseCtg=0;
     maxTime=QDateTime::currentDateTime();
-    minTime=QDateTime();
+    minTime = QDateTime(QDate(1970, 0, 0), QTime(0, 0)); // 设置为指定日期和时间
+
     showButton();
 
-    ui->min_dateTimeEdit->setMinimumDateTime(QDateTime::currentDateTime());
-    ui->min_dateTimeEdit->setMaximumDateTime(ui->max_dateTimeEdit->dateTime());
-    ui->max_dateTimeEdit->setMinimumDateTime(ui->min_dateTimeEdit->dateTime());
-    connect(ui->min_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){emit reorder();});
-    connect(ui->max_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){emit reorder();});
+    connect(ui->min_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){
+        this->minTime=ui->min_dateTimeEdit->dateTime();
+        emit reorder();
+    });
+    connect(ui->max_dateTimeEdit, &QDateTimeEdit::dateTimeChanged, [=](){
+        this->maxTime=ui->max_dateTimeEdit->dateTime();
+        emit reorder();
+    });
 
     ui->choose_order->addItem("开始时间顺序");
     ui->choose_order->addItem("名字顺序");
     ui->choose_order->setCurrentIndex(0);
-    connect(ui->choose_order, &QComboBox::currentIndexChanged, [=](){emit reorder();});
+    connect(ui->choose_order, &QComboBox::currentIndexChanged, [=](){
+        //
+        emit reorder();
+    });
 
     ui->choose_category->setCurrentIndex(0);
     ui->choose_category->addItem("所有分类");
@@ -83,14 +90,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->choose_category->addItem("工作");
     ui->choose_category->addItem("运动");
     ui->choose_category->addItem("其他");
-    connect(ui->choose_category, &QComboBox::currentIndexChanged, [=](){emit reorder();});
+    connect(ui->choose_category, &QComboBox::currentIndexChanged, [=](){
+        this->chooseCtg=ui->choose_category->currentIndex();
+        emit reorder();
+    });
 
     ui->choose_priority->setCurrentIndex(0);
     ui->choose_priority->addItem("所有优先级");
     ui->choose_priority->addItem("低");
     ui->choose_priority->addItem("中");
     ui->choose_priority->addItem("高");
-    connect(ui->choose_priority, &QComboBox::currentIndexChanged, [=](){emit reorder();});
+    connect(ui->choose_priority, &QComboBox::currentIndexChanged, [=](){
+        this->choosePrio=ui->choose_priority->currentIndex();
+        emit reorder();
+    });
 
     // connect(createTaskPage, &create_task_window::done_creation, [=](){emit reorder();});
     // connect(taskInfoPage, &task_info_window::done_modification, [=](){emit reorder();});
@@ -137,6 +150,11 @@ MainWindow::~MainWindow()
     delete currentAccount;
     delete createTaskPage;
     delete taskInfoPage;
+    for(Task *task:taskOrder){
+        delete task;
+    }
+    delete contentWidget;
+    delete layout;
     delete ui;
 }
 
@@ -169,8 +187,8 @@ void MainWindow::showButton(){
 }
 
 void MainWindow::removeButton(){
-    while(layout->count()){
-        auto item=layout->takeAt(0);
+    for(Task *task:taskOrder){
+        layout->removeWidget(task->get_taskButton());
     }
 }
 
