@@ -4,7 +4,6 @@
 #include "delete_confirm_dialog.h"
 #include "time_conflict_dialog.h"
 
-extern MainWindow *mainPage;
 extern Account *currentAccount;
 
 task_info_window::task_info_window(Task *task, QWidget *parent)
@@ -139,6 +138,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
                 emit done_modification();
 
+                MainWindow *mainPage=new MainWindow;
                 mainPage->show();
                 this->close();
             }
@@ -150,11 +150,13 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
         delConfDialog->show();
         this->close();
         connect(delConfDialog,&delete_confirm_dialog::doneDel,[=](){
+            MainWindow *mainPage=new MainWindow;
             mainPage->show();
         });
     });
 
     connect(ui->pushButton_return, &QPushButton::clicked, [=](){
+        MainWindow *mainPage=new MainWindow;
         mainPage->show();
         this->close();
     });

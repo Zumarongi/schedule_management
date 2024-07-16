@@ -17,6 +17,10 @@ MainWindow::MainWindow(QWidget *parent)
     remindThread * arrving_remind=new remindThread;
     arrving_remind->start();
 
+    connect(arrving_remind,&QThread::started,[=](){
+        qDebug()<<"startremind";
+    });
+
     layout = new QVBoxLayout;
 
     QHBoxLayout *hLayout = new QHBoxLayout;

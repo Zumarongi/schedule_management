@@ -5,7 +5,6 @@
 #include "mainwindow.h"
 
 extern Account *currentAccount;
-extern MainWindow *mainPage;
 
 create_task_window::create_task_window(QWidget *parent)
     : QWidget(parent)
@@ -84,20 +83,8 @@ create_task_window::create_task_window(QWidget *parent)
             {
                 time_conflict_dialog *timeConfDialog = new time_conflict_dialog(this);
                 timeConfDialog->show();
-                connect(timeConfDialog, &time_conflict_dialog::forcedSave,[=](){
-                    qDebug() << "ready to create task";
-                    Task *new_task = new Task(new_taskName, new_stTime, new_edTime, new_rmTime, new_taskLoc, new_taskPrio, new_taskCtg, new_taskNote);
-                    currentAccount->addTask(new_task);
-
-                    std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(new_task->get_taskId()) + ".task";
-                    qDebug() << "In create_task_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
-                    new_task->saveToFile(task_path);
-
-                    // delete mainPage;
-                    // mainPage=new MainWindow;
-                    mainPage->show();
-                    this->close();
-                });
+                timeConfDialog->exec();
+                forceToSave=true;
                 // forceToSave 待解决
             }
             if (!timeConflicted || forceToSave)
@@ -108,8 +95,7 @@ create_task_window::create_task_window(QWidget *parent)
 
                 emit done_creation();
 
-                // delete mainPage;
-                // mainPage=new MainWindow;
+                MainWindow *mainPage=new MainWindow;
                 mainPage->show();
                 this->close();
             }
@@ -117,6 +103,7 @@ create_task_window::create_task_window(QWidget *parent)
     });
 
     connect(ui->pushButton_cancel, &QPushButton::clicked, [=](){
+        MainWindow *mainPage=new MainWindow;
         mainPage->show();
         this->close();
     });

@@ -6,7 +6,6 @@
 
 std::string encrypt(QString Qplaintext);
 
-MainWindow *mainPage;
 Account *currentAccount;
 
 sign_in_window::sign_in_window(QWidget *parent)
