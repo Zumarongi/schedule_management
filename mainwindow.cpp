@@ -34,6 +34,7 @@ void MainWindow::setupInitValues()
     ui->choose_priority->addItem("高");
     ui->choose_priority->setCurrentIndex(0);
 
+    //搜索框自动补全
     connect(ui->lineEdit_search,&QLineEdit::textChanged,this,&MainWindow::auto_complete);
 
     ui->auto_delete->setCheckable(true);
@@ -48,7 +49,7 @@ void MainWindow::setupInitValues()
             && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
             remindPage=new remindDialog(task);
             remindPage->show();
-            task->set_isReminded(true);
+            task->set_isReminded(true);                 //登录提醒
         }
     }
 }
@@ -104,16 +105,20 @@ void MainWindow::setupMainLayout()
         ui->max_dateTimeEdit->move(220, 80);
         hLayout->addWidget(ui->max_dateTimeEdit);
 
-        ui->choose_order->setFixedSize(120, 30);
+        ui->choose_order->setFixedSize(100, 30);
         ui->choose_order->move(395, 80);
         hLayout->addWidget(ui->choose_order);
 
-        ui->choose_priority->setFixedSize(120, 30);
-        ui->choose_priority->move(520, 80);
+        ui->toggle_button->setFixedSize(20,30);
+        ui->toggle_button->move(500,80);
+        hLayout->addWidget(ui->toggle_button);
+
+        ui->choose_priority->setFixedSize(90, 30);
+        ui->choose_priority->move(525, 80);
         hLayout->addWidget(ui->choose_priority);
 
-        ui->choose_category->setFixedSize(120, 30);
-        ui->choose_category->move(645, 80);
+        ui->choose_category->setFixedSize(80, 30);
+        ui->choose_category->move(620, 80);
         hLayout->addWidget(ui->choose_category);
     }
     mainLayout->addLayout(hLayout);
@@ -161,12 +166,13 @@ void MainWindow::taskFiltering()
 void MainWindow::taskOrdering()
 {
     bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending;
-    switch (ui->choose_order->currentIndex())
-    {
-    case 0:
-        cmp = Task::stTime_ascending; break;
-    case 1:
-        cmp = Task::taskName_ascending; break;
+    if(ui->choose_order->currentIndex()==0){
+        if(isPosSeq) cmp = Task::stTime_ascending;
+        else cmp = Task::stTime_descending;
+    }
+    else{
+        if(isPosSeq) cmp = Task::taskName_ascending;
+        else cmp = Task::taskName_descending;
     }
     Task::sortTasks(taskOrder.begin(), taskOrder.end(), cmp);
 }
@@ -348,3 +354,10 @@ void MainWindow::create_remind_Page(Task *task){
     remindPage=new remindDialog(task);
     remindPage->show();
 }
+
+void MainWindow::on_toggle_button_clicked()
+{
+    isPosSeq=!isPosSeq;
+    emit reorder();
+}
+

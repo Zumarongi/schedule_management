@@ -32,6 +32,7 @@ private:
     int choosePrio;
     int chooseCtg;
     QStringList searched_tasks;
+    bool isPosSeq=true;
 
     QThread m_thread;
     remindDialog *remindPage = NULL;
@@ -63,6 +64,8 @@ private slots:
     void auto_complete();
 
     void create_remind_Page(Task *task);
+
+    void on_toggle_button_clicked();
 
 protected:
     void showEvent(QShowEvent *event);
