@@ -91,28 +91,21 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->setLayout(layout);
 
-    // ui->auto_delete->setFixedSize(100,20);
-    // ui->auto_delete->move(30,30);
-
-
-    //contentWidget = new QWidget;
-    // layout = new QVBoxLayout;                //记得调整间距
-    //ui->scrollArea->setLayout(layout);
-    // ui->scrollArea->setWidget(contentWidget);
-    // layout->setContentsMargins(35,5,35,5);
+    if(currentAccount->get_doneAndDel()){
+        del_done_task();
+    }
 
     taskOrder = currentAccount->get_taskList();
     showLayout();
 
-    {
-    if(currentAccount->get_doneAndDel()) del_done_task();
-
-    QStringList searched_tasks;
-    for (Task * task: currentAccount->get_taskList())
-        searched_tasks.append(task->get_taskName());
-    QCompleter *searchList=new QCompleter(searched_tasks,this);
-    searchList->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->lineEdit_search->setCompleter(searchList);
+    connect(ui->lineEdit_search,&QLineEdit::textChanged,[=](){
+        searched_tasks.clear();
+        for (Task * task: currentAccount->get_taskList())
+            searched_tasks.append(task->get_taskName());
+        QCompleter *searchList=new QCompleter(searched_tasks,this);
+        searchList->setCaseSensitivity(Qt::CaseInsensitive);
+        ui->lineEdit_search->setCompleter(searchList);
+    });
 
     choosePrio=0;
     chooseCtg=0;
@@ -198,12 +191,13 @@ MainWindow::MainWindow(QWidget *parent)
         if(ui->auto_delete->isChecked()){
             currentAccount->set_doneAndDel(true);
             del_done_task();
+            this->close();
+
         }
         else{
             currentAccount->set_doneAndDel(false);
         }
     });
-    }
 }
 
 MainWindow::~MainWindow()

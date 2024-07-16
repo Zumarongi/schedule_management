@@ -28,9 +28,13 @@ private:
     QDateTime maxTime,minTime;
     int choosePrio;
     int chooseCtg;
+    QStringList searched_tasks;
 
     void removeLayout();
     void showLayout();
+
+signals:
+    void reload();
 
 private slots:
     void on_search_button_clicked();
