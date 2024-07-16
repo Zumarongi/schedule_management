@@ -9,6 +9,8 @@ std::string encrypt(QString Qplaintext);
 extern MainWindow *mainPage;
 extern Account *currentAccount;
 
+extern void showWarning(QString text);
+
 sign_in_window::sign_in_window(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::sign_in_window)
@@ -51,28 +53,9 @@ sign_in_window::sign_in_window(QWidget *parent)
             this->close();
         }
         else{
-            if(userName.isEmpty()){
-                ui->empty_username_warning->show();
-                ui->notfind_username_warning->hide();
-            }
-            else if(!existName){
-                ui->notfind_username_warning->show();
-                ui->empty_username_warning->hide();
-            }
-            else{
-                if(passWord.isEmpty()){
-                    ui->empty_password_warning->show();
-                    ui->error_password_warning->hide();
-                    ui->notfind_username_warning->hide();
-                    ui->empty_username_warning->hide();
-                }
-                else{
-                    ui->error_password_warning->show();
-                    ui->empty_password_warning->hide();
-                    ui->notfind_username_warning->hide();
-                    ui->empty_username_warning->hide();
-                }
-            }
+            if(userName.isEmpty()) showWarning("用户名不能为空！");
+            else if(!existName) showWarning("用户名不存在！");
+            else showWarning("密码错误！");
         }
     });
     connect(ui->sign_up_button,&QPushButton::clicked,[=](){
