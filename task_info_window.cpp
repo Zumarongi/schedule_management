@@ -6,6 +6,7 @@
 
 extern MainWindow *mainPage;
 extern Account *currentAccount;
+extern task_info_window *taskInfoPage;
 
 task_info_window::task_info_window(Task *task, QWidget *parent)
     : QWidget(parent)
@@ -15,8 +16,6 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
     currentTask = task;
 
-    // ui->dateTimeEdit_stTime->setMinimumDateTime(QDateTime::currentDateTime());
-    // ui->dateTimeEdit_edTime->setMinimumDateTime(QDateTime::currentDateTime());
     ui->lineEdit_rmTime_h->setValidator(new QIntValidator(0, 23, this));
     ui->lineEdit_rmTime_m->setValidator(new QIntValidator(0, 59, this));
     ui->comboBox_taskPrio->setEditable(false);
@@ -36,47 +35,15 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
     ui->warning_edTimeTooEarly->hide();
     ui->warning_rmTimeTooEarly->hide();
 
-    ui->lineEdit_taskName->setReadOnly(true);
-    connect(ui->editButton_taskName, &QPushButton::clicked, [=](){
-        ui->lineEdit_taskName->setReadOnly(false);
-    });
-
-    ui->dateTimeEdit_stTime->setReadOnly(true);
-    connect(ui->editButton_stTime, &QPushButton::clicked, [=](){
-        ui->dateTimeEdit_stTime->setReadOnly(false);
-    });
-
-    ui->dateTimeEdit_edTime->setReadOnly(true);
-    connect(ui->editButton_edTime, &QPushButton::clicked, [=](){
-        ui->dateTimeEdit_edTime->setReadOnly(false);
-    });
-
-    ui->lineEdit_rmTime_h->setReadOnly(true);
-    ui->lineEdit_rmTime_m->setReadOnly(true);
-    connect(ui->editButton_rmTime, &QPushButton::clicked, [=](){
-        ui->lineEdit_rmTime_h->setReadOnly(false);
-        ui->lineEdit_rmTime_m->setReadOnly(false);
-    });
-
-    ui->lineEdit_taskLoc->setReadOnly(true);
-    connect(ui->editButton_taskLoc, &QPushButton::clicked, [=](){
-        ui->lineEdit_taskLoc->setReadOnly(false);
-    });
-
-    ui->comboBox_taskPrio->setEnabled(false);
-    connect(ui->editButton_taskPrio, &QPushButton::clicked, [=](){
-        ui->comboBox_taskPrio->setEnabled(true);
-    });
-
-    ui->comboBox_taskCtg->setEnabled(false);
-    connect(ui->editButton_taskCtg, &QPushButton::clicked, [=](){
-        ui->comboBox_taskCtg->setEnabled(true);
-    });
-
-    ui->textEdit_taskNote->setReadOnly(true);
-    connect(ui->editButton_taskNote, &QPushButton::clicked, [=](){
-        ui->textEdit_taskNote->setReadOnly(false);
-    });
+    ui->lineEdit_taskName->setReadOnly(false);
+    ui->dateTimeEdit_stTime->setReadOnly(false);
+    ui->dateTimeEdit_edTime->setReadOnly(false);
+    ui->lineEdit_rmTime_h->setReadOnly(false);
+    ui->lineEdit_rmTime_m->setReadOnly(false);
+    ui->lineEdit_taskLoc->setReadOnly(false);
+    ui->comboBox_taskPrio->setEnabled(true);
+    ui->comboBox_taskCtg->setEnabled(true);
+    ui->textEdit_taskNote->setReadOnly(false);
 
     connect(ui->pushButton_saveChanges, &QPushButton::clicked, [=](){
         QString new_taskName = ui->lineEdit_taskName->text();
@@ -108,7 +75,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
         {
             bool timeConflicted = false;
             for (auto task: currentAccount->get_taskList())
-                if (task != currentTask)
+                if (task->get_taskId() != currentTask->get_taskId())
                     if ((new_stTime <= task->get_stTime() && task->get_stTime() <= new_edTime) || (new_stTime <= task->get_edTime() && task->get_edTime() <= new_edTime))
                     {
                         timeConflicted = true;
@@ -120,6 +87,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
                 time_conflict_dialog *timeConfDialog = new time_conflict_dialog(this);
                 timeConfDialog->show();
                 connect(timeConfDialog, &time_conflict_dialog::forcedSave, [&](){forceToSave = true;});
+                timeConfDialog->exec();
             }
             if (!timeConflicted || forceToSave)
             {
@@ -132,13 +100,14 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
                 task->set_taskCtg(new_taskCtg);
                 task->set_taskNote(new_taskNote);
 
-                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(currentTask->get_taskId()) + ".task";
-                qDebug() << "In task_info_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
-                task->saveToFile(task_path);
                 currentAccount->saveToFile();
+                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(currentTask->get_taskId()) + ".task";
+                // qDebug() << "In task_info_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
+                task->saveToFile(task_path);
 
                 emit done_modification();
 
+                mainPage=new MainWindow;
                 mainPage->show();
                 this->close();
             }
@@ -146,13 +115,17 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
     });
 
     connect(ui->pushButton_deleteTask, &QPushButton::clicked, [=](){
-        delete_confirm_dialog *delConfDialog = new delete_confirm_dialog(this);
+        delete_confirm_dialog *delConfDialog = new delete_confirm_dialog(currentTask);
         delConfDialog->show();
-        mainPage->show();
         this->close();
+        connect(delConfDialog,&delete_confirm_dialog::doneDel,[=](){
+            mainPage=new MainWindow;
+            mainPage->show();
+        });
     });
 
     connect(ui->pushButton_return, &QPushButton::clicked, [=](){
+        mainPage=new MainWindow;
         mainPage->show();
         this->close();
     });
@@ -160,6 +133,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
 task_info_window::~task_info_window()
 {
+    taskInfoPage = nullptr;
     delete ui;
 }
 

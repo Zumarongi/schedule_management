@@ -24,7 +24,7 @@ create_task_window::create_task_window(QWidget *parent)
     ui->dateTimeEdit_stTime->setDateTime(QDateTime::currentDateTime());
     ui->dateTimeEdit_edTime->setDateTime(QDateTime::currentDateTime().addDuration(std::chrono::milliseconds(3600000)));
     ui->lineEdit_rmTime_h->setText("0");
-    ui->lineEdit_rmTime_m->setText("30");
+    ui->lineEdit_rmTime_m->setText("0");
     ui->lineEdit_taskLoc->setText("");
     ui->comboBox_taskPrio->setCurrentText("低");
     ui->comboBox_taskCtg->setCurrentText("其他");
@@ -85,7 +85,7 @@ create_task_window::create_task_window(QWidget *parent)
                 time_conflict_dialog *timeConfDialog = new time_conflict_dialog(this);
                 timeConfDialog->show();
                 connect(timeConfDialog, &time_conflict_dialog::forcedSave, [&](){forceToSave = true;});
-                // forceToSave 待解决
+                timeConfDialog->exec();
             }
             if (!timeConflicted || forceToSave)
             {
@@ -93,12 +93,9 @@ create_task_window::create_task_window(QWidget *parent)
                 Task *new_task = new Task(new_taskName, new_stTime, new_edTime, new_rmTime, new_taskLoc, new_taskPrio, new_taskCtg, new_taskNote);
                 currentAccount->addTask(new_task);
 
-                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(new_task->get_taskId()) + ".task";
-                qDebug() << "In create_task_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
-                new_task->saveToFile(task_path);
-
                 emit done_creation();
 
+                mainPage=new MainWindow;
                 mainPage->show();
                 this->close();
             }
@@ -106,6 +103,7 @@ create_task_window::create_task_window(QWidget *parent)
     });
 
     connect(ui->pushButton_cancel, &QPushButton::clicked, [=](){
+        mainPage=new MainWindow;
         mainPage->show();
         this->close();
     });

@@ -4,12 +4,9 @@
 #include <QMainWindow>
 #include "account.h"
 #include <QCompleter>
-#include "task_info_window.h"
 #include <QVBoxLayout>
 #include <vector>
-#include "create_task_window.h"
 #include <QDebug>
-#include "remindthread.h"
 
 extern Account *currentAccount;
 
@@ -23,10 +20,45 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
+private:
+    Ui::MainWindow *ui;
+    QVBoxLayout *mainLayout, *scrollLayout;
+    QWidget *contentWidget;
+    std::vector<Task *> taskOrder;
+    QDateTime maxTime,minTime;
+    int choosePrio;
+    int chooseCtg;
+
+    void setupInitValues();
+    void setupMainLayout();
+    void setupRemindThread();
+
+    void taskFiltering();
+    void taskOrdering();
+
+    void removeTaskButton();
+    void setupTaskButton();
+
+private slots:
+    void on_search_button_clicked();
+    void on_add_task_button_clicked();
+    void on_min_dateTimeEdit_dateTimeChanged(const QDateTime &dateTime);
+    void on_max_dateTimeEdit_dateTimeChanged(const QDateTime &dateTime);
+    void on_choose_order_currentIndexChanged(int index);
+    void on_choose_priority_currentIndexChanged(int index);
+    void on_choose_category_currentIndexChanged(int index);
+
+    void on_auto_delete_stateChanged(int arg1);
+
+    void on_lineEdit_search_textChanged(const QString &arg1);
+
+protected:
+    void showEvent(QShowEvent *event);
+    void closeEvent(QCloseEvent *event);
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void auto_complete();
     void showButton();
     void removeButton();
     void del_done_task();
@@ -39,25 +71,6 @@ public:
 
 signals:
     void reorder();
-
-protected:
-    void showEvent(QShowEvent *event);
-
-private slots:
-    void on_search_button_clicked();
-    void on_add_task_button_clicked();
-
-private:
-    Ui::MainWindow *ui;
-    QWidget *contentWidget;
-    QVBoxLayout *layout;
-    std::vector<Task *> taskOrder;
-    QDateTime maxTime,minTime;
-    int choosePrio;
-    int chooseCtg;
-
-    void removeHLayout();
-    void showHLayout();
 };
 
 #endif // MAINWINDOW_H

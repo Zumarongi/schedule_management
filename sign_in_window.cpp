@@ -6,8 +6,8 @@
 
 std::string encrypt(QString Qplaintext);
 
-MainWindow *mainPage;
-Account *currentAccount;
+extern MainWindow *mainPage;
+extern Account *currentAccount;
 
 sign_in_window::sign_in_window(QWidget *parent)
     : QMainWindow(parent)
@@ -38,9 +38,6 @@ sign_in_window::sign_in_window(QWidget *parent)
                 qDebug() << "[File" << acc_path.string() << "opened to read.]";
                 std::string s, encryptedPass;
                 fin >> s >> encryptedPass;
-                qDebug() << "Input password :" << passWord;
-                qDebug() << "input-password encrypted :" << encrypt(passWord);
-                qDebug() << "saved-password encrypted :" << encryptedPass;
                 if (encryptedPass == encrypt(passWord))
                     samePassword = true;
                 fin.close();

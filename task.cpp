@@ -4,8 +4,8 @@
 #include <algorithm>
 #include <QDebug>
 
-std::map<int, std::string> Task::ctgIdxToStr = {{0, "学习"}, {1, "娱乐"}, {2, "生活"}, {3, "工作"}, {4, "运动"}, {5, "其他"}};
-std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 0}, {"娱乐", 1}, {"生活", 2}, {"工作", 3}, {"运动", 4}, {"其他", 5}};
+std::map<int, std::string> Task::ctgIdxToStr = {{1, "学习"}, {2, "娱乐"}, {3, "生活"}, {4, "工作"}, {5, "运动"}, {6, "其他"}};
+std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 1}, {"娱乐", 2}, {"生活", 3}, {"工作", 4}, {"运动", 5}, {"其他", 6}};
 
 int Task::IdCounter = 0;
 
@@ -38,19 +38,9 @@ Task::Task(int taskid,
     taskPrio = taskprio;
     taskCtg = taskctg;
     taskNote = tasknote;
-
-    taskButton=new QPushButton;
-    taskButton->setFixedSize(700,40);
-    taskButton->setText(taskname);
-    taskButton->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;}");
-    taskButton->setText(taskname);
-    //改变颜色
 }
 
-Task::~Task()
-{
-    delete taskButton;
-}
+Task::~Task() {}
 
 bool Task::saveToFile(std::filesystem::path task_path) const
 {
@@ -68,7 +58,7 @@ bool Task::saveToFile(std::filesystem::path task_path) const
     fout << edTime.toString().toStdString() << std::endl;
     fout << rmTime.toString().toStdString() << std::endl;
     fout << taskLoc.toStdString() << std::endl;
-    fout << taskPrio << std::endl;
+    fout << (int)taskPrio << std::endl;
     fout << taskCtg << std::endl;
     fout << taskNote.toStdString() << std::endl;
     fout.close();
@@ -123,8 +113,6 @@ int Task::get_taskCtg() const { return taskCtg; }
 
 QString Task::get_taskNote() const { return taskNote; }
 
-QPushButton * Task::get_taskButton() const {return taskButton;}
-
 void Task::set_taskName(QString new_taskName) { taskName = new_taskName; }
 
 void Task::set_stTime(QDateTime new_stTime) { stTime = new_stTime; }
@@ -143,32 +131,32 @@ void Task::set_taskNote(QString new_taskNote) { taskNote = new_taskNote; }
 
 TaskPriority toTaskPriority(QString qTaskPrio)
 {
-    if (qTaskPrio == "LOW") return LOW;
-    if (qTaskPrio == "MID") return MID;
-    if (qTaskPrio == "HIGH") return HIGH;
+    if (qTaskPrio == "低" || qTaskPrio == "LOW" || qTaskPrio == "1") return LOW;
+    if (qTaskPrio == "中" || qTaskPrio == "MID" || qTaskPrio == "2") return MID;
+    if (qTaskPrio == "高" || qTaskPrio == "HIGH" || qTaskPrio == "3") return HIGH;
     return LOW;
 }
 
 TaskPriority toTaskPriority(std::string sTaskPrio)
 {
-    if (sTaskPrio == "LOW") return LOW;
-    if (sTaskPrio == "MID") return MID;
-    if (sTaskPrio == "HIGH") return HIGH;
+    if (sTaskPrio == "低" || sTaskPrio == "LOW" || sTaskPrio == "1") return LOW;
+    if (sTaskPrio == "中" || sTaskPrio == "MID" || sTaskPrio == "2") return MID;
+    if (sTaskPrio == "高" || sTaskPrio == "HIGH" || sTaskPrio == "3") return HIGH;
     return LOW;
 }
 
 QString toQString(TaskPriority taskPrio)
 {
-    if (taskPrio == LOW) return "LOW";
-    if (taskPrio == MID) return "MID";
-    if (taskPrio == HIGH) return "HIGH";
-    return "LOW";
+    if (taskPrio == LOW) return "低";
+    if (taskPrio == MID) return "中";
+    if (taskPrio == HIGH) return "高";
+    return "低";
 }
 
 std::string toString(TaskPriority taskPrio)
 {
-    if (taskPrio == LOW) return "LOW";
-    if (taskPrio == MID) return "MID";
-    if (taskPrio == HIGH) return "HIGH";
-    return "LOW";
+    if (taskPrio == LOW) return "低";
+    if (taskPrio == MID) return "中";
+    if (taskPrio == HIGH) return "高";
+    return "低";
 }

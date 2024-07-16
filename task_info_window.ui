@@ -62,19 +62,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="editButton_taskName">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>30</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
-   </property>
-  </widget>
   <widget class="QDateTimeEdit" name="dateTimeEdit_stTime">
    <property name="geometry">
     <rect>
@@ -96,19 +83,6 @@
    </property>
    <property name="text">
     <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="editButton_taskLoc">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>110</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_taskPrio">
@@ -219,19 +193,6 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;分钟 前&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="editButton_rmTime">
-   <property name="geometry">
-    <rect>
-     <x>215</x>
-     <y>150</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_taskNote">
    <property name="geometry">
     <rect>
@@ -253,19 +214,6 @@
      <width>194</width>
      <height>60</height>
     </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="editButton_taskNote">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>230</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox_taskPrio">
@@ -370,58 +318,6 @@
    </property>
    <property name="text">
     <string>返回</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="editButton_stTime">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>70</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="editButton_edTime">
-   <property name="geometry">
-    <rect>
-     <x>560</x>
-     <y>70</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="editButton_taskCtg">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>110</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="editButton_taskPrio">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>30</y>
-     <width>22</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Edit</string>
    </property>
   </widget>
   <widget class="QLabel" name="warning_taskNameEmpty">

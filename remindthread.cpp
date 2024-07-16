@@ -1,15 +1,25 @@
 #include "remindthread.h"
+#include <QDebug>
+
+QMutex remindThread::mutex;
 
 remindThread::remindThread(QObject *parent)
     : QThread{parent}
 {}
 
 void remindThread::run(){
-    QTimer *timer= new QTimer ();
-    timer->setInterval(1000);
+    timer= new QTimer (this);
+    timer->start(1000);
     connect(timer,&QTimer::timeout,[=](){
-        for (auto task: currentAccount->get_taskList())
-            if (task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
-                remindDialog *remindPage = new remindDialog(task);
+        qDebug()<<"timeout";
+        mutex.lock();
+        auto taskList = currentAccount->get_taskList();
+        mutex.unlock();
+        for (auto task: taskList)
+            if (task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay()){
+                remindPage = new remindDialog(task);
+                remindPage->exec();
+                delete remindPage;
+            }
     });
 }

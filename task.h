@@ -8,7 +8,7 @@
 #include <QPushButton>
 #include <QDateTime>
 
-enum TaskPriority { LOW = 0, MID, HIGH };
+enum TaskPriority { LOW = 1, MID, HIGH };
 
 TaskPriority toTaskPriority(QString qTaskPrio);
 TaskPriority toTaskPriority(std::string sTaskPrio);
@@ -30,7 +30,6 @@ class Task
     TaskPriority taskPrio;          // priority
     int taskCtg;                    // catagory
     QString taskNote;
-    QPushButton *taskButton;
 
 public:
     Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
@@ -69,7 +68,6 @@ public:
     TaskPriority get_taskPrio() const;
     int get_taskCtg() const;
     QString get_taskNote() const;
-    QPushButton *get_taskButton() const;
 
     void set_taskName(QString new_taskName);
     void set_stTime(QDateTime new_stTime);
