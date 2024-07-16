@@ -40,10 +40,7 @@ Task::Task(int taskid,
     taskNote = tasknote;
 }
 
-Task::~Task()
-{
-    delete taskButton;
-}
+Task::~Task() {}
 
 bool Task::saveToFile(std::filesystem::path task_path) const
 {
@@ -61,7 +58,7 @@ bool Task::saveToFile(std::filesystem::path task_path) const
     fout << edTime.toString().toStdString() << std::endl;
     fout << rmTime.toString().toStdString() << std::endl;
     fout << taskLoc.toStdString() << std::endl;
-    fout << taskPrio << std::endl;
+    fout << (int)taskPrio << std::endl;
     fout << taskCtg << std::endl;
     fout << taskNote.toStdString() << std::endl;
     fout.close();
@@ -134,17 +131,17 @@ void Task::set_taskNote(QString new_taskNote) { taskNote = new_taskNote; }
 
 TaskPriority toTaskPriority(QString qTaskPrio)
 {
-    if (qTaskPrio == "低" || qTaskPrio == "LOW") return LOW;
-    if (qTaskPrio == "中" || qTaskPrio == "MID") return MID;
-    if (qTaskPrio == "高" || qTaskPrio == "HIGH") return HIGH;
+    if (qTaskPrio == "低" || qTaskPrio == "LOW" || qTaskPrio == "1") return LOW;
+    if (qTaskPrio == "中" || qTaskPrio == "MID" || qTaskPrio == "2") return MID;
+    if (qTaskPrio == "高" || qTaskPrio == "HIGH" || qTaskPrio == "3") return HIGH;
     return LOW;
 }
 
 TaskPriority toTaskPriority(std::string sTaskPrio)
 {
-    if (sTaskPrio == "低" || sTaskPrio == "LOW") return LOW;
-    if (sTaskPrio == "中" || sTaskPrio == "MID") return MID;
-    if (sTaskPrio == "高" || sTaskPrio == "HIGH") return HIGH;
+    if (sTaskPrio == "低" || sTaskPrio == "LOW" || sTaskPrio == "1") return LOW;
+    if (sTaskPrio == "中" || sTaskPrio == "MID" || sTaskPrio == "2") return MID;
+    if (sTaskPrio == "高" || sTaskPrio == "HIGH" || sTaskPrio == "3") return HIGH;
     return LOW;
 }
 

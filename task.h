@@ -32,8 +32,6 @@ class Task
     QString taskNote;
 
 public:
-    QPushButton *taskButton;
-
     Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
          QString taskloc, TaskPriority taskprio, int taskctg,
          QString tasknote);         // new task

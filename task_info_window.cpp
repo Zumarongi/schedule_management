@@ -6,6 +6,7 @@
 
 extern MainWindow *mainPage;
 extern Account *currentAccount;
+extern task_info_window *taskInfoPage;
 
 task_info_window::task_info_window(Task *task, QWidget *parent)
     : QWidget(parent)
@@ -162,6 +163,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 
 task_info_window::~task_info_window()
 {
+    taskInfoPage = nullptr;
     delete ui;
 }
 

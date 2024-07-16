@@ -6,8 +6,8 @@
 
 std::string encrypt(QString Qplaintext);
 
-MainWindow *mainPage;
-Account *currentAccount;
+extern MainWindow *mainPage;
+extern Account *currentAccount;
 
 sign_in_window::sign_in_window(QWidget *parent)
     : QMainWindow(parent)

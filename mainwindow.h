@@ -22,19 +22,31 @@ class MainWindow : public QMainWindow
 
 private:
     Ui::MainWindow *ui;
+    QVBoxLayout *mainLayout, *scrollLayout;
     QWidget *contentWidget;
-    QVBoxLayout *layout, *scrollLayout;
     std::vector<Task *> taskOrder;
     QDateTime maxTime,minTime;
     int choosePrio;
     int chooseCtg;
 
-    void removeLayout();
-    void showLayout();
+    void setupInitValues();
+    void setupMainLayout();
+    void setupRemindThread();
+
+    void taskFiltering();
+    void taskOrdering();
+
+    void removeTaskButton();
+    void setupTaskButton();
 
 private slots:
     void on_search_button_clicked();
     void on_add_task_button_clicked();
+    void on_min_dateTimeEdit_dateTimeChanged(const QDateTime &dateTime);
+    void on_max_dateTimeEdit_dateTimeChanged(const QDateTime &dateTime);
+    void on_choose_order_currentIndexChanged(int index);
+    void on_choose_priority_currentIndexChanged(int index);
+    void on_choose_category_currentIndexChanged(int index);
 
 protected:
     void showEvent(QShowEvent *event);
