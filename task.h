@@ -39,7 +39,7 @@ public:
     Task(int taskId,
          QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
          QString taskloc, TaskPriority taskprio, int taskctg,
-         QString tasknote);         // build from file
+         QString tasknote, bool isreminded);         // build from file
     ~Task();
     bool saveToFile(std::filesystem::path task_path) const;
     void printInfo() const;

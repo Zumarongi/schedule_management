@@ -13,8 +13,6 @@ create_task_window::create_task_window(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // ui->dateTimeEdit_stTime->setMinimumDateTime(QDateTime::currentDateTime());
-    // ui->dateTimeEdit_edTime->setMinimumDateTime(QDateTime::currentDateTime());
     ui->lineEdit_rmTime_h->setValidator(new QIntValidator(0, 23, this));
     ui->lineEdit_rmTime_m->setValidator(new QIntValidator(0, 59, this));
     ui->comboBox_taskPrio->setEditable(false);

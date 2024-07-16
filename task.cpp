@@ -28,7 +28,7 @@ Task::Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time
 Task::Task(int taskid,
            QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
            QString taskloc, TaskPriority taskprio, int taskctg,
-           QString tasknote)
+           QString tasknote, bool isreminded)
 {
     taskId = taskid;
     taskName = taskname;
@@ -39,7 +39,7 @@ Task::Task(int taskid,
     taskPrio = taskprio;
     taskCtg = taskctg;
     taskNote = tasknote;
-    isReminded = false;
+    isReminded = isreminded;
 }
 
 Task::~Task() {}
@@ -63,6 +63,7 @@ bool Task::saveToFile(std::filesystem::path task_path) const
     fout << (int)taskPrio << std::endl;
     fout << taskCtg << std::endl;
     fout << taskNote.toStdString() << std::endl;
+    fout << (int)isReminded <<std::endl;
     fout.close();
     qDebug() << "[File" << task_path.string() << "closed.]";
     return true;

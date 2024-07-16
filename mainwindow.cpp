@@ -39,8 +39,18 @@ void MainWindow::setupInitValues()
     ui->auto_delete->setCheckable(true);
     qDebug() << "In mainwindow: setting auto_delete CheckBox:" << currentAccount->get_doneAndDel();
     ui->auto_delete->setChecked(currentAccount->get_doneAndDel());
-    if(currentAccount->get_doneAndDel())
+
+    if(currentAccount->get_doneAndDel())                //自动删除
         del_done_task();
+
+    for (auto task: currentAccount->get_taskList()){
+        if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
+            && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
+            remindPage=new remindDialog(task);
+            remindPage->show();
+            task->set_isReminded(true);
+        }
+    }
 }
 
 void MainWindow::setupMainLayout()

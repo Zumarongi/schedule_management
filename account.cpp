@@ -59,10 +59,13 @@ Task *Account::readTask(std::filesystem::path task_path)
     getline(fin, s);
     QString taskNote = QString::fromStdString(s);
 
+    getline(fin, s);
+    bool isReminded = s != "0";
+
     fin.close();
     qDebug() << "[File" << task_path.string() << "opened.]";
 
-    return new Task(taskId, taskName, stTime, edTime, rmTime, taskLoc, taskPrio, taskCtg, taskNote);
+    return new Task(taskId, taskName, stTime, edTime, rmTime, taskLoc, taskPrio, taskCtg, taskNote, isReminded);
 }
 
 Account::Account(QString username)
