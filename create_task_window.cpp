@@ -95,6 +95,7 @@ create_task_window::create_task_window(QWidget *parent)
 
                 emit done_creation();
 
+                mainPage=new MainWindow;
                 mainPage->show();
                 this->close();
             }
@@ -102,6 +103,7 @@ create_task_window::create_task_window(QWidget *parent)
     });
 
     connect(ui->pushButton_cancel, &QPushButton::clicked, [=](){
+        mainPage=new MainWindow;
         mainPage->show();
         this->close();
     });

@@ -13,6 +13,7 @@ class sign_in_window;
 class sign_in_window : public QMainWindow
 {
     Q_OBJECT
+    MainWindow *mainPage;
 
 public:
     explicit sign_in_window(QWidget *parent = nullptr);

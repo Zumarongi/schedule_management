@@ -81,7 +81,9 @@ Account::Account(QString username)
     userName = username;
     std::getline(fin, s);
     encryptedPass = s;
-    qDebug() << "Read encryptedPass =" << encryptedPass;
+    std::getline(fin, s);
+    doneAndDel = s != "0";
+    qDebug() << "Reading from file doneAndDel =" << doneAndDel;
     taskList.clear();
     while (std::getline(fin, s))
     {
@@ -93,8 +95,6 @@ Account::Account(QString username)
     Task::sortTasks(taskList.begin(), taskList.end(), Task::stTime_ascending);
     fin.close();
     qDebug() << "[File" << accfile_path.string() << "closed.]";
-    showHelp=false;
-    doneAndDel=false;
 }
 
 Account::Account(QString getUserName, QString getPassWord) {
@@ -189,6 +189,8 @@ void Account::saveToFile() const
     qDebug() << "[File" << acc_path.string() << "opened to write.]";
     fout << userName.toStdString() << std::endl;
     fout << encryptedPass << std::endl;
+    fout << (int)doneAndDel << std::endl;
+    qDebug() << "Saving to file doneAndDel =" << doneAndDel;
     for (int i = 0; i < taskList.size(); i ++)
         fout << taskList[i]->get_taskId() << std::endl;
     fout.close();
@@ -199,7 +201,7 @@ void Account::addTask(Task *taskToAdd)
 {
     taskList.push_back(taskToAdd);
 
-    std::filesystem::path task_path = ROOTDIR + "/data/" + this->userName.toStdString() + "/" + std::to_string(taskToAdd->get_taskId()) + ".task";
+    std::filesystem::path task_path = ROOTDIR + "/data/" + userName.toStdString() + "/" + std::to_string(taskToAdd->get_taskId()) + ".task";
     taskToAdd->saveToFile(task_path);
 
     saveToFile();
@@ -208,7 +210,7 @@ void Account::addTask(Task *taskToAdd)
 void Account::delTask(Task *taskToDel)
 {
     for (auto p = taskList.begin(); p != taskList.end(); p ++)
-        if (taskToDel == *p)
+        if (taskToDel->get_taskId() == (*p)->get_taskId())
         {
             taskList.erase(p);
 

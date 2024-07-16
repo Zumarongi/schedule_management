@@ -41,6 +41,12 @@ void MainWindow::setupInitValues()
     QCompleter *searchList=new QCompleter(searched_tasks,this);
     searchList->setCaseSensitivity(Qt::CaseInsensitive);
     ui->lineEdit_search->setCompleter(searchList);
+
+    ui->auto_delete->setCheckable(true);
+    qDebug() << "In mainwindow: setting auto_delete CheckBox:" << currentAccount->get_doneAndDel();
+    ui->auto_delete->setChecked(currentAccount->get_doneAndDel());
+    if(currentAccount->get_doneAndDel())
+        del_done_task();
 }
 
 void MainWindow::setupMainLayout()
@@ -129,16 +135,17 @@ void MainWindow::setupRemindThread()
 
 void MainWindow::taskFiltering()
 {
-    currentAccount->printTask();
-    qDebug() << minTime;
-    qDebug() << maxTime;
-    qDebug() << choosePrio;
-    qDebug() << chooseCtg;
+    // currentAccount->printTask();
+    // qDebug() << minTime;
+    // qDebug() << maxTime;
+    // qDebug() << choosePrio;
+    // qDebug() << chooseCtg;
     taskOrder.clear();
     for (auto task: currentAccount->get_taskList())
     {
-        qDebug() << task->get_taskId() << "\t" << task->get_taskName() << "\t" << task->get_stTime() << "\t" << task->get_edTime() << "\t" << task->get_taskPrio() << "\t" << task->get_taskCtg();
-        if ((task->get_stTime() >= minTime && task->get_stTime() <= maxTime) && (task->get_taskCtg() == chooseCtg || chooseCtg == 0) && (task->get_taskPrio() == choosePrio || choosePrio == 0))
+        // qDebug() << task->get_taskId() << "\t" << task->get_taskName() << "\t" << task->get_stTime() << "\t" << task->get_edTime() << "\t" << task->get_taskPrio() << "\t" << task->get_taskCtg();
+        if ((task->get_stTime() >= minTime && task->get_stTime() <= maxTime) && (task->get_taskCtg() == chooseCtg || chooseCtg == 0) && (task->get_taskPrio() == choosePrio || choosePrio == 0)
+            && task->get_taskName().startsWith(ui->lineEdit_search->text()))
             taskOrder.push_back(task);
     }
 }
@@ -186,7 +193,6 @@ void MainWindow::removeTaskButton()
             widget->deleteLater();
         delete item;
     }
-    ui->scrollArea->setLayout(nullptr);
     delete scrollLayout;
 }
 
@@ -206,23 +212,11 @@ MainWindow::MainWindow(QWidget *parent)
         taskFiltering(), taskOrdering();
         setupTaskButton();
     });
-
-    if(currentAccount->get_doneAndDel())
-        del_done_task();
-
-    connect(ui->auto_delete,&QCheckBox::stateChanged,[=](){
-        if(ui->auto_delete->isChecked()){
-            currentAccount->set_doneAndDel(true);
-            del_done_task();
-        }
-        else{
-            currentAccount->set_doneAndDel(false);
-        }
-    });
 }
 
 MainWindow::~MainWindow()
 {
+    currentAccount->saveToFile();
     Account::saveAccountList();
     delete ui->lineEdit_search->completer();
     delete mainLayout;
@@ -236,6 +230,7 @@ void MainWindow::del_done_task(){
             currentAccount->delTask(task);
         }
     }
+    emit reorder();
 }
 
 QDateTime MainWindow::get_minTime() const { return minTime; }
@@ -253,6 +248,7 @@ void MainWindow::showEvent(QShowEvent *event)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    currentAccount->saveToFile();
     Account::saveAccountList();
 }
 
@@ -308,6 +304,18 @@ void MainWindow::on_choose_priority_currentIndexChanged(int index)
 void MainWindow::on_choose_category_currentIndexChanged(int index)
 {
     chooseCtg = index;
+    emit reorder();
+}
+
+void MainWindow::on_auto_delete_stateChanged(int arg1)
+{
+    currentAccount->set_doneAndDel(ui->auto_delete->isChecked());
+    if (ui->auto_delete->isChecked())
+        del_done_task();
+}
+
+void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
+{
     emit reorder();
 }
 

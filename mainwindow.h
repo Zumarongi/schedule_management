@@ -48,6 +48,10 @@ private slots:
     void on_choose_priority_currentIndexChanged(int index);
     void on_choose_category_currentIndexChanged(int index);
 
+    void on_auto_delete_stateChanged(int arg1);
+
+    void on_lineEdit_search_textChanged(const QString &arg1);
+
 protected:
     void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);

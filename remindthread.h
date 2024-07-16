@@ -13,6 +13,8 @@ extern Account *currentAccount;
 class remindThread : public QThread
 {
     Q_OBJECT
+    QTimer *timer;
+    remindDialog *remindPage;
 
     static QMutex mutex;
 

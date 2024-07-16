@@ -16,7 +16,5 @@ int main(int argc, char *argv[])
     sign_in_window w;
     w.show();
     int ret = a.exec();
-    delete currentAccount;
-    delete mainPage;
     return ret;
 }

@@ -75,7 +75,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
         {
             bool timeConflicted = false;
             for (auto task: currentAccount->get_taskList())
-                if (task != currentTask)
+                if (task->get_taskId() != currentTask->get_taskId())
                     if ((new_stTime <= task->get_stTime() && task->get_stTime() <= new_edTime) || (new_stTime <= task->get_edTime() && task->get_edTime() <= new_edTime))
                     {
                         timeConflicted = true;
@@ -101,9 +101,13 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
                 task->set_taskNote(new_taskNote);
 
                 currentAccount->saveToFile();
+                std::filesystem::path task_path = ROOTDIR + "/data/" + currentAccount->get_userName().toStdString() + "/" + std::to_string(currentTask->get_taskId()) + ".task";
+                // qDebug() << "In task_info_window: calling Task::saveToFile(task_path), task_path =" << task_path.string();
+                task->saveToFile(task_path);
 
                 emit done_modification();
 
+                mainPage=new MainWindow;
                 mainPage->show();
                 this->close();
             }
@@ -115,11 +119,13 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
         delConfDialog->show();
         this->close();
         connect(delConfDialog,&delete_confirm_dialog::doneDel,[=](){
+            mainPage=new MainWindow;
             mainPage->show();
         });
     });
 
     connect(ui->pushButton_return, &QPushButton::clicked, [=](){
+        mainPage=new MainWindow;
         mainPage->show();
         this->close();
     });
