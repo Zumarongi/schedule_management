@@ -10,19 +10,26 @@
 
 extern Account *currentAccount;
 
-class remindThread : public QThread
+class remindThread : public QObject
 {
     Q_OBJECT
-    QTimer *timer;
+    QTimer *timer=NULL;
     remindDialog *remindPage;
 
     static QMutex mutex;
 
 public:
     explicit remindThread(QObject *parent = nullptr);
+    ~remindThread();
 
-protected:
-    void run() override;
+signals:
+    void showRemind(Task *task);
+    void reorder();
+
+public slots:
+    void onCreateTimer();
+    void onTimeout();
+
 
 };
 

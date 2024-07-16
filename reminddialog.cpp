@@ -12,7 +12,7 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
     std::chrono::seconds sec = std::chrono::duration_cast<std::chrono::seconds>(lastTime);
     std::chrono::minutes min = std::chrono::duration_cast<std::chrono::minutes>(sec);
     sec-=min;
-    std::string convertTime=std::to_string(min.count()+'.'+sec.count());
+    std::string convertTime=std::to_string(min.count())+"分"+std::to_string(sec.count())+"秒";
     ui->TaskTime->setText(QString::fromStdString(convertTime));
     ui->comboBox->addItem("不提醒");
     if(sec>std::chrono::seconds(60)){
@@ -52,4 +52,5 @@ remindDialog::~remindDialog()
 
 void remindDialog::on_task_info_button_clicked(){
     task_info_window *infoPage=new task_info_window(currenTask);
+    infoPage->show();
 }

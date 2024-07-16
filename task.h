@@ -30,6 +30,7 @@ class Task
     TaskPriority taskPrio;          // priority
     int taskCtg;                    // catagory
     QString taskNote;
+    bool isReminded;
 
 public:
     Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
@@ -68,6 +69,7 @@ public:
     TaskPriority get_taskPrio() const;
     int get_taskCtg() const;
     QString get_taskNote() const;
+    bool get_isReminded() const;
 
     void set_taskName(QString new_taskName);
     void set_stTime(QDateTime new_stTime);
@@ -77,6 +79,7 @@ public:
     void set_taskPrio(TaskPriority new_taskPrio);
     void set_taskCtg(int new_taskCtg);
     void set_taskNote(QString new_taskNote);
+    void set_isReminded(bool new_isReminded);
 };
 
 #endif // TASK_H

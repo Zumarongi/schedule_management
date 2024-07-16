@@ -2,7 +2,6 @@
 #include "./ui_mainwindow.h"
 #include "create_task_window.h"
 #include "task_info_window.h"
-#include "remindthread.h"
 
 extern create_task_window *createTaskPage;
 extern task_info_window *taskInfoPage;
@@ -35,12 +34,7 @@ void MainWindow::setupInitValues()
     ui->choose_priority->addItem("高");
     ui->choose_priority->setCurrentIndex(0);
 
-    QStringList searched_tasks;
-    for (Task *task: currentAccount->get_taskList())
-        searched_tasks.append(task->get_taskName());
-    QCompleter *searchList=new QCompleter(searched_tasks,this);
-    searchList->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->lineEdit_search->setCompleter(searchList);
+    connect(ui->lineEdit_search,&QLineEdit::textChanged,this,&MainWindow::auto_complete);
 
     ui->auto_delete->setCheckable(true);
     qDebug() << "In mainwindow: setting auto_delete CheckBox:" << currentAccount->get_doneAndDel();
@@ -129,8 +123,12 @@ void MainWindow::setupMainLayout()
 
 void MainWindow::setupRemindThread()
 {
-    remindThread * arrving_remind=new remindThread;
-    arrving_remind->start();
+    arrving_remind=new remindThread();
+    arrving_remind->moveToThread(&m_thread);
+    connect(&m_thread,&QThread::started,arrving_remind,&remindThread::onCreateTimer);
+    connect(&m_thread,&QThread::finished,arrving_remind,&QObject::deleteLater);
+    m_thread.start();
+    connect(arrving_remind,&remindThread::showRemind,this,&MainWindow::create_remind_Page);
 }
 
 void MainWindow::taskFiltering()
@@ -202,12 +200,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setupRemindThread(); // 初始化提醒线程
     setupInitValues(); // 各变量以及显示值的初始化
     setupMainLayout(); // 设置页面布局
-    setupRemindThread(); // 初始化提醒线程
 
     // connect reorder信号
     connect(this, &MainWindow::reorder, [=](){
+        removeTaskButton();
+        taskFiltering(), taskOrdering();
+        setupTaskButton();
+    });
+
+    connect(arrving_remind, &remindThread::reorder, [=](){
         removeTaskButton();
         taskFiltering(), taskOrdering();
         setupTaskButton();
@@ -216,6 +220,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    m_thread.quit();
+    m_thread.wait();
     currentAccount->saveToFile();
     Account::saveAccountList();
     delete ui->lineEdit_search->completer();
@@ -319,3 +325,16 @@ void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
     emit reorder();
 }
 
+void MainWindow::auto_complete(){
+    searched_tasks.clear();
+    for (Task * task: currentAccount->get_taskList())
+        searched_tasks.append(task->get_taskName());
+    QCompleter *searchList=new QCompleter(searched_tasks,this);
+    searchList->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEdit_search->setCompleter(searchList);
+}
+
+void MainWindow::create_remind_Page(Task *task){
+    remindPage=new remindDialog(task);
+    remindPage->show();
+}

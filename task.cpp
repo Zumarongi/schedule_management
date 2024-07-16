@@ -22,6 +22,7 @@ Task::Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time
     taskPrio = taskprio;
     taskCtg = taskctg;
     taskNote = tasknote;
+    isReminded = false;
 }
 
 Task::Task(int taskid,
@@ -38,6 +39,7 @@ Task::Task(int taskid,
     taskPrio = taskprio;
     taskCtg = taskctg;
     taskNote = tasknote;
+    isReminded = false;
 }
 
 Task::~Task() {}
@@ -113,6 +115,8 @@ int Task::get_taskCtg() const { return taskCtg; }
 
 QString Task::get_taskNote() const { return taskNote; }
 
+bool Task::get_isReminded() const { return isReminded; }
+
 void Task::set_taskName(QString new_taskName) { taskName = new_taskName; }
 
 void Task::set_stTime(QDateTime new_stTime) { stTime = new_stTime; }
@@ -128,6 +132,8 @@ void Task::set_taskPrio(TaskPriority new_taskPrio) { taskPrio = new_taskPrio; }
 void Task::set_taskCtg(int new_taskCtg) { taskCtg = new_taskCtg; }
 
 void Task::set_taskNote(QString new_taskNote) { taskNote = new_taskNote; }
+
+void Task::set_isReminded(bool new_isReminded) { isReminded = new_isReminded; }
 
 TaskPriority toTaskPriority(QString qTaskPrio)
 {
