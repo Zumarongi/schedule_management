@@ -63,7 +63,7 @@ bool Task::saveToFile(std::filesystem::path task_path) const
     fout << (int)taskPrio << std::endl;
     fout << taskCtg << std::endl;
     fout << taskNote.toStdString() << std::endl;
-    fout << (int)isReminded <<std::endl;
+    fout << (int)isReminded << std::endl;
     fout.close();
     qDebug() << "[File" << task_path.string() << "closed.]";
     return true;

@@ -320,57 +320,6 @@
     <string>返回</string>
    </property>
   </widget>
-  <widget class="QLabel" name="warning_taskNameEmpty">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>50</y>
-     <width>113</width>
-     <height>14</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string> 任务名称不能为空！</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="warning_edTimeTooEarly">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>88</y>
-     <width>194</width>
-     <height>14</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string> 结束时间不能早于开始时间！</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="warning_rmTimeTooEarly">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>170</y>
-     <width>130</width>
-     <height>14</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string> 提醒时间不能早于现在！</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>

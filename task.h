@@ -42,7 +42,6 @@ public:
          QString tasknote, bool isreminded);         // build from file
     ~Task();
     bool saveToFile(std::filesystem::path task_path) const;
-    void printInfo() const;
 
     static int toCtgIndex(std::string ctgStr);
     static int toCtgIndex(QString ctgqStr);

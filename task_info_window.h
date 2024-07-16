@@ -2,6 +2,7 @@
 #define TASK_INFO_WINDOW_H
 
 #include "task.h"
+#include <QVBoxLayout>
 #include <QWidget>
 
 namespace Ui {
@@ -12,6 +13,9 @@ class task_info_window : public QWidget
 {
     Q_OBJECT
     Task *currentTask;
+
+    void setupInitValues();
+    void setupPageLayout();
 
 public:
     explicit task_info_window(Task *task, QWidget *parent = nullptr);
