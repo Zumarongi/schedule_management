@@ -28,7 +28,6 @@ void remindThread::onTimeout(){
         if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
             && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
             emit showRemind(task);
-            task->set_isReminded(true);
         }
         if(currentAccount->get_doneAndDel() && task->get_edTime()<QDateTime::currentDateTime()){
             currentAccount->delTask(task);

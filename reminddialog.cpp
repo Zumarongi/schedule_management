@@ -11,6 +11,8 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
 {
     ui->setupUi(this);
     ui->TaskName->setText(currenTask->get_taskName());
+    getTask->set_isReminded(true);
+    // save to file
     std::chrono::milliseconds lastTime=currenTask->get_stTime()-QDateTime::currentDateTime();
     std::chrono::seconds sec = std::chrono::duration_cast<std::chrono::seconds>(lastTime);
     std::chrono::minutes min = std::chrono::duration_cast<std::chrono::minutes>(sec);
