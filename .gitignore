@@ -1,8 +1,5 @@
-
-/build
 *.user
-/data
 /build
+/build/*
 /data
-/data
-data/.acclist
+/data/*

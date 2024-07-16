@@ -24,7 +24,7 @@ create_task_window::create_task_window(QWidget *parent)
     ui->dateTimeEdit_stTime->setDateTime(QDateTime::currentDateTime());
     ui->dateTimeEdit_edTime->setDateTime(QDateTime::currentDateTime().addDuration(std::chrono::milliseconds(3600000)));
     ui->lineEdit_rmTime_h->setText("0");
-    ui->lineEdit_rmTime_m->setText("30");
+    ui->lineEdit_rmTime_m->setText("0");
     ui->lineEdit_taskLoc->setText("");
     ui->comboBox_taskPrio->setCurrentText("低");
     ui->comboBox_taskCtg->setCurrentText("其他");
@@ -84,6 +84,7 @@ create_task_window::create_task_window(QWidget *parent)
             {
                 time_conflict_dialog *timeConfDialog = new time_conflict_dialog(this);
                 timeConfDialog->show();
+                connect(timeConfDialog, &time_conflict_dialog::forcedSave, [&](){forceToSave = true;});
                 timeConfDialog->exec();
             }
             if (!timeConflicted || forceToSave)
@@ -94,8 +95,6 @@ create_task_window::create_task_window(QWidget *parent)
 
                 emit done_creation();
 
-                // delete mainPage;
-                // mainPage=new MainWindow;
                 mainPage->show();
                 this->close();
             }

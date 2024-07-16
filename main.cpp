@@ -18,7 +18,5 @@ int main(int argc, char *argv[])
     int ret = a.exec();
     delete currentAccount;
     delete mainPage;
-    delete createTaskPage;
-    delete taskInfoPage;
     return ret;
 }

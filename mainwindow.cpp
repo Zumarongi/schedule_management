@@ -160,10 +160,10 @@ void MainWindow::setupTaskButton()
 {
     scrollLayout = new QVBoxLayout;
     scrollLayout->setContentsMargins(35, 5, 35, 5);
-    qDebug() << "showLayout(): printing taskOrder";
+    // qDebug() << "showLayout(): printing taskOrder";
     for (auto task: taskOrder)
     {
-        qDebug() << task->get_taskId() << "\t" << task->get_taskName();
+        // qDebug() << task->get_taskId() << "\t" << task->get_taskName();
         QPushButton *taskButton = new QPushButton(task->get_taskName(), this);
         taskButton->setFixedSize(700, 40);
         taskButton->setStyleSheet("QPushButton{border-radius:5px;background-color:#148AFF;}");
@@ -175,21 +175,18 @@ void MainWindow::setupTaskButton()
         scrollLayout->addWidget(taskButton);
     }
     ui->scrollArea->setLayout(scrollLayout);
-    mainLayout->addWidget(ui->scrollArea);
 }
 
 void MainWindow::removeTaskButton()
 {
-    QObjectList buttonList = scrollLayout->children();
-    for (int i = 0; i < buttonList.length(); i ++)
+    QLayoutItem *item;
+    while ((item = scrollLayout->takeAt(0)) != nullptr)
     {
-        QPushButton *taskButton = qobject_cast<QPushButton *>(buttonList.at(i));
-        taskButton->setParent(NULL);
-        scrollLayout->removeWidget(taskButton);
-        // scrollLayout->takeAt(0);
-        delete taskButton;
+        if (QWidget *widget = item->widget())
+            widget->deleteLater();
+        delete item;
     }
-    mainLayout->removeWidget(ui->scrollArea);
+    ui->scrollArea->setLayout(nullptr);
     delete scrollLayout;
 }
 
@@ -270,7 +267,6 @@ void MainWindow::on_search_button_clicked(){
             taskSearched=task;
         }
     if(findTask){
-        delete taskInfoPage;
         taskInfoPage = new task_info_window(taskSearched);
         this->close();
         taskInfoPage->show();

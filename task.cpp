@@ -147,16 +147,16 @@ TaskPriority toTaskPriority(std::string sTaskPrio)
 
 QString toQString(TaskPriority taskPrio)
 {
-    if (taskPrio == LOW) return "LOW";
-    if (taskPrio == MID) return "MID";
-    if (taskPrio == HIGH) return "HIGH";
-    return "LOW";
+    if (taskPrio == LOW) return "低";
+    if (taskPrio == MID) return "中";
+    if (taskPrio == HIGH) return "高";
+    return "低";
 }
 
 std::string toString(TaskPriority taskPrio)
 {
-    if (taskPrio == LOW) return "LOW";
-    if (taskPrio == MID) return "MID";
-    if (taskPrio == HIGH) return "HIGH";
-    return "LOW";
+    if (taskPrio == LOW) return "低";
+    if (taskPrio == MID) return "中";
+    if (taskPrio == HIGH) return "高";
+    return "低";
 }
