@@ -6,38 +6,49 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
+#define _FONT(s) QFont("Times New Roman", (s))
+#define FONT _FONT(10)
 
 extern void showWarning(QString text);
 
 void sign_up_window::setLayout(){
     this->setFixedSize(300,350);
+    this->setWindowTitle("注册");
 
     ui->username_label->move(30,73);
+    ui->username_label->setFont(FONT);
     ui->password_label->move(40,133);
+    ui->password_label->setFont(FONT);
     ui->confirm_label->setFixedSize(60,20);
     ui->confirm_label->move(15,190);
+    ui->confirm_label->setFont(FONT);
 
     QHBoxLayout *editLineLayout = new QHBoxLayout;
     ui->lineEdit_username->setFixedSize(180,40);
     ui->lineEdit_username->move(75,60);
+    ui->lineEdit_username->setFont(FONT);
     ui->lineEdit_username->setStyleSheet("QLineEdit{border-radius:10px;}");
     editLineLayout->addWidget(ui->lineEdit_username);
     ui->lineEdit_password->setFixedSize(180,40);
     ui->lineEdit_password->move(75,120);
+    ui->lineEdit_password->setFont(FONT);
     ui->lineEdit_password->setStyleSheet("QLineEdit{border-radius:10px;}");
     editLineLayout->addWidget(ui->lineEdit_password);
     ui->lineEdit_confirm_password->setFixedSize(180,40);
     ui->lineEdit_confirm_password->move(75,180);
+    ui->lineEdit_confirm_password->setFont(FONT);
     ui->lineEdit_confirm_password->setStyleSheet("QLineEdit{border-radius:10px;}");
     editLineLayout->addWidget(ui->lineEdit_confirm_password);
 
     QHBoxLayout *buttonLayout = new QHBoxLayout;
     ui->sign_up_button->setFixedSize(80,30);
     ui->sign_up_button->move(40,270);
+    ui->sign_up_button->setFont(FONT);
     ui->sign_up_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
     buttonLayout->addWidget(ui->sign_up_button);
     ui->cancel_button->setFixedSize(80,30);
     ui->cancel_button->move(180,270);
+    ui->cancel_button->setFont(FONT);
     ui->cancel_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
     buttonLayout->addWidget(ui->cancel_button);
 }
