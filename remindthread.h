@@ -25,6 +25,7 @@ public:
 signals:
     void showRemind(Task *task);
     void reorder();
+    void inProgress(Task *task);
 
 public slots:
     void onCreateTimer();

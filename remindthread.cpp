@@ -22,8 +22,6 @@ void remindThread::onCreateTimer(){
 void remindThread::onTimeout(){
     qDebug()<<"timeout";
     mutex.lock();
-    auto taskList = currentAccount->get_taskList();
-    mutex.unlock();
     for (auto task: currentAccount->get_taskList()){
         if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
             && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
@@ -34,5 +32,9 @@ void remindThread::onTimeout(){
             currentAccount->delTask(task);
             emit reorder();
         }
+        if(task->get_stTime()<QDateTime::currentDateTime()&&task->get_edTime()>QDateTime::currentDateTime()){
+            emit inProgress(task);
+        }
     }
+    mutex.unlock();
 }

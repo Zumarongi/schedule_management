@@ -66,9 +66,12 @@ void MainWindow::setupMainLayout()
         ui->lineEdit_search->setStyleSheet("QLineEdit{border-radius:15px;}");
         hLayout->addWidget(ui->lineEdit_search);
 
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/magnifying glass").c_str());
         ui->search_button->setFixedSize(50,30);
         ui->search_button->move(500,25);
         ui->search_button->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;}");
+        ui->search_button->setIcon(icon);
         hLayout->addWidget(ui->search_button);
 
         ui->add_task_button->setFixedSize(80,30);
@@ -109,8 +112,11 @@ void MainWindow::setupMainLayout()
         ui->choose_order->move(395, 80);
         hLayout->addWidget(ui->choose_order);
 
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/arrow").c_str());
         ui->toggle_button->setFixedSize(20,30);
         ui->toggle_button->move(500,80);
+        ui->toggle_button->setIcon(icon);
         hLayout->addWidget(ui->toggle_button);
 
         ui->choose_priority->setFixedSize(90, 30);
@@ -358,6 +364,16 @@ void MainWindow::create_remind_Page(Task *task){
 void MainWindow::on_toggle_button_clicked()
 {
     isPosSeq=!isPosSeq;
+    if(isPosSeq){
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/arrow").c_str());
+        ui->toggle_button->setIcon(icon);
+    }
+    else{
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/arrow2").c_str());
+        ui->toggle_button->setIcon(icon);
+    }
     emit reorder();
 }
 

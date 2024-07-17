@@ -10,6 +10,7 @@
 #include <QThread>
 #include "reminddialog.h"
 #include "remindthread.h"
+#include <QIcon>
 
 extern Account *currentAccount;
 

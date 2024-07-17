@@ -34,7 +34,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>查询</string>
+     <string/>
     </property>
    </widget>
    <widget class="QPushButton" name="add_task_button">
