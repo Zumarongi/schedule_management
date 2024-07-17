@@ -11,6 +11,7 @@
 #include "reminddialog.h"
 #include "remindthread.h"
 #include <QIcon>
+#include "inprogress_rmdialog.h"
 
 extern Account *currentAccount;
 
@@ -36,6 +37,7 @@ private:
 
     QThread m_thread;
     remindDialog *remindPage = NULL;
+    inProgress_rmDialog *inProgress_rmPage = NULL;
     remindThread * arrving_remind = NULL;
 
     void setupInitValues();
@@ -48,6 +50,7 @@ private:
     void removeTaskButton();
     void setupTaskButton();
 
+    void getInitTime();
 private slots:
     void on_search_button_clicked();
     void on_add_task_button_clicked();
@@ -64,6 +67,8 @@ private slots:
     void auto_complete();
 
     void create_remind_Page(Task *task);
+
+    void inProgress_remind_Page(Task *task);
 
     void on_toggle_button_clicked();
 
@@ -86,6 +91,7 @@ public:
 
 signals:
     void reorder();
+    void inProgress(Task *task);
 };
 
 #endif // MAINWINDOW_H

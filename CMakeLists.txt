@@ -32,6 +32,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         remindthread.h remindthread.cpp
         reminddialog.h reminddialog.cpp reminddialog.ui
         create_task_window.h create_task_window.cpp create_task_window.ui
+        inprogress_rmdialog.h inprogress_rmdialog.cpp inprogress_rmdialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET schedule_management APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

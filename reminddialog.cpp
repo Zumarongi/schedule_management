@@ -11,8 +11,8 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
 {
     ui->setupUi(this);
     ui->TaskName->setText(currenTask->get_taskName());
-    currenTask->set_isReminded(true);
 
+    getTask->set_isReminded(true);
     std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
     currenTask->saveToFile(task_path);
 

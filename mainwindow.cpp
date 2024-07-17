@@ -5,6 +5,7 @@
 
 extern create_task_window *createTaskPage;
 extern task_info_window *taskInfoPage;
+extern void showWarning(QString text);
 
 void MainWindow::getInitTime()
 {
@@ -57,6 +58,11 @@ void MainWindow::setupInitValues()
             remindPage->show();
             task->set_isReminded(true);                 //登录提醒
         }
+        if(task->get_stTime()<QDateTime::currentDateTime()&&task->get_edTime()>QDateTime::currentDateTime()
+            &&!task->get_isReminded()){
+            task->set_isReminded(true);
+            emit inProgress(task);
+        }
     }
 }
 
@@ -84,6 +90,8 @@ void MainWindow::setupMainLayout()
         ui->add_task_button->move(600,25);
         ui->add_task_button->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;}");
         hLayout->addWidget(ui->add_task_button);
+
+        ui->not_find_warning->setStyleSheet("QLabel{background-color:#FFFFFF;}");
     }
     mainLayout->addLayout(hLayout);
 
@@ -155,7 +163,6 @@ void MainWindow::setupRemindThread()
     connect(&m_thread,&QThread::started,arrving_remind,&remindThread::onCreateTimer);
     connect(&m_thread,&QThread::finished,arrving_remind,&QObject::deleteLater);
     m_thread.start();
-    connect(arrving_remind,&remindThread::showRemind,this,&MainWindow::create_remind_Page);
 }
 
 void MainWindow::taskFiltering()
@@ -236,6 +243,9 @@ MainWindow::MainWindow(QWidget *parent)
         taskFiltering(), taskOrdering();
         setupTaskButton();
     });
+    connect(arrving_remind,&remindThread::showRemind,this,&MainWindow::create_remind_Page);
+    connect(arrving_remind,&remindThread::inProgress,this,&MainWindow::inProgress_remind_Page);
+    connect(this,&MainWindow::inProgress,this,&MainWindow::inProgress_remind_Page);
 }
 
 MainWindow::~MainWindow()
@@ -357,6 +367,11 @@ void MainWindow::auto_complete(){
 void MainWindow::create_remind_Page(Task *task){
     remindPage=new remindDialog(task);
     remindPage->show();
+}
+
+void MainWindow::inProgress_remind_Page(Task *task){
+    inProgress_rmPage=new inProgress_rmDialog(task);
+    inProgress_rmPage->show();
 }
 
 void MainWindow::on_toggle_button_clicked()

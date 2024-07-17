@@ -7,22 +7,6 @@ remindThread::remindThread(QObject *parent)
     : QObject{parent}
 {}
 
-void remindThread::run(){
-    timer= new QTimer (this);
-    timer->start(1000);
-    connect(timer,&QTimer::timeout,[=](){
-        qDebug()<<"timeout";
-        mutex.lock();
-        auto taskList = currentAccount->get_taskList();
-        mutex.unlock();
-        for (auto task: taskList)
-            if (task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay()){
-                remindPage = new remindDialog(task);
-                remindPage->exec();
-                delete remindPage;
-            }
-    });
-
   remindThread::~remindThread(){
     timer->stop();
     timer->deleteLater();
@@ -47,7 +31,8 @@ void remindThread::onTimeout(){
             currentAccount->delTask(task);
             emit reorder();
         }
-        if(task->get_stTime()<QDateTime::currentDateTime()&&task->get_edTime()>QDateTime::currentDateTime()){
+        if(task->get_stTime()<QDateTime::currentDateTime() && task->get_edTime()>QDateTime::currentDateTime()
+            && !task->get_isReminded()){
             emit inProgress(task);
         }
     }
