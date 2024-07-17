@@ -6,6 +6,9 @@ extern MainWindow *mainPage;
 extern Account *currentAccount;
 extern task_info_window *taskInfoPage;
 
+#define _FONT(s) QFont("Times New Roman", (s))
+#define FONT _FONT(10)
+
 void task_info_window::setupInitValues()
 {
     ui->lineEdit_rmTime_h->setValidator(new QIntValidator(0, 23, this));
@@ -36,75 +39,102 @@ void task_info_window::setupInitValues()
 
 void task_info_window::setupPageLayout()
 {
+    // this->setWindowFlags(Qt::FramelessWindowHint);
+    this->setWindowTitle("任务信息");
+
     QVBoxLayout *pageLayout = new QVBoxLayout;
     {
         QGridLayout *taskInfoLayout = new QGridLayout;
         {
             // 第一列（均为label）
-            ui->label_taskName->setFixedSize(50, 20);
+            ui->label_taskName->setFixedSize(55, 20);
             ui->label_taskName->setAlignment(Qt::AlignBottom);
+            ui->label_taskName->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_taskName, 0, 0, Qt::AlignLeft);
-            ui->label_stTime->setFixedSize(50, 20);
+            ui->label_stTime->setFixedSize(55, 20);
             ui->label_stTime->setAlignment(Qt::AlignBottom);
+            ui->label_stTime->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_stTime, 1, 0, Qt::AlignLeft);
-            ui->label_taskLoc->setFixedSize(50, 20);
+            ui->label_taskLoc->setFixedSize(55, 20);
             ui->label_taskLoc->setAlignment(Qt::AlignBottom);
+            ui->label_taskLoc->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_taskLoc, 2, 0, Qt::AlignLeft);
-            ui->label_rmTime->setFixedSize(50, 20);
+            ui->label_rmTime->setFixedSize(55, 20);
             ui->label_rmTime->setAlignment(Qt::AlignBottom);
+            ui->label_rmTime->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_rmTime, 3, 0, Qt::AlignLeft);
-            ui->label_taskNote->setFixedSize(50, 20);
+            ui->label_taskNote->setFixedSize(55, 20);
             ui->label_taskNote->setAlignment(Qt::AlignBottom);
+            ui->label_taskNote->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_taskNote, 4, 0, Qt::AlignLeft);
 
             // 第二列
             ui->lineEdit_taskName->setFixedSize(120, 30);
+            ui->lineEdit_taskName->setFont(FONT);
             taskInfoLayout->addWidget(ui->lineEdit_taskName, 0, 1, Qt::AlignLeft);
             ui->dateTimeEdit_stTime->setFixedSize(200, 30);
+            ui->dateTimeEdit_stTime->setFont(FONT);
             taskInfoLayout->addWidget(ui->dateTimeEdit_stTime, 1, 1, Qt::AlignLeft);
             ui->lineEdit_taskLoc->setFixedSize(120, 30);
+            ui->lineEdit_taskLoc->setFont(FONT);
             taskInfoLayout->addWidget(ui->lineEdit_taskLoc, 2, 1, Qt::AlignLeft);
             QHBoxLayout *rmTimeLayout = new QHBoxLayout;
             {
                 ui->lineEdit_rmTime_h->setFixedSize(50, 30);
+                ui->lineEdit_rmTime_h->setFont(FONT);
                 rmTimeLayout->addWidget(ui->lineEdit_rmTime_h);
                 ui->label_rmTime_h->setFixedSize(30, 30);
+                ui->label_rmTime_h->setAlignment(Qt::AlignBottom);
+                ui->label_rmTime_h->setFont(FONT);
                 rmTimeLayout->addWidget(ui->label_rmTime_h);
                 ui->lineEdit_rmTime_m->setFixedSize(50, 30);
+                ui->lineEdit_rmTime_m->setFont(FONT);
                 rmTimeLayout->addWidget(ui->lineEdit_rmTime_m);
                 ui->label_rmTime_m->setFixedSize(45, 30);
+                ui->label_rmTime_m->setAlignment(Qt::AlignBottom);
+                ui->label_rmTime_m->setFont(FONT);
                 rmTimeLayout->addWidget(ui->label_rmTime_m);
             }taskInfoLayout->addLayout(rmTimeLayout, 3, 1, Qt::AlignLeft);
             ui->textEdit_taskNote->setFixedSize(200, 60);
+            ui->textEdit_taskNote->setFont(FONT);
             taskInfoLayout->addWidget(ui->textEdit_taskNote, 4, 1, Qt::AlignLeft);
 
             // 第三列（均为label）
-            ui->label_taskPrio->setFixedSize(50, 20);
+            ui->label_taskPrio->setFixedSize(55, 20);
             ui->label_taskPrio->setAlignment(Qt::AlignBottom);
+            ui->label_taskPrio->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_taskPrio, 0, 2, Qt::AlignLeft);
-            ui->label_edTime->setFixedSize(50, 20);
+            ui->label_edTime->setFixedSize(55, 20);
             ui->label_edTime->setAlignment(Qt::AlignBottom);
+            ui->label_edTime->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_edTime, 1, 2, Qt::AlignLeft);
-            ui->label_taskCtg->setFixedSize(50, 20);
+            ui->label_taskCtg->setFixedSize(55, 20);
             ui->label_taskCtg->setAlignment(Qt::AlignBottom);
+            ui->label_taskCtg->setFont(FONT);
             taskInfoLayout->addWidget(ui->label_taskCtg, 2, 2, Qt::AlignLeft);
 
             // 第四列
             ui->comboBox_taskPrio->setFixedSize(60, 30);
+            ui->comboBox_taskPrio->setFont(FONT);
             taskInfoLayout->addWidget(ui->comboBox_taskPrio, 0, 3, Qt::AlignLeft);
             ui->dateTimeEdit_edTime->setFixedSize(200, 30);
+            ui->dateTimeEdit_edTime->setFont(FONT);
             taskInfoLayout->addWidget(ui->dateTimeEdit_edTime, 1, 3, Qt::AlignLeft);
             ui->comboBox_taskCtg->setFixedSize(60, 30);
+            ui->comboBox_taskCtg->setFont(FONT);
             taskInfoLayout->addWidget(ui->comboBox_taskCtg, 2, 3, Qt::AlignLeft);
         }pageLayout->addLayout(taskInfoLayout);
 
         QHBoxLayout *buttonLayout = new QHBoxLayout;
         {
             ui->pushButton_saveChanges->setFixedSize(80, 30);
+            ui->pushButton_saveChanges->setFont(FONT);
             buttonLayout->addWidget(ui->pushButton_saveChanges);
             ui->pushButton_deleteTask->setFixedSize(80, 30);
+            ui->pushButton_deleteTask->setFont(FONT);
             buttonLayout->addWidget(ui->pushButton_deleteTask);
             ui->pushButton_return->setFixedSize(80, 30);
+            ui->pushButton_return->setFont(FONT);
             buttonLayout->addWidget(ui->pushButton_return);
         }pageLayout->addLayout(buttonLayout);
 

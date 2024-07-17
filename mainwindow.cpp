@@ -8,7 +8,8 @@ extern create_task_window *createTaskPage;
 extern task_info_window *taskInfoPage;
 extern void showWarning(QString text);
 
-QFont tableFont = QFont("Times New Roman", 10);
+#define _FONT(s) QFont("Times New Roman", (s))
+#define FONT _FONT(10)
 
 void MainWindow::getInitTime()
 {
@@ -24,11 +25,14 @@ void MainWindow::setupInitValues()
     chooseCtg = 0;
     getInitTime();
     ui->min_dateTimeEdit->setDateTime(minTime);
+    ui->min_dateTimeEdit->setFont(FONT);
     ui->max_dateTimeEdit->setDateTime(maxTime);
+    ui->max_dateTimeEdit->setFont(FONT);
 
     ui->choose_order->addItem("开始时间顺序");
     ui->choose_order->addItem("名字顺序");
     ui->choose_order->setCurrentIndex(0);
+    ui->choose_order->setFont(FONT);
 
     ui->choose_category->addItem("所有分类");
     ui->choose_category->addItem("学习");
@@ -38,12 +42,23 @@ void MainWindow::setupInitValues()
     ui->choose_category->addItem("运动");
     ui->choose_category->addItem("其他");
     ui->choose_category->setCurrentIndex(0);
+    ui->choose_category->setFont(FONT);
 
     ui->choose_priority->addItem("所有优先级");
     ui->choose_priority->addItem("低");
     ui->choose_priority->addItem("中");
     ui->choose_priority->addItem("高");
     ui->choose_priority->setCurrentIndex(0);
+    ui->choose_priority->setFont(FONT);
+
+
+    ui->lineEdit_search->setFont(FONT);
+    ui->label_from->setFont(FONT);
+    ui->label_to->setFont(FONT);
+    ui->add_task_button->setFont(FONT);
+    ui->auto_delete->setFont(FONT);
+    ui->not_find_warning->setFont(FONT);
+    ui->not_find_warning->setStyleSheet("color: red;");
 
     //搜索框自动补全
     connect(ui->lineEdit_search,&QLineEdit::textChanged,this,&MainWindow::auto_complete);
@@ -53,25 +68,13 @@ void MainWindow::setupInitValues()
 
     if(currentAccount->get_doneAndDel())                //自动删除
         del_done_task();
-
-    // for (auto task: currentAccount->get_taskList()){
-    //     if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
-    //         && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
-    //         remindPage=new remindDialog(task);
-    //         remindPage->show();
-    //         task->set_isReminded(true);                 //登录提醒
-    //     }
-    //     if(task->get_stTime()<QDateTime::currentDateTime()&&task->get_edTime()>QDateTime::currentDateTime()
-    //         &&!task->get_isReminded()){
-    //         task->set_isReminded(true);
-    //         emit inProgress(task);
-    //     }
-    // }
 }
 
 void MainWindow::setupMainLayout()
 {
     this->setFixedSize(800,600);
+    this->setWindowTitle("主页");
+
     mainLayout = new QVBoxLayout;
 
     QHBoxLayout *hLayout = new QHBoxLayout;
@@ -208,7 +211,7 @@ void MainWindow::setupScrollLayout()
     scrollLayout->setSelectionBehavior(QAbstractItemView::SelectRows);
     scrollLayout->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    scrollLayout->setFont(tableFont);
+    scrollLayout->setFont(FONT);
 
     scrollLayout->setColumnWidth(0, 80);
     scrollLayout->setColumnWidth(1, 75);
@@ -235,8 +238,8 @@ void MainWindow::setupScrollLayout()
         QString alphaStr = QString::fromStdString(std::to_string(alpha));
 
         QPushButton *taskButton = new QPushButton(task->get_taskName(), this);
-        taskButton->setFont(tableFont);
-        // taskButton->setFixedWidth(80);
+        taskButton->setFont(FONT);
+        taskButton->setFixedWidth(80);
         taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
         connect(taskButton, &QPushButton::clicked, [=](){
             taskInfoPage = new task_info_window(task);
@@ -246,7 +249,7 @@ void MainWindow::setupScrollLayout()
         scrollLayout->setCellWidget(row, 0, taskButton);
 
         taskButton = new QPushButton(toQString(task->get_taskPrio()), this);
-        taskButton->setFont(tableFont);
+        taskButton->setFont(FONT);
         taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
         connect(taskButton, &QPushButton::clicked, [=](){
             taskInfoPage = new task_info_window(task);
@@ -256,7 +259,7 @@ void MainWindow::setupScrollLayout()
         scrollLayout->setCellWidget(row, 1, taskButton);
 
         taskButton = new QPushButton(task->get_stTime().toString("yyyy-MM-dd hh:mm") + QString::fromStdString("——") + task->get_edTime().toString("yyyy-MM-dd hh:mm"));
-        taskButton->setFont(tableFont);
+        taskButton->setFont(FONT);
         taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
         connect(taskButton, &QPushButton::clicked, [=](){
             taskInfoPage = new task_info_window(task);
@@ -266,7 +269,7 @@ void MainWindow::setupScrollLayout()
         scrollLayout->setCellWidget(row, 2, taskButton);
 
         taskButton = new QPushButton(task->get_taskLoc());
-        taskButton->setFont(tableFont);
+        taskButton->setFont(FONT);
         taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
         connect(taskButton, &QPushButton::clicked, [=](){
             taskInfoPage = new task_info_window(task);
@@ -276,7 +279,7 @@ void MainWindow::setupScrollLayout()
         scrollLayout->setCellWidget(row, 3, taskButton);
 
         taskButton = new QPushButton(Task::toCtgQString(task->get_taskCtg()));
-        taskButton->setFont(tableFont);
+        taskButton->setFont(FONT);
         QColor taskCtgColor;
         QString ctgcolorStr = "";
         switch (task->get_taskCtg())
@@ -453,6 +456,7 @@ void MainWindow::on_auto_delete_stateChanged(int arg1)
 
 void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
 {
+    ui->not_find_warning->hide();
     emit reorder();
 }
 
