@@ -1,5 +1,8 @@
 #include "reminddialog.h"
 #include "ui_reminddialog.h"
+#include "mainwindow.h"
+
+extern MainWindow *mainPage;
 
 remindDialog::remindDialog(Task *getTask,QWidget *parent)
     : currenTask(getTask)
@@ -8,49 +11,55 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
 {
     ui->setupUi(this);
     ui->TaskName->setText(currenTask->get_taskName());
-<<<<<<< Updated upstream
-=======
     currenTask->set_isReminded(true);
 
     std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
     currenTask->saveToFile(task_path);
 
->>>>>>> Stashed changes
     std::chrono::milliseconds lastTime=currenTask->get_stTime()-QDateTime::currentDateTime();
     std::chrono::seconds sec = std::chrono::duration_cast<std::chrono::seconds>(lastTime);
     std::chrono::minutes min = std::chrono::duration_cast<std::chrono::minutes>(sec);
     sec-=min;
-    std::string convertTime=std::to_string(min.count()+'.'+sec.count());
+    std::string convertTime=std::to_string(min.count())+"分"+std::to_string(sec.count())+"秒";
     ui->TaskTime->setText(QString::fromStdString(convertTime));
     ui->comboBox->addItem("不提醒");
-    if(sec>std::chrono::seconds(60)){
+    if(min>std::chrono::minutes(1)){
         ui->comboBox->addItem("1分钟");
     }
-    if(sec>std::chrono::seconds(300)){
+    if(min>std::chrono::minutes(5)){
         ui->comboBox->addItem("5分钟");
     }
-    if(sec>std::chrono::seconds(600)){
+    if(min>std::chrono::minutes(10)){
         ui->comboBox->addItem("10分钟");
     }
-    if(sec>std::chrono::seconds(1800)){
+    if(min>std::chrono::minutes(30)){
         ui->comboBox->addItem("30分钟");
     }
     ui->comboBox->setCurrentIndex(0);
-    connect(ui->comboBox,&QComboBox::currentIndexChanged,[=](){
+
+    connect(ui->OK_button,&QPushButton::clicked,[=](){
         if(ui->comboBox->currentIndex()==1){
-            getTask->set_rmTime(getTask->get_rmTime().addSecs(-60));
+            getTask->set_isReminded(false);
+            new_rmTime=QTime::fromMSecsSinceStartOfDay((getTask->get_stTime()-QDateTime::currentDateTime()).count()-60000);
+            getTask->set_rmTime(new_rmTime);
         }
         if(ui->comboBox->currentIndex()==2){
-            getTask->set_rmTime(getTask->get_rmTime().addSecs(-300));
+            getTask->set_isReminded(false);
+            new_rmTime=QTime::fromMSecsSinceStartOfDay((getTask->get_stTime()-QDateTime::currentDateTime()).count()-300000);
+            getTask->set_rmTime(new_rmTime);
         }
         if(ui->comboBox->currentIndex()==3){
-            getTask->set_rmTime(getTask->get_rmTime().addSecs(-600));
+            getTask->set_isReminded(false);
+            new_rmTime=QTime::fromMSecsSinceStartOfDay((getTask->get_stTime()-QDateTime::currentDateTime()).count()-600000);
+            getTask->set_rmTime(new_rmTime);
         }
         if(ui->comboBox->currentIndex()==4){
-            getTask->set_rmTime(getTask->get_rmTime().addSecs(-1800));
+            getTask->set_isReminded(false);
+            new_rmTime=QTime::fromMSecsSinceStartOfDay((getTask->get_stTime()-QDateTime::currentDateTime()).count()-1800000);
+            getTask->set_rmTime(new_rmTime);
         }
+        this->close();
     });
-    connect(ui->OK_button,&QPushButton::clicked,this,&QDialog::close);
 }
 
 remindDialog::~remindDialog()
@@ -60,4 +69,6 @@ remindDialog::~remindDialog()
 
 void remindDialog::on_task_info_button_clicked(){
     task_info_window *infoPage=new task_info_window(currenTask);
+    infoPage->show();
+    mainPage->close();
 }

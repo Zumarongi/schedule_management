@@ -15,6 +15,7 @@ class remindDialog : public QDialog
 {
     Q_OBJECT
     Task *currenTask;
+    QTime new_rmTime=QTime();
 
 public:
     explicit remindDialog(Task *getTask,QWidget *parent = nullptr);

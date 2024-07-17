@@ -28,10 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         sign_in_window.h sign_in_window.cpp sign_in_window.ui
         sign_up_window.h sign_up_window.cpp sign_up_window.ui
         md5.h md5.cpp
-        delete_confirm_dialog.h delete_confirm_dialog.cpp delete_confirm_dialog.ui
         task_info_window.h task_info_window.cpp task_info_window.ui
-        time_conflict_dialog.h time_conflict_dialog.cpp time_conflict_dialog.ui
-
         remindthread.h remindthread.cpp
         reminddialog.h reminddialog.cpp reminddialog.ui
         create_task_window.h create_task_window.cpp create_task_window.ui

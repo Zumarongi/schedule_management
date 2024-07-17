@@ -7,6 +7,9 @@
 #include <QVBoxLayout>
 #include <vector>
 #include <QDebug>
+#include <QThread>
+#include "reminddialog.h"
+#include "remindthread.h"
 
 extern Account *currentAccount;
 
@@ -27,6 +30,12 @@ private:
     QDateTime maxTime,minTime;
     int choosePrio;
     int chooseCtg;
+    QStringList searched_tasks;
+    bool isPosSeq=true;
+
+    QThread m_thread;
+    remindDialog *remindPage = NULL;
+    remindThread * arrving_remind = NULL;
 
     void setupInitValues();
     void setupMainLayout();
@@ -50,6 +59,12 @@ private slots:
     void on_auto_delete_stateChanged(int arg1);
 
     void on_lineEdit_search_textChanged(const QString &arg1);
+
+    void auto_complete();
+
+    void create_remind_Page(Task *task);
+
+    void on_toggle_button_clicked();
 
 protected:
     void showEvent(QShowEvent *event);
