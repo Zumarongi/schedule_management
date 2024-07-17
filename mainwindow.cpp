@@ -2,7 +2,6 @@
 #include "./ui_mainwindow.h"
 #include "create_task_window.h"
 #include "task_info_window.h"
-#include "remindthread.h"
 
 extern create_task_window *createTaskPage;
 extern task_info_window *taskInfoPage;
@@ -42,17 +41,23 @@ void MainWindow::setupInitValues()
     ui->choose_priority->addItem("高");
     ui->choose_priority->setCurrentIndex(0);
 
-    QStringList searched_tasks;
-    for (Task *task: currentAccount->get_taskList())
-        searched_tasks.append(task->get_taskName());
-    QCompleter *searchList=new QCompleter(searched_tasks,this);
-    searchList->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->lineEdit_search->setCompleter(searchList);
+    //搜索框自动补全
+    connect(ui->lineEdit_search,&QLineEdit::textChanged,this,&MainWindow::auto_complete);
 
     ui->auto_delete->setCheckable(true);
     ui->auto_delete->setChecked(currentAccount->get_doneAndDel());
-    if(currentAccount->get_doneAndDel())
+
+    if(currentAccount->get_doneAndDel())                //自动删除
         del_done_task();
+
+    for (auto task: currentAccount->get_taskList()){
+        if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
+            && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
+            remindPage=new remindDialog(task);
+            remindPage->show();
+            task->set_isReminded(true);                 //登录提醒
+        }
+    }
 }
 
 void MainWindow::setupMainLayout()
@@ -106,16 +111,20 @@ void MainWindow::setupMainLayout()
         ui->max_dateTimeEdit->move(220, 80);
         hLayout->addWidget(ui->max_dateTimeEdit);
 
-        ui->choose_order->setFixedSize(120, 30);
+        ui->choose_order->setFixedSize(100, 30);
         ui->choose_order->move(395, 80);
         hLayout->addWidget(ui->choose_order);
 
-        ui->choose_priority->setFixedSize(120, 30);
-        ui->choose_priority->move(520, 80);
+        ui->toggle_button->setFixedSize(20,30);
+        ui->toggle_button->move(500,80);
+        hLayout->addWidget(ui->toggle_button);
+
+        ui->choose_priority->setFixedSize(90, 30);
+        ui->choose_priority->move(525, 80);
         hLayout->addWidget(ui->choose_priority);
 
-        ui->choose_category->setFixedSize(120, 30);
-        ui->choose_category->move(645, 80);
+        ui->choose_category->setFixedSize(80, 30);
+        ui->choose_category->move(620, 80);
         hLayout->addWidget(ui->choose_category);
     }
     mainLayout->addLayout(hLayout);
@@ -135,8 +144,12 @@ void MainWindow::setupMainLayout()
 
 void MainWindow::setupRemindThread()
 {
-    remindThread * arrving_remind=new remindThread;
-    arrving_remind->start();
+    arrving_remind=new remindThread();
+    arrving_remind->moveToThread(&m_thread);
+    connect(&m_thread,&QThread::started,arrving_remind,&remindThread::onCreateTimer);
+    connect(&m_thread,&QThread::finished,arrving_remind,&QObject::deleteLater);
+    m_thread.start();
+    connect(arrving_remind,&remindThread::showRemind,this,&MainWindow::create_remind_Page);
 }
 
 void MainWindow::taskFiltering()
@@ -153,12 +166,13 @@ void MainWindow::taskFiltering()
 void MainWindow::taskOrdering()
 {
     bool (*cmp)(const Task *, const Task *) = Task::stTime_ascending;
-    switch (ui->choose_order->currentIndex())
-    {
-    case 0:
-        cmp = Task::stTime_ascending; break;
-    case 1:
-        cmp = Task::taskName_ascending; break;
+    if(ui->choose_order->currentIndex()==0){
+        if(isPosSeq) cmp = Task::stTime_ascending;
+        else cmp = Task::stTime_descending;
+    }
+    else{
+        if(isPosSeq) cmp = Task::taskName_ascending;
+        else cmp = Task::taskName_descending;
     }
     Task::sortTasks(taskOrder.begin(), taskOrder.end(), cmp);
 }
@@ -200,12 +214,18 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setupRemindThread(); // 初始化提醒线程
     setupInitValues(); // 各变量以及显示值的初始化
     setupMainLayout(); // 设置页面布局
-    setupRemindThread(); // 初始化提醒线程
 
     // connect reorder信号
     connect(this, &MainWindow::reorder, [=](){
+        removeTaskButton();
+        taskFiltering(), taskOrdering();
+        setupTaskButton();
+    });
+
+    connect(arrving_remind, &remindThread::reorder, [=](){
         removeTaskButton();
         taskFiltering(), taskOrdering();
         setupTaskButton();
@@ -214,6 +234,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    m_thread.quit();
+    m_thread.wait();
     currentAccount->saveToFile();
     Account::saveAccountList();
     delete ui->lineEdit_search->completer();
@@ -314,6 +336,26 @@ void MainWindow::on_auto_delete_stateChanged(int arg1)
 
 void MainWindow::on_lineEdit_search_textChanged(const QString &arg1)
 {
+    emit reorder();
+}
+
+void MainWindow::auto_complete(){
+    searched_tasks.clear();
+    for (Task * task: currentAccount->get_taskList())
+        searched_tasks.append(task->get_taskName());
+    QCompleter *searchList=new QCompleter(searched_tasks,this);
+    searchList->setCaseSensitivity(Qt::CaseInsensitive);
+    ui->lineEdit_search->setCompleter(searchList);
+}
+
+void MainWindow::create_remind_Page(Task *task){
+    remindPage=new remindDialog(task);
+    remindPage->show();
+}
+
+void MainWindow::on_toggle_button_clicked()
+{
+    isPosSeq=!isPosSeq;
     emit reorder();
 }
 

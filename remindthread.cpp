@@ -4,10 +4,9 @@
 QMutex remindThread::mutex;
 
 remindThread::remindThread(QObject *parent)
-    : QThread{parent}
+    : QObject{parent}
 {}
 
-<<<<<<< Updated upstream
 void remindThread::run(){
     timer= new QTimer (this);
     timer->start(1000);
@@ -23,8 +22,8 @@ void remindThread::run(){
                 delete remindPage;
             }
     });
-=======
-remindThread::~remindThread(){
+
+  remindThread::~remindThread(){
     timer->stop();
     timer->deleteLater();
 }
@@ -50,5 +49,4 @@ void remindThread::onTimeout(){
         }
     }
     mutex.unlock();
->>>>>>> Stashed changes
 }
