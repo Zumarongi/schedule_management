@@ -15,7 +15,7 @@ remindThread::~remindThread(){
 void remindThread::onCreateTimer(){
     // 等待至整分钟
     timer = new QTimer();
-    timer->setInterval(60000);
+    timer->setInterval(1000);
     connect(timer, &QTimer::timeout, this, &remindThread::onTimeout);
     timer->start();
 }
@@ -31,6 +31,10 @@ void remindThread::onTimeout(){
         if(currentAccount->get_doneAndDel() && task->get_edTime()<QDateTime::currentDateTime()){
             currentAccount->delTask(task);
             emit reorder();
+        }
+        if(task->get_stTime()<QDateTime::currentDateTime() && task->get_edTime()>QDateTime::currentDateTime()
+            && !task->get_isReminded()){
+            emit inProgress(task);
         }
     }
     mutex.unlock();

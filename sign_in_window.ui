@@ -40,30 +40,72 @@
      <string>注册</string>
     </property>
    </widget>
+   <widget class="QLineEdit" name="lineEdit_password">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>209</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>请输入密码</string>
+    </property>
+   </widget>
    <widget class="QLineEdit" name="lineEdit_username">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>120</y>
-      <width>161</width>
-      <height>31</height>
+      <x>100</x>
+      <y>70</y>
+      <width>209</width>
+      <height>22</height>
      </rect>
     </property>
     <property name="placeholderText">
      <string>请输入用户名</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_password">
+   <widget class="QLabel" name="username_label">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>180</y>
-      <width>161</width>
-      <height>31</height>
+      <x>40</x>
+      <y>70</y>
+      <width>45</width>
+      <height>13</height>
      </rect>
     </property>
-    <property name="placeholderText">
-     <string>请输入密码</string>
+    <property name="text">
+     <string>用户名：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="password_label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>120</y>
+      <width>45</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>密码：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>10</y>
+      <width>131</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 600 italic 48pt &quot;Sitka Banner Semibold&quot;;</string>
+    </property>
+    <property name="text">
+     <string>TaskX</string>
     </property>
    </widget>
   </widget>

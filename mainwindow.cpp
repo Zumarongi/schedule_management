@@ -6,6 +6,7 @@
 
 extern create_task_window *createTaskPage;
 extern task_info_window *taskInfoPage;
+extern void showWarning(QString text);
 
 QFont tableFont = QFont("Times New Roman", 10);
 
@@ -53,14 +54,19 @@ void MainWindow::setupInitValues()
     if(currentAccount->get_doneAndDel())                //自动删除
         del_done_task();
 
-    for (auto task: currentAccount->get_taskList()){
-        if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
-            && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
-            remindPage=new remindDialog(task);
-            remindPage->show();
-            task->set_isReminded(true);                 //登录提醒
-        }
-    }
+    // for (auto task: currentAccount->get_taskList()){
+    //     if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
+    //         && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
+    //         remindPage=new remindDialog(task);
+    //         remindPage->show();
+    //         task->set_isReminded(true);                 //登录提醒
+    //     }
+    //     if(task->get_stTime()<QDateTime::currentDateTime()&&task->get_edTime()>QDateTime::currentDateTime()
+    //         &&!task->get_isReminded()){
+    //         task->set_isReminded(true);
+    //         emit inProgress(task);
+    //     }
+    // }
 }
 
 void MainWindow::setupMainLayout()
@@ -75,15 +81,20 @@ void MainWindow::setupMainLayout()
         ui->lineEdit_search->setStyleSheet("QLineEdit{border-radius:15px;}");
         hLayout->addWidget(ui->lineEdit_search);
 
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/magnifying glass").c_str());
         ui->search_button->setFixedSize(50,30);
         ui->search_button->move(500,25);
-        ui->search_button->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;}");
+        ui->search_button->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;color:#FFFFFF;}");
+        ui->search_button->setIcon(icon);
         hLayout->addWidget(ui->search_button);
 
         ui->add_task_button->setFixedSize(80,30);
         ui->add_task_button->move(600,25);
-        ui->add_task_button->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;}");
+        ui->add_task_button->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;color:#FFFFFF;}");
         hLayout->addWidget(ui->add_task_button);
+
+        ui->not_find_warning->setStyleSheet("QLabel{background-color:#FFFFFF;}");
     }
     mainLayout->addLayout(hLayout);
 
@@ -118,8 +129,11 @@ void MainWindow::setupMainLayout()
         ui->choose_order->move(395, 80);
         hLayout->addWidget(ui->choose_order);
 
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/arrow").c_str());
         ui->toggle_button->setFixedSize(20,30);
         ui->toggle_button->move(500,80);
+        ui->toggle_button->setIcon(icon);
         hLayout->addWidget(ui->toggle_button);
 
         ui->choose_priority->setFixedSize(90, 30);
@@ -152,7 +166,6 @@ void MainWindow::setupRemindThread()
     connect(&m_thread,&QThread::started,arrving_remind,&remindThread::onCreateTimer);
     connect(&m_thread,&QThread::finished,arrving_remind,&QObject::deleteLater);
     m_thread.start();
-    connect(arrving_remind,&remindThread::showRemind,this,&MainWindow::create_remind_Page);
 }
 
 void MainWindow::taskFiltering()
@@ -331,6 +344,9 @@ MainWindow::MainWindow(QWidget *parent)
         taskFiltering(), taskOrdering();
         setupScrollLayout();
     });
+    connect(arrving_remind,&remindThread::showRemind,this,&MainWindow::create_remind_Page);
+    connect(arrving_remind,&remindThread::inProgress,this,&MainWindow::inProgress_remind_Page);
+    // connect(this,&MainWindow::inProgress,this,&MainWindow::inProgress_remind_Page);
 }
 
 MainWindow::~MainWindow()
@@ -454,9 +470,24 @@ void MainWindow::create_remind_Page(Task *task){
     remindPage->show();
 }
 
+void MainWindow::inProgress_remind_Page(Task *task){
+    inProgress_rmPage=new inProgress_rmDialog(task);
+    inProgress_rmPage->show();
+}
+
 void MainWindow::on_toggle_button_clicked()
 {
     isPosSeq=!isPosSeq;
+    if(isPosSeq){
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/arrow").c_str());
+        ui->toggle_button->setIcon(icon);
+    }
+    else{
+        QIcon icon;
+        icon.addFile((ROOTDIR+"/images/arrow2").c_str());
+        ui->toggle_button->setIcon(icon);
+    }
     emit reorder();
 }
 

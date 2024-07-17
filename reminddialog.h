@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::remindDialog *ui;
+    void setLayout();
 };
 
 #endif // REMINDDIALOG_H

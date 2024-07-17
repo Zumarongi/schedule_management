@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::sign_up_window *ui;
+    void setLayout();
 };
 
 #endif // SIGN_UP_WINDOW_H

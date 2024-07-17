@@ -14,6 +14,7 @@ class sign_in_window : public QMainWindow
 {
     Q_OBJECT
     MainWindow *mainPage;
+    void setLayout();
 
 public:
     explicit sign_in_window(QWidget *parent = nullptr);
