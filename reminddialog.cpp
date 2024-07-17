@@ -14,20 +14,20 @@ void remindDialog::setLayout(){
         ui->label_3->move(80,50);
         ui->label_3->setAlignment(Qt::AlignCenter);
         firstLayout->addWidget(ui->label_3);
-        ui->TaskName->setFixedSize(60,30);
+        ui->TaskName->setFixedSize(70,30);
         ui->TaskName->move(140,50);
         ui->TaskName->setAlignment(Qt::AlignCenter);
         firstLayout->addWidget(ui->TaskName);
         ui->label->setFixedSize(30,30);
-        ui->label->move(205,50);
+        ui->label->move(215,50);
         ui->label->setAlignment(Qt::AlignCenter);
         firstLayout->addWidget(ui->label);
         ui->TaskTime->setFixedSize(50,30);
-        ui->TaskTime->move(240,50);
+        ui->TaskTime->move(250,50);
         ui->TaskTime->setAlignment(Qt::AlignCenter);
         firstLayout->addWidget(ui->TaskTime);
         ui->label_2->setFixedSize(60,30);
-        ui->label_2->move(295,50);
+        ui->label_2->move(305,50);
         ui->label_2->setAlignment(Qt::AlignCenter);
         firstLayout->addWidget(ui->label_2);
     }

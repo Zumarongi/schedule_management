@@ -10,11 +10,12 @@ void inProgress_rmDialog::setLayout(){
     ui->label->setFixedSize(60,30);
     ui->label->setAlignment(Qt::AlignCenter);
     layout->addWidget(ui->label);
-    ui->taskName_label->setFixedSize(60,30);
+    ui->taskName_label->setFixedSize(70,30);
     ui->taskName_label->move(115,70);
+    ui->taskName_label->setAlignment(Qt::AlignCenter);
     layout->addWidget(ui->taskName_label);
     ui->label_2->setFixedSize(60,30);
-    ui->label_2->move(180,70);
+    ui->label_2->move(190,70);
     ui->label_2->setAlignment(Qt::AlignCenter);
     layout->addWidget(ui->label_2);
 
