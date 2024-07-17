@@ -17,29 +17,33 @@ void sign_up_window::setLayout(){
     ui->confirm_label->setFixedSize(60,20);
     ui->confirm_label->move(15,190);
 
-    QHBoxLayout *editLineLayout = new QHBoxLayout;
-    ui->lineEdit_username->setFixedSize(180,40);
-    ui->lineEdit_username->move(75,60);
-    ui->lineEdit_username->setStyleSheet("QLineEdit{border-radius:10px;}");
-    editLineLayout->addWidget(ui->lineEdit_username);
-    ui->lineEdit_password->setFixedSize(180,40);
-    ui->lineEdit_password->move(75,120);
-    ui->lineEdit_password->setStyleSheet("QLineEdit{border-radius:10px;}");
-    editLineLayout->addWidget(ui->lineEdit_password);
-    ui->lineEdit_confirm_password->setFixedSize(180,40);
-    ui->lineEdit_confirm_password->move(75,180);
-    ui->lineEdit_confirm_password->setStyleSheet("QLineEdit{border-radius:10px;}");
-    editLineLayout->addWidget(ui->lineEdit_confirm_password);
+    QHBoxLayout *editLineLayout = new QHBoxLayout;              //输入栏布局
+    {
+        ui->lineEdit_username->setFixedSize(180,40);
+        ui->lineEdit_username->move(75,60);
+        ui->lineEdit_username->setStyleSheet("QLineEdit{border-radius:10px;}");
+        editLineLayout->addWidget(ui->lineEdit_username);
+        ui->lineEdit_password->setFixedSize(180,40);
+        ui->lineEdit_password->move(75,120);
+        ui->lineEdit_password->setStyleSheet("QLineEdit{border-radius:10px;}");
+        editLineLayout->addWidget(ui->lineEdit_password);
+        ui->lineEdit_confirm_password->setFixedSize(180,40);
+        ui->lineEdit_confirm_password->move(75,180);
+        ui->lineEdit_confirm_password->setStyleSheet("QLineEdit{border-radius:10px;}");
+        editLineLayout->addWidget(ui->lineEdit_confirm_password);
+    }
 
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
-    ui->sign_up_button->setFixedSize(80,30);
-    ui->sign_up_button->move(40,270);
-    ui->sign_up_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
-    buttonLayout->addWidget(ui->sign_up_button);
-    ui->cancel_button->setFixedSize(80,30);
-    ui->cancel_button->move(180,270);
-    ui->cancel_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
-    buttonLayout->addWidget(ui->cancel_button);
+    QHBoxLayout *buttonLayout = new QHBoxLayout;                //按钮布局
+    {
+        ui->sign_up_button->setFixedSize(80,30);
+        ui->sign_up_button->move(40,270);
+        ui->sign_up_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
+        buttonLayout->addWidget(ui->sign_up_button);
+        ui->cancel_button->setFixedSize(80,30);
+        ui->cancel_button->move(180,270);
+        ui->cancel_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
+        buttonLayout->addWidget(ui->cancel_button);
+    }
 }
 
 sign_up_window::sign_up_window(QWidget *parent)
@@ -53,13 +57,13 @@ sign_up_window::sign_up_window(QWidget *parent)
 
     ui->lineEdit_password->setEchoMode(QLineEdit::Password);
     ui->lineEdit_confirm_password->setEchoMode(QLineEdit::Password);
-    connect(ui->sign_up_button,&QPushButton::clicked,[=](){\
+    connect(ui->sign_up_button,&QPushButton::clicked,[=](){
         QString userName=ui->lineEdit_username->text();
         QString passWord=ui->lineEdit_password->text();
         QString confPassword=ui->lineEdit_confirm_password->text();
         bool existName=Account::isNameExist(userName);
         if(!existName&&(passWord==confPassword)&&!userName.isEmpty()&&!passWord.isEmpty()&&!confPassword.isEmpty()){
-            Account *newAccount=new Account(userName, passWord);
+            Account *newAccount=new Account(userName, passWord);    //合法信息，注册成功，写入文件
             Account::addToList(userName);
             Account::saveAccountList();
 
@@ -72,7 +76,7 @@ sign_up_window::sign_up_window(QWidget *parent)
             sign_in_page->show();
             this->close();
         }
-        else{
+        else{                   //注册失败提示
             if(userName.isEmpty()) showWarning("用户名不能为空！");
             else if(existName) showWarning("用户名已存在！");
             else if(passWord.isEmpty()) showWarning("密码不能为空！");
@@ -81,7 +85,7 @@ sign_up_window::sign_up_window(QWidget *parent)
         }
     });
     connect(ui->cancel_button,&QPushButton::clicked,[=](){
-        sign_in_page->show();
+        sign_in_page->show();               //取消按钮绑定槽函数
         this->close();
     });
 }

@@ -82,7 +82,7 @@ void MainWindow::setupMainLayout()
         hLayout->addWidget(ui->lineEdit_search);
 
         QIcon icon;
-        icon.addFile((ROOTDIR+"/images/magnifying glass").c_str());
+        icon.addFile((ROOTDIR+"/images/magnifying glass2").c_str());
         ui->search_button->setFixedSize(50,30);
         ui->search_button->move(500,25);
         ui->search_button->setStyleSheet("QPushButton{border-radius:15px;background-color:#148AFF;color:#FFFFFF;}");

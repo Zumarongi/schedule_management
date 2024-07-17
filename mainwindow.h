@@ -53,7 +53,6 @@ private:
     void removeTaskButton();
     void setupScrollLayout();
 
-    void getInitTime();
 private slots:
     void on_search_button_clicked();
     void on_add_task_button_clicked();

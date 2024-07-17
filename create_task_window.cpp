@@ -121,8 +121,10 @@ void create_task_window::setupPageLayout()
         QHBoxLayout *buttonLayout = new QHBoxLayout;
         {
             ui->pushButton_createTask->setFixedSize(80, 30);
+            ui->pushButton_createTask->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
             buttonLayout->addWidget(ui->pushButton_createTask);
             ui->pushButton_cancel->setFixedSize(80, 30);
+            ui->pushButton_cancel->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
             buttonLayout->addWidget(ui->pushButton_cancel);
         }pageLayout->addLayout(buttonLayout);
 

@@ -101,10 +101,13 @@ void task_info_window::setupPageLayout()
         QHBoxLayout *buttonLayout = new QHBoxLayout;
         {
             ui->pushButton_saveChanges->setFixedSize(80, 30);
+            ui->pushButton_saveChanges->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
             buttonLayout->addWidget(ui->pushButton_saveChanges);
             ui->pushButton_deleteTask->setFixedSize(80, 30);
+            ui->pushButton_deleteTask->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
             buttonLayout->addWidget(ui->pushButton_deleteTask);
             ui->pushButton_return->setFixedSize(80, 30);
+            ui->pushButton_return->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
             buttonLayout->addWidget(ui->pushButton_return);
         }pageLayout->addLayout(buttonLayout);
 

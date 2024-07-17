@@ -30,9 +30,9 @@ inProgress_rmDialog::inProgress_rmDialog(Task *task,QWidget *parent)
 {
     ui->setupUi(this);
 
-    setLayout();
+    setLayout();            //设置页面布局
 
-    task->set_isReminded(true);
+    task->set_isReminded(true);             //获取任务信息并设置为已提醒
     std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
     currenTask->saveToFile(task_path);
     ui->taskName_label->setText(task->get_taskName());

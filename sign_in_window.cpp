@@ -22,25 +22,29 @@ void sign_in_window::setLayout(){
     ui->username_label->move(25,113);
     ui->password_label->move(35,183);
 
-    QVBoxLayout *editLineLayout = new QVBoxLayout;
-    ui->lineEdit_username->setFixedSize(180,40);
-    ui->lineEdit_username->move(70,100);
-    ui->lineEdit_username->setStyleSheet("QLineEdit{border-radius:10px;}");
-    editLineLayout->addWidget(ui->lineEdit_username);
-    ui->lineEdit_password->setFixedSize(180,40);
-    ui->lineEdit_password->move(70,170);
-    ui->lineEdit_password->setStyleSheet("QLineEdit{border-radius:10px;}");
-    editLineLayout->addWidget(ui->lineEdit_password);
+    QVBoxLayout *editLineLayout = new QVBoxLayout;             //用户名和密码栏绑定布局
+    {
+        ui->lineEdit_username->setFixedSize(180,40);
+        ui->lineEdit_username->move(70,100);
+        ui->lineEdit_username->setStyleSheet("QLineEdit{border-radius:10px;}");
+        editLineLayout->addWidget(ui->lineEdit_username);
+        ui->lineEdit_password->setFixedSize(180,40);
+        ui->lineEdit_password->move(70,170);
+        ui->lineEdit_password->setStyleSheet("QLineEdit{border-radius:10px;}");
+        editLineLayout->addWidget(ui->lineEdit_password);
+    }
 
-    QHBoxLayout *buttonLayout = new QHBoxLayout;
-    ui->sign_in_Button->setFixedSize(80,30);
-    ui->sign_in_Button->move(40,270);
-    ui->sign_in_Button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
-    buttonLayout->addWidget(ui->sign_in_Button);
-    ui->sign_up_button->setFixedSize(80,30);
-    ui->sign_up_button->move(180,270);
-    ui->sign_up_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
-    buttonLayout->addWidget(ui->sign_up_button);
+    QHBoxLayout *buttonLayout = new QHBoxLayout;               //按钮绑定布局
+    {
+        ui->sign_in_Button->setFixedSize(80,30);
+        ui->sign_in_Button->move(40,270);
+        ui->sign_in_Button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
+        buttonLayout->addWidget(ui->sign_in_Button);
+        ui->sign_up_button->setFixedSize(80,30);
+        ui->sign_up_button->move(180,270);
+        ui->sign_up_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
+        buttonLayout->addWidget(ui->sign_up_button);
+    }
 }
 
 sign_in_window::sign_in_window(QWidget *parent)
@@ -54,13 +58,13 @@ sign_in_window::sign_in_window(QWidget *parent)
     Account::readAccountList();
 
     ui->lineEdit_password->setEchoMode(QLineEdit::Password);
-    connect(ui->sign_in_Button,&QPushButton::clicked,[=](){\
+    connect(ui->sign_in_Button,&QPushButton::clicked,[=](){
         QString userName = ui->lineEdit_username->text();
         QString passWord = ui->lineEdit_password->text();
         bool existName=Account::isNameExist(userName);
         bool samePassword=false;
         if (existName)
-        {
+        {                          //从文件中读取账户信息
             std::filesystem::path acc_path = ROOTDIR + "/data/" + userName.toStdString() + "/.acc";
             std::ifstream fin(acc_path);
             if (!fin.is_open())
@@ -77,19 +81,20 @@ sign_in_window::sign_in_window(QWidget *parent)
             }
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
-            currentAccount = new Account(userName);
+            currentAccount = new Account(userName);         //登陆成功，进入主界面
             mainPage = new MainWindow;
             mainPage->show();
             this->close();
         }
-        else{
+        else{                                   //登陆失败提示
             if(userName.isEmpty()) showWarning("用户名不能为空！");
             else if(!existName) showWarning("用户名不存在！");
             else showWarning("密码错误！");
         }
     });
+
     connect(ui->sign_up_button,&QPushButton::clicked,[=](){
-        sign_up_window *sign_up_Page=new sign_up_window;
+        sign_up_window *sign_up_Page=new sign_up_window;        //进入注册界面
         sign_up_Page->show();
         this->close();
     });
