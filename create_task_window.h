@@ -15,7 +15,6 @@ class create_task_window : public QWidget
     QDateTime init_stTime, init_edTime;
 
     void getInitTime();
-
     void setupInitValues();
     void setupPageLayout();
 

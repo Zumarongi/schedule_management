@@ -22,6 +22,7 @@ class Task
 
     static int IdCounter;
     int taskId;
+    QString owner;
 
     QString taskName;
     QDateTime stTime, edTime;
@@ -33,10 +34,11 @@ class Task
     bool isReminded;
 
 public:
-    Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
+    Task(QString taskowner,
+         QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
          QString taskloc, TaskPriority taskprio, int taskctg,
          QString tasknote);         // new task
-    Task(int taskId,
+    Task(int taskId, QString taskowner,
          QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
          QString taskloc, TaskPriority taskprio, int taskctg,
          QString tasknote, bool isreminded);         // build from file
@@ -60,6 +62,7 @@ public:
     static bool (*stTime_descending)(const Task *, const Task *);
 
     int get_taskId() const;
+    QString get_owner() const;
     QString get_taskName() const;
     QDateTime get_stTime() const;
     QDateTime get_edTime() const;
@@ -71,6 +74,7 @@ public:
     bool get_isReminded() const;
 
     void set_taskName(QString new_taskName);
+    void set_owner(QString new_owner);
     void set_stTime(QDateTime new_stTime);
     void set_edTime(QDateTime new_edTime);
     void set_rmTime(QTime new_rmTime);
