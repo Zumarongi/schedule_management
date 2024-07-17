@@ -36,6 +36,9 @@ Task *Account::readTask(std::filesystem::path task_path)
     int taskId = std::stoi(s);
 
     getline(fin, s);
+    QString owner = QString::fromStdString(s);
+
+    getline(fin, s);
     QString taskName = QString::fromStdString(s);
 
     getline(fin, s);
@@ -65,7 +68,7 @@ Task *Account::readTask(std::filesystem::path task_path)
     fin.close();
     qDebug() << "[File" << task_path.string() << "opened.]";
 
-    return new Task(taskId, taskName, stTime, edTime, rmTime, taskLoc, taskPrio, taskCtg, taskNote, isReminded);
+    return new Task(taskId, owner, taskName, stTime, edTime, rmTime, taskLoc, taskPrio, taskCtg, taskNote, isReminded);
 }
 
 Account::Account(QString username)
@@ -86,7 +89,6 @@ Account::Account(QString username)
     encryptedPass = s;
     std::getline(fin, s);
     doneAndDel = s != "0";
-    qDebug() << "Reading from file doneAndDel =" << doneAndDel;
     taskList.clear();
     while (std::getline(fin, s))
     {
@@ -193,7 +195,6 @@ void Account::saveToFile() const
     fout << userName.toStdString() << std::endl;
     fout << encryptedPass << std::endl;
     fout << (int)doneAndDel << std::endl;
-    qDebug() << "Saving to file doneAndDel =" << doneAndDel;
     for (int i = 0; i < taskList.size(); i ++)
         fout << taskList[i]->get_taskId() << std::endl;
     fout.close();

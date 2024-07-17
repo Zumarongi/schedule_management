@@ -9,11 +9,13 @@ std::map<std::string, int> Task::ctgStrToIdx = {{"学习", 1}, {"娱乐", 2}, {"
 
 int Task::IdCounter = 0;
 
-Task::Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
+Task::Task(QString taskowner,
+           QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
            QString taskloc, TaskPriority taskprio, int taskctg,
            QString tasknote)
 {
     taskId = ++ IdCounter;
+    owner = taskowner;
     taskName = taskname;
     stTime = st_time;
     edTime = ed_time;
@@ -25,12 +27,13 @@ Task::Task(QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time
     isReminded = false;
 }
 
-Task::Task(int taskid,
+Task::Task(int taskid, QString taskowner,
            QString taskname, QDateTime st_time, QDateTime ed_time, QTime rm_time,
            QString taskloc, TaskPriority taskprio, int taskctg,
            QString tasknote, bool isreminded)
 {
     taskId = taskid;
+    owner = taskowner;
     taskName = taskname;
     stTime = st_time;
     edTime = ed_time;
@@ -55,6 +58,7 @@ bool Task::saveToFile(std::filesystem::path task_path) const
     }
     qDebug() << "[File" << task_path.string() << "opened to write.]";
     fout << taskId << std::endl;
+    fout << owner.toStdString() << std::endl;
     fout << taskName.toStdString() << std::endl;
     fout << stTime.toString().toStdString() << std::endl;
     fout << edTime.toString().toStdString() << std::endl;
@@ -63,7 +67,7 @@ bool Task::saveToFile(std::filesystem::path task_path) const
     fout << (int)taskPrio << std::endl;
     fout << taskCtg << std::endl;
     fout << taskNote.toStdString() << std::endl;
-    fout << (int)isReminded <<std::endl;
+    fout << (int)isReminded << std::endl;
     fout.close();
     qDebug() << "[File" << task_path.string() << "closed.]";
     return true;
@@ -100,6 +104,8 @@ bool (*Task::stTime_descending)(const Task *, const Task *) = [](const Task *x, 
 
 int Task::get_taskId() const { return taskId; }
 
+QString Task::get_owner() const { return owner; }
+
 QString Task::get_taskName() const { return taskName; }
 
 QDateTime Task::get_stTime() const { return stTime; }
@@ -119,6 +125,8 @@ QString Task::get_taskNote() const { return taskNote; }
 bool Task::get_isReminded() const { return isReminded; }
 
 void Task::set_taskName(QString new_taskName) { taskName = new_taskName; }
+
+void Task::set_owner(QString new_owner) { owner = new_owner; }
 
 void Task::set_stTime(QDateTime new_stTime) { stTime = new_stTime; }
 

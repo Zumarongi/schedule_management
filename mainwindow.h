@@ -27,7 +27,6 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
     QVBoxLayout *mainLayout, *scrollLayout;
-    QWidget *contentWidget;
     std::vector<Task *> taskOrder;
     QDateTime maxTime,minTime;
     int choosePrio;

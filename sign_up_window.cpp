@@ -4,6 +4,8 @@
 #include "account.h"
 #include <filesystem>
 
+extern void showWarning(QString text);
+
 sign_up_window::sign_up_window(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::sign_up_window)
@@ -37,33 +39,11 @@ sign_up_window::sign_up_window(QWidget *parent)
             this->close();
         }
         else{
-            if(userName.isEmpty()){
-                ui->emptyID_warning->show();
-                ui->username_warning->hide();
-            }
-            else if(existName){
-                ui->username_warning->show();
-                ui->emptyID_warning->hide();
-            }
-            else if(passWord.isEmpty()){
-                ui->emptypw_warning->show();
-                ui->emptyID_warning->hide();
-                ui->username_warning->hide();
-            }
-            else if(confPassword.isEmpty()){
-                ui->conf_warning->hide();
-                ui->empty_confpw_warning->show();
-                ui->emptypw_warning->hide();
-                ui->emptyID_warning->hide();
-                ui->username_warning->hide();
-            }
-            else{
-                ui->conf_warning->show();
-                ui->empty_confpw_warning->hide();
-                ui->emptypw_warning->hide();
-                ui->emptyID_warning->hide();
-                ui->username_warning->hide();
-            }
+            if(userName.isEmpty()) showWarning("用户名不能为空！");
+            else if(existName) showWarning("用户名已存在！");
+            else if(passWord.isEmpty()) showWarning("密码不能为空！");
+            else if(confPassword.isEmpty()) showWarning("请确认密码！");
+            else showWarning("两次输入密码不相同！");
         }
     });
     connect(ui->cancel_button,&QPushButton::clicked,[=](){

@@ -6,12 +6,19 @@
 extern create_task_window *createTaskPage;
 extern task_info_window *taskInfoPage;
 
+void MainWindow::getInitTime()
+{
+    // minTime = QDateTime(QDate(1970, 1, 1), QTime(0, 0));
+    // maxTime = QDateTime(QDate(2100, 1, 1), QTime(0, 0));
+    minTime = QDateTime::currentDateTime();
+    maxTime = minTime.addYears(1);
+}
+
 void MainWindow::setupInitValues()
 {
     choosePrio = 0;
     chooseCtg = 0;
-    minTime = QDateTime(QDate(1970, 1, 1), QTime(0, 0)); // 设置为指定日期和时间
-    maxTime = QDateTime(QDate(2100, 1, 1), QTime(0, 0));
+    getInitTime();
     ui->min_dateTimeEdit->setDateTime(minTime);
     ui->max_dateTimeEdit->setDateTime(maxTime);
 
@@ -38,7 +45,6 @@ void MainWindow::setupInitValues()
     connect(ui->lineEdit_search,&QLineEdit::textChanged,this,&MainWindow::auto_complete);
 
     ui->auto_delete->setCheckable(true);
-    qDebug() << "In mainwindow: setting auto_delete CheckBox:" << currentAccount->get_doneAndDel();
     ui->auto_delete->setChecked(currentAccount->get_doneAndDel());
 
     if(currentAccount->get_doneAndDel())                //自动删除
@@ -154,19 +160,13 @@ void MainWindow::setupRemindThread()
 
 void MainWindow::taskFiltering()
 {
-    // currentAccount->printTask();
-    // qDebug() << minTime;
-    // qDebug() << maxTime;
-    // qDebug() << choosePrio;
-    // qDebug() << chooseCtg;
     taskOrder.clear();
     for (auto task: currentAccount->get_taskList())
-    {
-        // qDebug() << task->get_taskId() << "\t" << task->get_taskName() << "\t" << task->get_stTime() << "\t" << task->get_edTime() << "\t" << task->get_taskPrio() << "\t" << task->get_taskCtg();
-        if ((task->get_stTime() >= minTime && task->get_stTime() <= maxTime) && (task->get_taskCtg() == chooseCtg || chooseCtg == 0) && (task->get_taskPrio() == choosePrio || choosePrio == 0)
-            && task->get_taskName().startsWith(ui->lineEdit_search->text()))
-            taskOrder.push_back(task);
-    }
+        if ((task->get_stTime() >= minTime && task->get_stTime() <= maxTime) &&
+            (task->get_taskCtg() == chooseCtg || chooseCtg == 0) &&
+            (task->get_taskPrio() == choosePrio || choosePrio == 0) &&
+            task->get_taskName().startsWith(ui->lineEdit_search->text()))
+                taskOrder.push_back(task);
 }
 
 void MainWindow::taskOrdering()
@@ -187,10 +187,8 @@ void MainWindow::setupTaskButton()
 {
     scrollLayout = new QVBoxLayout;
     scrollLayout->setContentsMargins(35, 5, 35, 5);
-    // qDebug() << "showLayout(): printing taskOrder";
     for (auto task: taskOrder)
     {
-        // qDebug() << task->get_taskId() << "\t" << task->get_taskName();
         QPushButton *taskButton = new QPushButton(task->get_taskName(), this);
         taskButton->setFixedSize(700, 40);
         taskButton->setStyleSheet("QPushButton{border-radius:5px;background-color:#148AFF;}");
