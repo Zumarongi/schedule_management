@@ -1,0 +1,6 @@
+*.user
+/build
+/build/*
+/data
+/data/*
+/data/test
