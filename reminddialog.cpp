@@ -8,6 +8,14 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
 {
     ui->setupUi(this);
     ui->TaskName->setText(currenTask->get_taskName());
+<<<<<<< Updated upstream
+=======
+    currenTask->set_isReminded(true);
+
+    std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
+    currenTask->saveToFile(task_path);
+
+>>>>>>> Stashed changes
     std::chrono::milliseconds lastTime=currenTask->get_stTime()-QDateTime::currentDateTime();
     std::chrono::seconds sec = std::chrono::duration_cast<std::chrono::seconds>(lastTime);
     std::chrono::minutes min = std::chrono::duration_cast<std::chrono::minutes>(sec);

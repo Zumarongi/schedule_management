@@ -157,6 +157,8 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
     currentTask = task;
 
     setupInitValues();
