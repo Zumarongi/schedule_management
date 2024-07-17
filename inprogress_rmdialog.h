@@ -13,6 +13,7 @@ class inProgress_rmDialog : public QDialog
 {
     Q_OBJECT
     Task * currenTask;
+    void setLayout();
 
 public:
     explicit inProgress_rmDialog(Task *task,QWidget *parent = nullptr);

@@ -1,8 +1,48 @@
 #include "reminddialog.h"
 #include "ui_reminddialog.h"
 #include "mainwindow.h"
+#include <QHBoxLayout>
 
 extern MainWindow *mainPage;
+
+void remindDialog::setLayout(){
+    this->setFixedSize(450,350);
+
+    QHBoxLayout *firstLayout = new QHBoxLayout;
+    ui->label_3->setFixedSize(55,30);
+    ui->label_3->move(80,50);
+    ui->label_3->setAlignment(Qt::AlignCenter);
+    firstLayout->addWidget(ui->label_3);
+    ui->TaskName->setFixedSize(60,30);
+    ui->TaskName->move(140,50);
+    ui->TaskName->setAlignment(Qt::AlignCenter);
+    firstLayout->addWidget(ui->TaskName);
+    ui->label->setFixedSize(30,30);
+    ui->label->move(205,50);
+    ui->label->setAlignment(Qt::AlignCenter);
+    firstLayout->addWidget(ui->label);
+    ui->TaskTime->setFixedSize(50,30);
+    ui->TaskTime->move(240,50);
+    ui->TaskTime->setAlignment(Qt::AlignCenter);
+    firstLayout->addWidget(ui->TaskTime);
+    ui->label_2->setFixedSize(60,30);
+    ui->label_2->move(295,50);
+    ui->label_2->setAlignment(Qt::AlignCenter);
+    firstLayout->addWidget(ui->label_2);
+
+    ui->task_info_button->setFixedSize(100,30);
+    ui->task_info_button->move(175,100);
+    ui->task_info_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
+
+    ui->remind_again->setFixedSize(120,30);
+    ui->remind_again->move(180,150);
+
+    ui->comboBox->move(130,190);
+
+    ui->OK_button->setFixedSize(60,30);
+    ui->OK_button->move(195,260);
+    ui->OK_button->setStyleSheet("QPushButton{border-radius:8px;background-color:#148AFF;color:#FFFFFF;}");
+}
 
 remindDialog::remindDialog(Task *getTask,QWidget *parent)
     : currenTask(getTask)
@@ -12,6 +52,8 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
     ui->setupUi(this);
     ui->TaskName->setText(currenTask->get_taskName());
 
+    setLayout();
+
     getTask->set_isReminded(true);
     std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
     currenTask->saveToFile(task_path);
@@ -20,7 +62,7 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
     std::chrono::seconds sec = std::chrono::duration_cast<std::chrono::seconds>(lastTime);
     std::chrono::minutes min = std::chrono::duration_cast<std::chrono::minutes>(sec);
     sec-=min;
-    std::string convertTime=std::to_string(min.count())+"分"+std::to_string(sec.count())+"秒";
+    std::string convertTime=std::to_string(min.count())+"分钟";
     ui->TaskTime->setText(QString::fromStdString(convertTime));
     ui->comboBox->addItem("不提醒");
     if(min>std::chrono::minutes(1)){
@@ -58,6 +100,10 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
             new_rmTime=QTime::fromMSecsSinceStartOfDay((getTask->get_stTime()-QDateTime::currentDateTime()).count()-1800000);
             getTask->set_rmTime(new_rmTime);
         }
+
+        std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
+        currenTask->saveToFile(task_path);
+
         this->close();
     });
 }

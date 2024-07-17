@@ -14,7 +14,7 @@ remindThread::remindThread(QObject *parent)
 
 void remindThread::onCreateTimer(){
     timer = new QTimer();
-    timer->setInterval(60000);
+    timer->setInterval(1000);
     connect(timer, &QTimer::timeout, this, &remindThread::onTimeout);
     timer->start();
 }
