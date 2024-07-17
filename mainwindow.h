@@ -8,6 +8,7 @@
 #include <vector>
 #include <QDebug>
 #include <QThread>
+#include <QTableWidget>
 #include "reminddialog.h"
 #include "remindthread.h"
 #include <QIcon>
@@ -27,7 +28,8 @@ class MainWindow : public QMainWindow
 
 private:
     Ui::MainWindow *ui;
-    QVBoxLayout *mainLayout, *scrollLayout;
+    QVBoxLayout *mainLayout;
+    QTableWidget *scrollLayout;
     std::vector<Task *> taskOrder;
     QDateTime maxTime,minTime;
     int choosePrio;
@@ -40,6 +42,7 @@ private:
     inProgress_rmDialog *inProgress_rmPage = NULL;
     remindThread * arrving_remind = NULL;
 
+    void getInitTime();
     void setupInitValues();
     void setupMainLayout();
     void setupRemindThread();
@@ -48,7 +51,7 @@ private:
     void taskOrdering();
 
     void removeTaskButton();
-    void setupTaskButton();
+    void setupScrollLayout();
 
     void getInitTime();
 private slots:

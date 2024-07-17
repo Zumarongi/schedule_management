@@ -7,12 +7,13 @@ remindThread::remindThread(QObject *parent)
     : QObject{parent}
 {}
 
-  remindThread::~remindThread(){
+remindThread::~remindThread(){
     timer->stop();
     timer->deleteLater();
 }
 
 void remindThread::onCreateTimer(){
+    // 等待至整分钟
     timer = new QTimer();
     timer->setInterval(1000);
     connect(timer, &QTimer::timeout, this, &remindThread::onTimeout);

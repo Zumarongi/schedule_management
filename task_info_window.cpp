@@ -236,6 +236,7 @@ task_info_window::task_info_window(Task *task, QWidget *parent)
             mainPage = new MainWindow;
             emit mainPage->reorder();
             mainPage->show();
+            this->close();
         }
     });
 
