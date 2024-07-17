@@ -13,7 +13,7 @@ task_info_window *taskInfoPage;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    sign_in_window w;
+    sign_in_window w;           //打开登陆界面
     w.show();
     return a.exec();
 }

@@ -65,13 +65,13 @@ sign_in_window::sign_in_window(QWidget *parent)
     Account::readAccountList();
 
     ui->lineEdit_password->setEchoMode(QLineEdit::Password);
-    connect(ui->sign_in_Button,&QPushButton::clicked,[=](){\
+    connect(ui->sign_in_Button,&QPushButton::clicked,[=](){
         QString userName = ui->lineEdit_username->text();
         QString passWord = ui->lineEdit_password->text();
         bool existName=Account::isNameExist(userName);
         bool samePassword=false;
         if (existName)
-        {
+        {                          //从文件中读取账户信息
             std::filesystem::path acc_path = ROOTDIR + "/data/" + userName.toStdString() + "/.acc";
             std::ifstream fin(acc_path);
             if (!fin.is_open())
@@ -88,19 +88,20 @@ sign_in_window::sign_in_window(QWidget *parent)
             }
         }
         if(existName&&!userName.isEmpty()&&!passWord.isEmpty()&&samePassword){
-            currentAccount = new Account(userName);
+            currentAccount = new Account(userName);         //登陆成功，进入主界面
             mainPage = new MainWindow;
             mainPage->show();
             this->close();
         }
-        else{
+        else{                                   //登陆失败提示
             if(userName.isEmpty()) showWarning("用户名不能为空！");
             else if(!existName) showWarning("用户名不存在！");
             else showWarning("密码错误！");
         }
     });
+
     connect(ui->sign_up_button,&QPushButton::clicked,[=](){
-        sign_up_window *sign_up_Page=new sign_up_window;
+        sign_up_window *sign_up_Page=new sign_up_window;        //进入注册界面
         sign_up_Page->show();
         this->close();
     });

@@ -8,27 +8,29 @@ extern MainWindow *mainPage;
 void remindDialog::setLayout(){
     this->setFixedSize(450,350);
 
-    QHBoxLayout *firstLayout = new QHBoxLayout;
-    ui->label_3->setFixedSize(55,30);
-    ui->label_3->move(80,50);
-    ui->label_3->setAlignment(Qt::AlignCenter);
-    firstLayout->addWidget(ui->label_3);
-    ui->TaskName->setFixedSize(60,30);
-    ui->TaskName->move(140,50);
-    ui->TaskName->setAlignment(Qt::AlignCenter);
-    firstLayout->addWidget(ui->TaskName);
-    ui->label->setFixedSize(30,30);
-    ui->label->move(205,50);
-    ui->label->setAlignment(Qt::AlignCenter);
-    firstLayout->addWidget(ui->label);
-    ui->TaskTime->setFixedSize(50,30);
-    ui->TaskTime->move(240,50);
-    ui->TaskTime->setAlignment(Qt::AlignCenter);
-    firstLayout->addWidget(ui->TaskTime);
-    ui->label_2->setFixedSize(60,30);
-    ui->label_2->move(295,50);
-    ui->label_2->setAlignment(Qt::AlignCenter);
-    firstLayout->addWidget(ui->label_2);
+    QHBoxLayout *firstLayout = new QHBoxLayout;         //第一行
+    {
+        ui->label_3->setFixedSize(55,30);
+        ui->label_3->move(80,50);
+        ui->label_3->setAlignment(Qt::AlignCenter);
+        firstLayout->addWidget(ui->label_3);
+        ui->TaskName->setFixedSize(70,30);
+        ui->TaskName->move(140,50);
+        ui->TaskName->setAlignment(Qt::AlignCenter);
+        firstLayout->addWidget(ui->TaskName);
+        ui->label->setFixedSize(30,30);
+        ui->label->move(215,50);
+        ui->label->setAlignment(Qt::AlignCenter);
+        firstLayout->addWidget(ui->label);
+        ui->TaskTime->setFixedSize(50,30);
+        ui->TaskTime->move(250,50);
+        ui->TaskTime->setAlignment(Qt::AlignCenter);
+        firstLayout->addWidget(ui->TaskTime);
+        ui->label_2->setFixedSize(60,30);
+        ui->label_2->move(305,50);
+        ui->label_2->setAlignment(Qt::AlignCenter);
+        firstLayout->addWidget(ui->label_2);
+    }
 
     ui->task_info_button->setFixedSize(100,30);
     ui->task_info_button->move(175,100);
@@ -58,6 +60,7 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
     std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
     currenTask->saveToFile(task_path);
 
+    //内容显示
     std::chrono::milliseconds lastTime=currenTask->get_stTime()-QDateTime::currentDateTime();
     std::chrono::seconds sec = std::chrono::duration_cast<std::chrono::seconds>(lastTime);
     std::chrono::minutes min = std::chrono::duration_cast<std::chrono::minutes>(sec);
@@ -79,6 +82,7 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
     }
     ui->comboBox->setCurrentIndex(0);
 
+    //设置再次提醒时间
     connect(ui->OK_button,&QPushButton::clicked,[=](){
         if(ui->comboBox->currentIndex()==1){
             getTask->set_isReminded(false);
@@ -113,7 +117,7 @@ remindDialog::~remindDialog()
     delete ui;
 }
 
-void remindDialog::on_task_info_button_clicked(){
+void remindDialog::on_task_info_button_clicked(){//查看任务
     task_info_window *infoPage=new task_info_window(currenTask);
     infoPage->show();
     mainPage->close();
