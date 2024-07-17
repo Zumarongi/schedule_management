@@ -66,74 +66,6 @@
      <string>请输入密码</string>
     </property>
    </widget>
-   <widget class="QLabel" name="empty_username_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>150</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 0, 0);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>请输入您的用户名！</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="empty_password_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>210</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>请输入您的密码！</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="notfind_username_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>150</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>用户名不存在！</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="error_password_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>210</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>密码不正确！</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -141,7 +73,7 @@ background-color: rgb(255, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>18</height>
+     <height>17</height>
     </rect>
    </property>
   </widget>

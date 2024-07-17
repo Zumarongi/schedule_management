@@ -2,9 +2,12 @@
 #include "./ui_mainwindow.h"
 #include "create_task_window.h"
 #include "task_info_window.h"
+#include <QHeaderView>
 
 extern create_task_window *createTaskPage;
 extern task_info_window *taskInfoPage;
+
+QFont tableFont = QFont("Times New Roman", 10);
 
 void MainWindow::getInitTime()
 {
@@ -129,12 +132,12 @@ void MainWindow::setupMainLayout()
     }
     mainLayout->addLayout(hLayout);
 
-    ui->scrollArea->setFixedSize(790,400);
+    ui->scrollArea->setFixedSize(780,400);
     ui->scrollArea->move(10,125);
     ui->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->scrollArea->setWidgetResizable(true);
     taskFiltering(), taskOrdering();
-    setupTaskButton();
+    setupScrollLayout();
 
     this->setLayout(mainLayout);
 
@@ -177,35 +180,133 @@ void MainWindow::taskOrdering()
     Task::sortTasks(taskOrder.begin(), taskOrder.end(), cmp);
 }
 
-void MainWindow::setupTaskButton()
+void MainWindow::setupScrollLayout()
 {
-    scrollLayout = new QVBoxLayout;
-    scrollLayout->setContentsMargins(35, 5, 35, 5);
+    scrollLayout = new QTableWidget(taskOrder.size(), 5);
+
+    scrollLayout->setHorizontalHeaderLabels(QStringList()<<"任务名称"<<"优先级"<<"开始时间 —— 结束时间"<<"地点"<<"分类");
+    scrollLayout->verticalHeader()->setVisible(false);
+    scrollLayout->horizontalHeader()->setVisible(true);
+    // scrollLayout->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    scrollLayout->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+    scrollLayout->resizeColumnsToContents();
+
+    scrollLayout->setVerticalScrollMode(QAbstractItemView::ScrollPerItem);
+    scrollLayout->setSelectionBehavior(QAbstractItemView::SelectRows);
+    scrollLayout->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    scrollLayout->setFont(tableFont);
+
+    scrollLayout->setColumnWidth(0, 80);
+    scrollLayout->setColumnWidth(1, 75);
+    scrollLayout->setColumnWidth(2, 370);
+    scrollLayout->setColumnWidth(3, 170);
+    scrollLayout->setColumnWidth(4, 80);
+
+    scrollLayout->setStyleSheet("QTableWidget { background-color: #f0f0f0; }"
+                                "QTableWidget::item:hover { background-color: #e0e0e0; }" // 鼠标悬浮时的背景色
+                                "QTableWidget::item:selected { background-color: #a0a0a0; }"); // 选中项的背景色
+    int row = 0;
     for (auto task: taskOrder)
     {
+        int alpha = 0;
+        switch ((int)(task->get_taskPrio()))
+        {
+        case 1:
+            alpha = 60; break;
+        case 2:
+            alpha = 105; break;
+        case 3:
+            alpha = 180; break;
+        }
+        QString alphaStr = QString::fromStdString(std::to_string(alpha));
+
         QPushButton *taskButton = new QPushButton(task->get_taskName(), this);
-        taskButton->setFixedSize(700, 40);
-        taskButton->setStyleSheet("QPushButton{border-radius:5px;background-color:#148AFF;}");
+        taskButton->setFont(tableFont);
+        // taskButton->setFixedWidth(80);
+        taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
         connect(taskButton, &QPushButton::clicked, [=](){
             taskInfoPage = new task_info_window(task);
             taskInfoPage->show();
             this->close();
         });
-        scrollLayout->addWidget(taskButton);
+        scrollLayout->setCellWidget(row, 0, taskButton);
+
+        taskButton = new QPushButton(toQString(task->get_taskPrio()), this);
+        taskButton->setFont(tableFont);
+        taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
+        connect(taskButton, &QPushButton::clicked, [=](){
+            taskInfoPage = new task_info_window(task);
+            taskInfoPage->show();
+            this->close();
+        });
+        scrollLayout->setCellWidget(row, 1, taskButton);
+
+        taskButton = new QPushButton(task->get_stTime().toString("yyyy-MM-dd hh:mm") + QString::fromStdString("——") + task->get_edTime().toString("yyyy-MM-dd hh:mm"));
+        taskButton->setFont(tableFont);
+        taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
+        connect(taskButton, &QPushButton::clicked, [=](){
+            taskInfoPage = new task_info_window(task);
+            taskInfoPage->show();
+            this->close();
+        });
+        scrollLayout->setCellWidget(row, 2, taskButton);
+
+        taskButton = new QPushButton(task->get_taskLoc());
+        taskButton->setFont(tableFont);
+        taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(255, 0, 0, " + alphaStr + "); }");
+        connect(taskButton, &QPushButton::clicked, [=](){
+            taskInfoPage = new task_info_window(task);
+            taskInfoPage->show();
+            this->close();
+        });
+        scrollLayout->setCellWidget(row, 3, taskButton);
+
+        taskButton = new QPushButton(Task::toCtgQString(task->get_taskCtg()));
+        taskButton->setFont(tableFont);
+        QColor taskCtgColor;
+        QString ctgcolorStr = "";
+        switch (task->get_taskCtg())
+        {
+        case 1:
+            ctgcolorStr = "0, 204, 0, "; break;
+        case 2:
+            ctgcolorStr = "0, 204, 204, "; break;
+        case 3:
+            ctgcolorStr = "51, 102, 204, "; break;
+        case 4:
+            ctgcolorStr = "102, 0, 204, "; break;
+        case 5:
+            ctgcolorStr = "204, 51, 102, "; break;
+        case 6:
+            ctgcolorStr = "102, 102, 102, "; break;
+        }
+        taskButton->setStyleSheet("QPushButton{ border-radius: 0px; background-color: rgba(" + ctgcolorStr + alphaStr + "); }");
+        connect(taskButton, &QPushButton::clicked, [=](){
+            taskInfoPage = new task_info_window(task);
+            taskInfoPage->show();
+            this->close();
+        });
+        scrollLayout->setCellWidget(row, 4, taskButton);
+        row ++;
     }
-    ui->scrollArea->setLayout(scrollLayout);
+    ui->scrollArea->setWidget(scrollLayout);
 }
 
 void MainWindow::removeTaskButton()
 {
-    QLayoutItem *item;
-    while ((item = scrollLayout->takeAt(0)) != nullptr)
+    int rows = scrollLayout->rowCount();
+    int cols = scrollLayout->columnCount();
+    for (int i = 0; i < rows; i ++)
     {
-        if (QWidget *widget = item->widget())
-            widget->deleteLater();
-        delete item;
+        for (int j = 0; j < cols; j ++)
+        {
+            QWidget *widget = scrollLayout->cellWidget(0, j);
+            scrollLayout->removeCellWidget(0, j);
+            delete widget;
+        }
+        scrollLayout->removeRow(0);
     }
-    delete scrollLayout;
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -222,13 +323,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(this, &MainWindow::reorder, [=](){
         removeTaskButton();
         taskFiltering(), taskOrdering();
-        setupTaskButton();
+        setupScrollLayout();
     });
 
     connect(arrving_remind, &remindThread::reorder, [=](){
         removeTaskButton();
         taskFiltering(), taskOrdering();
-        setupTaskButton();
+        setupScrollLayout();
     });
 }
 

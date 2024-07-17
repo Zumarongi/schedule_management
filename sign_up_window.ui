@@ -66,46 +66,6 @@
      <string>取消</string>
     </property>
    </widget>
-   <widget class="QLabel" name="username_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>100</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 0, 0);
-background-color: rgb(255, 0, 0);
-background-color: rgb(255, 0, 0);
-background-color: rgb(255, 0, 0);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>用户名已存在！</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="conf_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>200</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>密码不相同！</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEdit_confirm_password">
     <property name="geometry">
      <rect>
@@ -117,57 +77,6 @@ background-color: rgb(255, 0, 0);</string>
     </property>
     <property name="placeholderText">
      <string>请确认密码</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="emptyID_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>100</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 0, 0);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>用户名不能为空！</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="emptypw_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>150</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 0, 0);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>密码不能为空！</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="empty_confpw_warning">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>200</y>
-      <width>161</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(255, 255, 255);
-background-color: rgb(255, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>请确认密码！</string>
     </property>
    </widget>
   </widget>

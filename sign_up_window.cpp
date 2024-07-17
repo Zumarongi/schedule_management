@@ -12,11 +12,7 @@ sign_up_window::sign_up_window(QWidget *parent)
 {
     ui->setupUi(this);
     sign_in_window *sign_in_page=new sign_in_window;
-    ui->username_warning->hide();
-    ui->conf_warning->hide();
-    ui->empty_confpw_warning->hide();
-    ui->emptyID_warning->hide();
-    ui->emptypw_warning->hide();
+
     ui->lineEdit_password->setEchoMode(QLineEdit::Password);
     ui->lineEdit_confirm_password->setEchoMode(QLineEdit::Password);
     connect(ui->sign_up_button,&QPushButton::clicked,[=](){\
