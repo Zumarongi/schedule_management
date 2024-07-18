@@ -39,6 +39,7 @@ void task_info_window::setupInitValues()
 
 void task_info_window::setupPageLayout()
 {
+    this->setFixedSize(600, 450);
     // this->setWindowFlags(Qt::FramelessWindowHint);
     this->setWindowTitle("任务信息");
 

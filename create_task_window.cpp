@@ -59,6 +59,7 @@ void create_task_window::setupInitValues()
 
 void create_task_window::setupPageLayout()
 {
+    this->setFixedSize(600, 450);
     // this->setWindowFlags(Qt::FramelessWindowHint);
     this->setWindowTitle("任务创建");
 
