@@ -56,9 +56,6 @@ remindDialog::remindDialog(Task *getTask,QWidget *parent)
 
     setLayout();
 
-    getTask->set_isReminded(true);
-    std::filesystem::path task_path = ROOTDIR + "/data/" + currenTask->get_owner().toStdString() + "/" + std::to_string(currenTask->get_taskId()) + ".task";
-    currenTask->saveToFile(task_path);
 
     //内容显示
     std::chrono::milliseconds lastTime=currenTask->get_stTime()-QDateTime::currentDateTime();

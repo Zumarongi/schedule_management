@@ -26,6 +26,9 @@ void remindThread::onTimeout(){
     for (auto task: currentAccount->get_taskList()){
         if ((task->get_stTime() - QDateTime::currentDateTime() < (std::chrono::milliseconds)task->get_rmTime().msecsSinceStartOfDay())
             && (task->get_stTime() > QDateTime::currentDateTime()) && !task->get_isReminded()){
+            task->set_isReminded(true);
+            std::filesystem::path task_path = ROOTDIR + "/data/" + task->get_owner().toStdString() + "/" + std::to_string(task->get_taskId()) + ".task";
+            task->saveToFile(task_path);
             emit showRemind(task);
         }
         if(currentAccount->get_doneAndDel() && task->get_edTime()<QDateTime::currentDateTime()){
@@ -34,6 +37,9 @@ void remindThread::onTimeout(){
         }
         if(task->get_stTime()<QDateTime::currentDateTime() && task->get_edTime()>QDateTime::currentDateTime()
             && !task->get_isReminded()){
+            task->set_isReminded(true);
+            std::filesystem::path task_path = ROOTDIR + "/data/" + task->get_owner().toStdString() + "/" + std::to_string(task->get_taskId()) + ".task";
+            task->saveToFile(task_path);
             emit inProgress(task);
         }
     }
