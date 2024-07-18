@@ -5,7 +5,8 @@
 #include <vector>
 #include <QMessageBox>
 
-#define ROOTDIR (std::string)"../.."
+// #define ROOTDIR (std::string)"../.."
+#define ROOTDIR (std::string)"."
 
 class Account
 {
